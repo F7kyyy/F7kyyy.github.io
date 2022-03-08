@@ -267,9 +267,9 @@
 <p>新建一个公共仓库，作为博客的部署的位置</p>
 <h3 id="配置ssh-key">5.3 配置ssh key</h3>
 <p>由于椭圆加密相同密钥长度下，安全性能更高同时计算量小，处理速度快，在私钥的处理速度上比RSA快的多，所以在生成密钥对时，使用ECC加密</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs powershell">ssh<span class="hljs-literal">-keygen</span> <span class="hljs-literal">-t</span> ecdsa<br></code></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell">ssh<span class="hljs-literal">-keygen</span> <span class="hljs-literal">-t</span> ecdsa<br></code></pre></div></td></tr></table></figure>
 <p>将公钥上传到github,测试连接</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">ssh <span class="hljs-literal">-T</span> git@github.com<br></code></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell">ssh <span class="hljs-literal">-T</span> git@github.com<br></code></pre></div></td></tr></table></figure>
 <p>连接成功</p>
 <figure>
 <img
@@ -281,18 +281,18 @@ alt="image-20220307201639074" />
 <ul>
 <li>安装hexo</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install -g hexo<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install -g hexo<br></code></pre></div></td></tr></table></figure>
 <ul>
 <li>新建一个文件夹,初始化博客</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo init<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">hexo init<br></code></pre></div></td></tr></table></figure>
 <ul>
 <li>安装依赖包，确保git部署</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install hexo-deployer-git --save<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install hexo-deployer-git --save<br></code></pre></div></td></tr></table></figure>
 <p>此时本地已经配置好博客</p>
 <p>使用命令启动</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo g<br>hexo s<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">hexo g<br>hexo s<br></code></pre></div></td></tr></table></figure>
 <h3 id="更换主题">5.5 更换主题</h3>
 <p>依据个人喜好更换主题，这里使用Aurora</p>
 <h3 id="博客部署在github.io">5.6 博客部署在github.io</h3>
@@ -300,11 +300,11 @@ alt="image-20220307201639074" />
 <li><p>复制SSH链接</p>
 <p><img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072023291.png" srcset="/img/loading.gif" lazyload alt="image-20220307202330251" style="zoom: 80%;" /></p></li>
 <li><p>编辑 config_yml</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">deploy:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br>  <span class="hljs-attr">repository:</span> <span class="hljs-string">git@github.com:Fantastic-Feng/Fantastic-Feng.github.io.git</span><br>  <span class="hljs-attr">branch:</span> <span class="hljs-string">main</span><br></code></pre></td></tr></table></figure></li>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">deploy:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br>  <span class="hljs-attr">repository:</span> <span class="hljs-string">git@github.com:Fantastic-Feng/Fantastic-Feng.github.io.git</span><br>  <span class="hljs-attr">branch:</span> <span class="hljs-string">main</span><br></code></pre></div></td></tr></table></figure></li>
 <li><p>配置Deploy keys</p>
 <p>与SSH配置方法相同，存在bug，添加后不显示，不过可以使用</p></li>
 <li><p>部署</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo g<br>hexo d<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">hexo g<br>hexo d<br></code></pre></div></td></tr></table></figure>
 <p><img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072028743.png" srcset="/img/loading.gif" lazyload alt="image-20220307202845648" style="zoom:50%;" /></p></li>
 </ul>
 <h3 id="访问">5.7 访问</h3>
@@ -312,8 +312,8 @@ alt="image-20220307201639074" />
 <p><img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072031185.png" srcset="/img/loading.gif" lazyload alt="image-20220307203148854" style="zoom: 50%;" /></p>
 <h3 id="添加一篇博客">5.7 添加一篇博客</h3>
 <p>生成一个新的md文件，在 ./source/_posts文件夹下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo new <span class="hljs-string">&quot;new article&quot;</span><br></code></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo g     //生成静态页面<br>hexo s    //启动本地服务器进行查看<br>hexo d   //查看后没有问题即可部署到github上<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">hexo new <span class="hljs-string">&quot;new article&quot;</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">hexo g     //生成静态页面<br>hexo s    //启动本地服务器进行查看<br>hexo d   //查看后没有问题即可部署到github上<br></code></pre></div></td></tr></table></figure>
 <p><img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072055102.png" srcset="/img/loading.gif" lazyload alt="image-20220307205545837" style="zoom:50%;" /></p>
 <h2 id="结论分析与体会">6. 结论分析与体会</h2>
 <p>网络上程序员好像人手一个博客，之前想过用java 和
