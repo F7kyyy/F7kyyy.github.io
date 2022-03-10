@@ -60,7 +60,7 @@ ssh -T git@github.com
 
 连接成功
 
-![image-20220307201639074](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072016135.png)
+![](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072016135.png)
 
 ### 5.4 配置hexo
 
@@ -99,7 +99,7 @@ hexo s
 
 - 复制SSH链接
 
-  <img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072023291.png" alt="image-20220307202330251" style="zoom: 80%;" />
+  <img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072023291.png" alt="" style="zoom: 80%;" />
 
 - 编辑 config_yml
 
@@ -121,13 +121,13 @@ hexo s
   hexo d
   ```
 
-  <img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072028743.png" alt="image-20220307202845648" style="zoom:50%;" />
+  <img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072028743.png" alt="" style="zoom:50%;" />
 
 ### 5.7 访问
 
 https://f7kyyy.github.io/
 
-<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072031185.png" alt="image-20220307203148854" style="zoom: 50%;" />
+<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072031185.png" alt="" style="zoom: 50%;" />
 
 ### 5.7 添加一篇博客
 
@@ -143,7 +143,7 @@ hexo s    //启动本地服务器进行查看
 hexo d   //查看后没有问题即可部署到github上
 ```
 
-<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072055102.png" alt="image-20220307205545837" style="zoom:50%;" />
+<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072055102.png" alt="" style="zoom:50%;" />
 
 ##   6. 结论分析与体会
 
