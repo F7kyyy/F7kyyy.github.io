@@ -5,6 +5,7 @@ tags:
   - 环境配置
   - 云计算
 categories: 实验报告
+index_img: https://gitee.com/Fantastic-Feng/picgo/raw/master/202203111633391.png
 ---
 
 # 山东大学  计算机科学与技术  学院 云计算技术  课程实验报告
