@@ -4,6 +4,7 @@ date: 2022-03-08 15:36:48
 tags: 
   - 环境配置
   - 云计算
+  - hexo
 categories: 实验报告
 index_img: https://gitee.com/Fantastic-Feng/picgo/raw/master/202203111633391.png
 ---
