@@ -6,7 +6,7 @@ tags:
   - 算法
   - 笔记
 categories: 算法
-index_img: /img/_post/leetcode.jpg
+index_img: https://gitee.com/Fantastic-Feng/picgo/raw/master/202203111618917.jpg
 math: true
 ---
 
