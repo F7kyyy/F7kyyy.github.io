@@ -6,6 +6,7 @@ tags:
   - 算法
   - 笔记
 categories: 算法
+index_img: /img/_post/leetcode.jpg
 math: true
 ---
 
