@@ -1,11 +1,11 @@
 ---
-title: 使用github,hexo搭建个人博客
+title: 云计算实验1-使用github,hexo搭建个人博客
 date: 2022-03-08 15:36:48
 tags: 
   - 环境配置
   - 云计算
   - hexo
-categories: 实验报告
+categories: 云计算
 index_img: https://gitee.com/Fantastic-Feng/picgo/raw/master/202203111633391.png
 ---
 
