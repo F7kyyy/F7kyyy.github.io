@@ -145,7 +145,7 @@ color:
 
   # 顶部菜单背景色
   # Color of navigation bar background
-  navbar_bg_color: "#ee9ca7"
+  navbar_bg_color: "#2f4154"
   navbar_bg_color_dark: "#1f3144"
 
   # 顶部菜单字体色
@@ -874,7 +874,7 @@ cusdis:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: /img/6.jpg
+  banner_img: /img/13.jpg
   banner_img_height: 60
   banner_mask_alpha: 0
 
@@ -885,7 +885,7 @@ archive:
 #---------------------------
 category:
   enable: true
-  banner_img: /img/8.png
+  banner_img: /img/16.jpg
   banner_img_height: 60
   banner_mask_alpha: 0
 
@@ -914,7 +914,7 @@ category:
 #---------------------------
 tag:
   enable: true
-  banner_img: /img/9.jpg
+  banner_img: /img/15.jpg
   banner_img_height: 60
   banner_mask_alpha: 0
   tagcloud:
