@@ -534,7 +534,7 @@ index:
 post:
   banner_img: /img/post.png
   banner_img_height: 70
-  banner_mask_alpha: 0.05
+  banner_mask_alpha: 0
 
   # 文章在首页的默认封面图，当没有指定 index_img 时会使用该图片，若两者都为空则不显示任何图片
   # Path of the default post cover when `index_img` is not set. If both are empty, no image will be displayed
@@ -640,7 +640,7 @@ post:
 
     # 层级的折叠深度，0 是全部折叠，大于 0 后如果存在下级标题则默认展开
     # Collapse depth. If 0, all headings collapsed. If greater than 0, it will be expanded by default if there are sub headings
-    collapseDepth: 0
+    collapseDepth: 1
 
   # 版权声明，会显示在每篇文章的结尾
   # Copyright, will be displayed at the end of each post
@@ -955,7 +955,7 @@ about:
 page:
   banner_img: /img/default.png
   banner_img_height: 60
-  banner_mask_alpha: 0.3
+  banner_mask_alpha: 0
 
 
 #---------------------------
@@ -980,7 +980,7 @@ links:
   enable: true
   banner_img: /img/default.png
   banner_img_height: 60
-  banner_mask_alpha: 0.3
+  banner_mask_alpha: 0
   # 友链的成员项
   # Member item of page
   items:
