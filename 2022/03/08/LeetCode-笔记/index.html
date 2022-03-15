@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203111618917.jpg">
 <meta property="article:published_time" content="2022-03-08T12:12:17.000Z">
-<meta property="article:modified_time" content="2022-03-11T08:19:36.765Z">
+<meta property="article:modified_time" content="2022-03-15T08:24:13.820Z">
 <meta property="article:author" content="F7kyyy">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="算法">
@@ -214,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.9k 字
+          6.1k 字
         
       </span>
     
@@ -225,7 +225,7 @@
         
         
         
-          25 分钟
+          31 分钟
         
       </span>
     
@@ -276,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年3月11日 下午
+                    本文最后更新于：2022年3月15日 下午
                   
                 
               </p>
@@ -368,7 +368,6 @@ class="math inline">\(n^2\)</span>）。</p>
 <p>输出: -2147483648</p>
 <p>输入: s=“ 2147483648”</p>
 <p>输出: 2147483648</p>
-<hr />
 <p>链接：https://leetcode-cn.com/problems/string-to-integer-atoi</p>
 <h3 id="解法-2">解法：</h3>
 <p>思路较为清晰和明确，整体是遍历一遍字符串</p>
@@ -379,6 +378,35 @@ class="math inline">\(n^2\)</span>）。</p>
 class="math inline">\(\left[ -2^{32},2^{32}-1
 \right]\)</span>，所以在判断个位数时应该使用大于</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">myAtoi</span><span class="hljs-params">(string s)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> len = s.<span class="hljs-built_in">length</span>();<br>    <span class="hljs-type">int</span> index = <span class="hljs-number">0</span>, sign = <span class="hljs-number">1</span>, res = <span class="hljs-number">0</span>;<br>    <span class="hljs-comment">//如果是空格，索引向后</span><br>    <span class="hljs-keyword">while</span> (s[index] == <span class="hljs-string">&#x27; &#x27;</span> &amp;&amp; index &lt; len)<br>    &#123;<br>        index++;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (index == len)<br>    &#123; <span class="hljs-comment">//整个字符串都是空格</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">else</span><br>    &#123;<br>        <span class="hljs-keyword">if</span> (s[index] == <span class="hljs-string">&#x27;-&#x27;</span>)<br>        &#123; <span class="hljs-comment">//是否为负数</span><br>            sign = <span class="hljs-number">-1</span>;<br>            index++;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s[index] == <span class="hljs-string">&#x27;+&#x27;</span>)<br>        &#123; <span class="hljs-comment">//是否为正数</span><br>            index++;<br>        &#125;<br>        <span class="hljs-keyword">while</span> (index &lt; len &amp;&amp; s[index] &lt;= <span class="hljs-string">&#x27;9&#x27;</span> &amp;&amp; s[index] &gt;= <span class="hljs-string">&#x27;0&#x27;</span>)<br>        &#123;<br>            <span class="hljs-type">int</span> curDigit = s[index] - <span class="hljs-string">&#x27;0&#x27;</span>;<br>            <span class="hljs-keyword">if</span> (res &gt; INT_MAX / <span class="hljs-number">10</span> || ((res == INT_MAX / <span class="hljs-number">10</span>) &amp;&amp; (curDigit &gt; INT_MAX % <span class="hljs-number">10</span>)))<br>            &#123;<br>                <span class="hljs-keyword">return</span> sign==<span class="hljs-number">1</span>?INT_MAX:INT_MIN;<br>            &#125;<br>            <span class="hljs-keyword">else</span><br>            &#123;<br>                res = res * <span class="hljs-number">10</span> + curDigit;<br>            &#125;<br>            index++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sign * res;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="最长公共前缀">14. 最长公共前缀</h2>
+<p>编写一个函数来查找字符串数组中的最长公共前缀。</p>
+<p>如果不存在公共前缀，返回空字符串 <code>""</code></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203151519386.png" srcset="/img/loading.gif" lazyload
+alt="image-20220315151908284" />
+<figcaption aria-hidden="true">image-20220315151908284</figcaption>
+</figure>
+<p>题目链接：https://leetcode-cn.com/problems/longest-common-prefix/</p>
+<h4 id="解法-3">解法：</h4>
+<h5 id="暴力">1. 暴力</h5>
+<p>首先，我们可以找到最短串的长度minStrLen，这样在比较每个字母是就不用担心会溢出</p>
+<p>然后，遍历每个字符串，当同一index的字母相同时，res加上该字母，否则break</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">string <span class="hljs-title">longestCommonPrefix</span><span class="hljs-params">(vector&lt;string&gt;&amp; strs)</span> </span>&#123;<br>       string res = <span class="hljs-string">&quot;&quot;</span>;<br>       <span class="hljs-type">int</span> minStrLen = <span class="hljs-number">300</span>;<br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; strs.<span class="hljs-built_in">size</span>(); i++)<br>       &#123;<br>           <span class="hljs-type">int</span> indexLen = strs[i].<span class="hljs-built_in">size</span>();<br>           <span class="hljs-keyword">if</span> (indexLen &lt; minStrLen)<br>           &#123;<br>               minStrLen = indexLen;<br>           &#125;<br>       &#125;<br><br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; minStrLen; i++)<br>       &#123;<br>           <span class="hljs-type">bool</span> flag = <span class="hljs-literal">true</span>;<br>           <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; strs.<span class="hljs-built_in">size</span>() - <span class="hljs-number">1</span>; j++)<br>           &#123;<br>               <span class="hljs-keyword">if</span>(strs[j][i]!=strs[j+<span class="hljs-number">1</span>][i])<br>               &#123;<br>                   flag = <span class="hljs-literal">false</span>;<br>                   <span class="hljs-keyword">break</span>;<br>               &#125;<br>           &#125;<br>           <span class="hljs-keyword">if</span>(flag)<br>               res += strs[<span class="hljs-number">0</span>][i];<br>           <span class="hljs-keyword">else</span><br>               <span class="hljs-keyword">break</span>;<br>       &#125;<br>       <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这样的结果为</p>
+<h5 id="image-20220315161954911"><img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203151619970.png" srcset="/img/loading.gif" lazyload
+alt="image-20220315161954911" /></h5>
+<h5 id="字典序排序">2. 字典序排序</h5>
+<p>在对字符串进行sort时，是按照字典序，所以我们完全可以在排序后比较第一个和最后一个的公共前缀子串，这样就可以省去比较每一个字符串的问题</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">string <span class="hljs-title">longestCommonPrefix</span><span class="hljs-params">(vector&lt;string&gt; &amp;strs)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">sort</span>(strs.<span class="hljs-built_in">begin</span>(), strs.<span class="hljs-built_in">end</span>());<br>    string res;<br>    string first = strs.<span class="hljs-built_in">front</span>();<br>    string end = strs.<span class="hljs-built_in">back</span>();<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; first.<span class="hljs-built_in">size</span>() &amp;&amp; i &lt; end.<span class="hljs-built_in">size</span>();i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(first[i]!=end[i])&#123;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>        res += first[i];<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203151624701.png" srcset="/img/loading.gif" lazyload
+alt="image-20220315162405643" />
+<figcaption aria-hidden="true">image-20220315162405643</figcaption>
+</figure>
+<p>这样极大的缩短了代码量，大佬们的脑洞太大了</p>
 
               
             </div>
