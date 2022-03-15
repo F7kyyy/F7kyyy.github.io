@@ -259,8 +259,6 @@ int lengthOfLongestSubstring(string s)
 
 
 
----
-
 
 
 链接：https://leetcode-cn.com/problems/string-to-integer-atoi
@@ -319,3 +317,83 @@ int myAtoi(string s)
     }
 }
 ```
+## 14. 最长公共前缀
+
+编写一个函数来查找字符串数组中的最长公共前缀。
+
+如果不存在公共前缀，返回空字符串 `""`
+
+![image-20220315151908284](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203151519386.png)
+
+题目链接：https://leetcode-cn.com/problems/longest-common-prefix/
+
+#### 解法：
+
+##### 1. 暴力
+
+首先，我们可以找到最短串的长度minStrLen，这样在比较每个字母是就不用担心会溢出
+
+然后，遍历每个字符串，当同一index的字母相同时，res加上该字母，否则break
+
+```c++
+ string longestCommonPrefix(vector<string>& strs) {
+        string res = "";
+        int minStrLen = 300;
+        for (int i = 0; i < strs.size(); i++)
+        {
+            int indexLen = strs[i].size();
+            if (indexLen < minStrLen)
+            {
+                minStrLen = indexLen;
+            }
+        }
+
+        for (int i = 0; i < minStrLen; i++)
+        {
+            bool flag = true;
+            for (int j = 0; j < strs.size() - 1; j++)
+            {
+                if(strs[j][i]!=strs[j+1][i])
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag)
+                res += strs[0][i];
+            else
+                break;
+        }
+        return res;
+ }
+```
+
+这样的结果为
+
+##### ![image-20220315161954911](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203151619970.png)
+
+##### 2. 字典序排序
+
+在对字符串进行sort时，是按照字典序，所以我们完全可以在排序后比较第一个和最后一个的公共前缀子串，这样就可以省去比较每一个字符串的问题
+
+```c++
+string longestCommonPrefix(vector<string> &strs)
+{
+    sort(strs.begin(), strs.end());
+    string res;
+    string first = strs.front();
+    string end = strs.back();
+    for (int i = 0; i < first.size() && i < end.size();i++)
+    {
+        if(first[i]!=end[i]){
+            break;
+        }
+        res += first[i];
+    }
+    return res;
+}
+```
+
+![image-20220315162405643](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203151624701.png)
+
+这样极大的缩短了代码量，大佬们的脑洞太大了
