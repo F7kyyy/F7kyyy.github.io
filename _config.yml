@@ -105,3 +105,10 @@ deploy:
   type: git
   repository: https://github.com/F7kyyy/F7kyyy.github.io.git
   branch: master
+
+## hexo-filter-emoji
+emoji:
+  enable: true
+  className: github-emoji
+  styles:
+  customEmojis:
