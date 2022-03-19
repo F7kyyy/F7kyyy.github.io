@@ -4,6 +4,60 @@
   
   
   <entry>
+    <title>云计算作业2</title>
+    <link href="/2022/03/19/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%BD%9C%E4%B8%9A2/"/>
+    <url>/2022/03/19/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%BD%9C%E4%B8%9A2/</url>
+    
+    <content type="html"><![CDATA[<h2 id="列举威胁作用者有哪些并简要说明">1.列举威胁作用者有哪些，并简要说明</h2><p>威胁作用者是引发威胁的实体，因为与它能够实施攻击。云安全威胁可能来自内部也可以来自外部，可能来自于软件程序。相对于漏洞、威胁和风险以及安全策略和安全机制建立起来的保护措施而言，威胁作用者所承担的角色，如下图所示：</p><p><img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203191834094.png" alt="image-20220319183403033" style="zoom: 50%;" /></p><ul><li><p><strong>匿名攻击者</strong>匿名攻击者是云中没有权限、不被信任的云服务用户，它通常是一个外部软件程序，通过公网发动网络攻击。当匿名攻击者对安全策略和防护所致有限时，这会抑制它们形成有效攻击的能力。因此，匿名攻击者往往诉诸绕过账号或窃取用户证书的手段，同时使用能够确保匿名性或需要大量资源才能被检举的方法。</p></li><li><p><strong>恶意服务作用者</strong>恶意服务作用者能截取并转发云内的网络流量。它通常是带有被损害的或恶意逻辑的服务代理或伪装成服务代理的程序，也有可能是能够远程截取并破坏消息内容的外部程序。</p></li><li><p><strong>授信的攻击者</strong>授信的攻击者与同意云环境中的云用户共享IT资源，试图利用合法的证书来把云提供者以及它们共享IT资源的云租户作为攻击目标。不同匿名攻击者（它们是非授权的），授信的攻击者通常滥用合法的证书或通过挪用敏感和保密的信息，在云的信任边界内部发动攻击。</p></li><li><p><strong>恶意的内部人员</strong>恶意的内部人员是人为的威胁作用者，它们的行为代表云提供者或者与之有关。它们通常是现任或前任雇员，或是能够访问云提供者资源范围的第三方。这种类型的威胁作用者会带来极大的破坏可能性，因为恶意的内部人员可能拥有访问云用户IT资源的管理特权。</p></li></ul><h2 id="列举云安全威胁有哪些并简要说明">1.2列举云安全威胁有哪些，并简要说明</h2><p>云安全威胁可能来自内部也可以来自外部，可能来自于人也可能来自于软件程序。</p><ul><li><p><strong>流量窃听</strong></p><p>流量窃听是指当数据在传输到云中或在云内部传输时（通常是从云用户到云提供者）被恶意的服务作用者被动地截获，用于非法的信息收集之目的，这种攻击的目的就是直接破坏数据的保密性，可能也破坏了云用户和云提供者之间关系的保密性。由于这种攻击被动的本质，这种攻击更容易长时间进行而不被发现。</p><p><img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203191837611.png" alt="image-20220319183744550" style="zoom:67%;" /></p></li><li><p><strong>恶意媒介</strong></p><p>恶意媒介威胁是指消息被恶意服务作用者截获并且被篡改，因此可能会被破坏消息的保密性和完整性。它还有可能在把消息转发到目的地之前插入有害的数据。</p><p><img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203191838726.png" alt="image-20220319183843688" style="zoom:67%;" /></p></li><li><p><strong>拒绝服务</strong></p><p>拒绝服务（Dos）攻击的目标是使IT资源过载至无法正确运行。这种形式的攻击通过是以以下方式之一发起的：</p><ol type="1"><li>云服务上的负载由于伪造的消息或重复的通信请求不正常地增加。</li><li>网络流量过载，降低了响应性，性能下降。</li><li>发出多个云服务请求，每个请求都设计成消耗过量的内存和处理资源。</li></ol><p><img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203191840953.png" alt="image-20220319184022880" style="zoom:67%;" /></p></li><li><p><strong>授权不足</strong></p><p>授权不足攻击是指错误地授予攻击者访问权限或是授权太宽泛，导致攻击者能够访问到本应该受到保护的IT资源。通常结果就是攻击者获得了对某些IT资源的直接访问的权利，这些资源实现的时候是假设只能是授信的用户程序才能访问的。这种攻击的一种变种称为弱认证，如果用弱密码或共享来保持IT资源就可能导致这种攻击</p></li><li><p><strong>虚拟化攻击</strong></p><p>虚拟化攻击利用的是虚拟化环境中的漏洞，获得了对底层物理硬件未被授权的访问</p></li><li><p><strong>信任边界重叠</strong></p><p>重叠的信任边界潜藏了一种威胁，攻击者可以利用多个云用户共享的、基于云的IT资源</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>云计算</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>云计算</tag>
+      
+      <tag>作业</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>fluid主题优化</title>
+    <link href="/2022/03/17/fluid%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/"/>
+    <url>/2022/03/17/fluid%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/</url>
+    
+    <content type="html"><![CDATA[<p>虽然fluid主题已经非常好看了，但我依旧可以通过一些简单的操作，让你的博客更加易用（更花里胡哨和装逼）<spanclass="github-emoji" data-alias="smile" style=""data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8">😄</span></p><h2 id="fluid-页脚增加网站运行时长">1. Fluid 页脚增加网站运行时长</h2><p>主题预览网站中有了很详细的介绍，这里就不在重复了</p><p><ahref="https://hexo.fluid-dev.com/posts/fluid-footer-custom/">配置链接</a>，效果如下：</p><figure><imgsrc="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203172342237.png"alt="image-20220317234230202" /><figcaption aria-hidden="true">image-20220317234230202</figcaption></figure><h2 id="markdown-使用emoji">2. markdown 使用emoji</h2><p>默认不支持输入emoji表情，我们可以通过hexo-filter-emoji插件实现</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install hexo-filter-emoji<br></code></pre></td></tr></table></figure><p>之后在hexo配置文件，_config.html中添加</p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-comment">## hexo-filter-emoji</span><br><span class="hljs-attr">emoji:</span><br>  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">className:</span> <span class="hljs-string">github-emoji</span><br>  <span class="hljs-attr">styles:</span><br>  <span class="hljs-attr">customEmojis:</span><br></code></pre></td></tr></table></figure><p>效果如下<span class="github-emoji" data-alias="thumbsup" style=""data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8">👍</span>:</p><figure><imgsrc="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203172346789.png"alt="image-20220317234604763" /><figcaption aria-hidden="true">image-20220317234604763</figcaption></figure><h2 id="使用tidio进行实时交流">3. 使用Tidio进行实时交流</h2><p>Tidio是一个客服服务平台，可以在blog中实现LiveChat,存在网页端和移动端，可以及时回复消息，同时免费功能足够我们使用，效果如下：</p><p><img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203191703130.png" alt="image-20220319170332006" style="zoom:50%;" /></p><p><img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203191703265.png" alt="image-20220319170356177" style="zoom: 50%;" /></p><ul><li><p>首先进入 <a href="https://www.tidio.com/">Tidio 官网</a>进行注册，可能需要魔法上网</p></li><li><p>选择live chat 在settings 中调整自己的语句和外观</p></li><li><p>在setting-&gt;developver中复制public key</p><p><img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203191711294.png" alt="image-20220319171101114" style="zoom: 50%;" /></p></li><li><p>在主题的配置文件中添加</p><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-comment"># Tidio online chat</span><br><span class="hljs-attr">tidio:</span><br>  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">key:</span> <span class="hljs-string">your</span> <span class="hljs-string">public</span> <span class="hljs-string">key</span><br></code></pre></td></tr></table></figure></li><li><p>更改主题文件</p><p>/hexo-theme-fluid/layout_partials/footer.ejs中添加</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ejs">&lt;!-- 在线通讯Tidio --&gt;<br>&lt;% if (theme.tidio.enable)&#123; %&gt;<br>&lt;script src=&quot;//code.tidio.co/your_public_key.js&quot;&gt;&lt;/script&gt;<br>&lt;% &#125; %&gt;<br></code></pre></td></tr></table></figure></li><li><p>重新部署</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo clean<br>hexo g<br>hexo s<br></code></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>环境配置</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>hexo</tag>
+      
+      <tag>花里胡哨</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>计算小于等于N的质数的并行算法</title>
     <link href="/2022/03/17/%E8%AE%A1%E7%AE%97%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8EN%E7%9A%84%E8%B4%A8%E6%95%B0%E7%9A%84%E5%B9%B6%E8%A1%8C%E7%AE%97%E6%B3%95/"/>
     <url>/2022/03/17/%E8%AE%A1%E7%AE%97%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8EN%E7%9A%84%E8%B4%A8%E6%95%B0%E7%9A%84%E5%B9%B6%E8%A1%8C%E7%AE%97%E6%B3%95/</url>
@@ -76,9 +130,9 @@
     
     <tags>
       
-      <tag>环境配置</tag>
-      
       <tag>hexo</tag>
+      
+      <tag>环境配置</tag>
       
     </tags>
     
@@ -182,11 +236,11 @@
     
     <tags>
       
+      <tag>hexo</tag>
+      
       <tag>云计算</tag>
       
       <tag>环境配置</tag>
-      
-      <tag>hexo</tag>
       
     </tags>
     
