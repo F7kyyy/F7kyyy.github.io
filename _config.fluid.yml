@@ -64,7 +64,7 @@ code:
       # Select a style in the link
       # See: https://highlightjs.org/static/demo/
       style: "Atom One Light"
-      style_dark: "Monokai Sublime"
+      style_dark: "Atom One Dark"
 
     prismjs:
       # 在下方链接页面右侧的圆形按钮挑选 style 填入，也可以直接填入 css 链接
@@ -1022,6 +1022,10 @@ links:
     # Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis
     type: disqus
 
+# Tidio online chat
+tidio:
+  enable: true
+  key: cek0qomnlvhhdar1huindmvyc6asqced
 
 #---------------------------
 # 以下是配置 JS CSS 等静态资源的 URL 前缀，可以自定义成 CDN 地址，
