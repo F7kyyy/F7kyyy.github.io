@@ -327,7 +327,7 @@ int myAtoi(string s)
 
 题目链接：https://leetcode-cn.com/problems/longest-common-prefix/
 
-#### 解法：
+### 解法：
 
 ##### 1. 暴力
 
@@ -397,3 +397,191 @@ string longestCommonPrefix(vector<string> &strs)
 ![image-20220315162405643](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203151624701.png)
 
 这样极大的缩短了代码量，大佬们的脑洞太大了
+
+## 15. 三数之和
+
+### 题目描述
+
+给定一个包含 *n* 个整数的数组 `nums`，判断 `nums` 中是否存在三个元素 *a，b，c ，*使得 *a + b + c =* 0 ？找出所有满足条件且不重复的三元组。
+
+**注意：**答案中不可以包含重复的三元组。
+
+#### 示例
+
+```
+给定数组 nums = [-1, 0, 1, 2, -1, -4]，
+
+满足要求的三元组集合为：
+[
+  [-1, 0, 1],
+  [-1, -1, 2]
+]
+```
+
+### 题目解析
+
+最容易想到的就是三重循环暴力法搜索，时间复杂度为 `O(n^3)`. 有点高啊，优化一下.
+
+通过题目我们了解到，主要问题在于 `搜索所有满足条件的情况` 和 `避免重复项`，那么我们可以使用 `升序数组 + 双指针`  有效处理问题并降低时间复杂度. 
+
+你可能想知道为啥会选择使用这个方案 ？
+
+首先数组排序时间复杂度可以达到 `O(NlogN)`，这点时间消耗我们是能接受的，另外根据有序数组的特性，数组重复项会挨在一起，不需要额外的空间存储就能跳过重复项，由于是升序，当发现最左边的数值大于0，就可以及时跳出来结束运算.
+
+双指针可以用来`降维`. 通过遍历数组，取当前下标值为`定值`，双指针代表`定值`后面子数组的`首尾数值`，通过不断靠近双指针来判断三个值的和。
+
+具体算法流程如下：
+
+1. 特判：对于数组长度 `n`，如果数组为 `null` 或者数组长度小于 `3`，返回`[ ]` ;
+2. 数组升序排序；
+3. 遍历数组：
+   - 若 `num[i] > 0`：因为是升序，所以结果不可能等于0，直接返回结果；
+   - 令左指针 `L = i + 1`，右指针 `R = n - 1`，当 `L < R` 时，执行循环：
+     - 当 `nums[i] + nums[L] + nums[R] == 0` ，执行循环，判断左指针和右指针是否和下一位置重复，`去除重复解`。并同时将 `L,R` 移到下一位置，寻找新的解；
+     - 若`和`大于 `0`，说明 `nums[R]` 太大，`R指针` 左移
+     - 若`和`小于 `0`，说明 `nums[L]` 太小，`L指针` 右移
+
+
+
+### 参考代码
+
+```c++
+vector<vector<int>> threeSum(vector<int> &nums)
+{
+    vector<vector<int>> res;
+    sort(nums.begin(), nums.end());
+    if (nums.size() == 0 || nums.back() < 0 || nums.front() > 0)
+        return res;
+    for (int k = 0; k < nums.size(); k++)
+    {
+        if (nums[k] > 0)
+            break;
+        //去重操作，如果是nums[k]==nums[k+1],会忽略-1，-1，2这样的情况
+        if (k > 0 && nums[k] == nums[k - 1])
+            continue;
+        int target = 0 - nums[k];
+        int i = k + 1, j = nums.size() - 1;
+        while (i < j)
+        {
+            if (nums[i] + nums[j] == target)
+            {
+                res.push_back({nums[k], nums[i], nums[j]});
+                //因为返回的是数组中的数，所以相同的数我们只需要一个
+                while (i < j && nums[i] == nums[i + 1])
+                    ++i;
+                while (i < j && nums[j] == nums[j - 1])
+                    --j;
+                ++i;
+                --j;
+            }
+            else if (nums[i] + nums[j] < target)
+                ++i;
+            else
+                --j;
+        }
+    }
+    return res;
+}
+```
+## 19 删除链表的倒数第 N 个节点
+
+### 题目描述
+
+给定一个链表，删除链表的倒数第 *n* 个节点，并且返回链表的头结点。
+
+**示例：**
+
+```
+给定一个链表: 1->2->3->4->5, 和 n = 2.
+
+当删除了倒数第二个节点后，链表变为 1->2->3->5.
+```
+
+**说明：**
+
+给定的 *n* 保证是有效的。
+
+**进阶：**
+
+你能尝试使用一趟扫描实现吗？
+
+### 题目解析
+
+采取双重遍历肯定是可以解决问题的，但题目要求我们一次遍历解决问题
+
+### 解法一 两次遍历
+
+这也是最naive的解法，第一次遍历找到链表的长度，第二次遍历到需要删除节点的前一个节点，使用next指针将所需要删掉的节点绕过。
+
+需要考虑只存在一个节点或者删除的就是头节点的特殊情况。
+
+```c++
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode *cur = head;
+        int nums = 1;
+        while (cur->next != nullptr)
+        {
+            cur = cur->next;
+            nums++;
+        }
+        if(nums==1||nums-n==0)
+            return head->next;
+        // 到删除节点的前一个
+        int index = 1;
+        cur = head;
+        while (index < (nums - n))
+        {
+            cur = cur->next;
+            index++;
+        }
+
+        ListNode *ptr = cur->next;
+        cur->next = ptr->next;
+        return head;
+}
+```
+
+### 解法二 快慢指针
+
+很容易就可以想到我们何不声明一个快慢指针，快指针比慢指针领先n个进度，当快指针指向最后一个时，慢指针指向我们需要删掉的
+
+```c++
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+    	//无节点或者只有一个头节点
+        if(!head | !head -> next) return NULL;
+        ListNode * fast = head, *slow = head;
+        for(int i = 0; i < n; i++){
+            fast = fast -> next;
+        }
+        //链表长度小于n时，相当于删掉头节点
+        if(!fast){
+            return head -> next;    
+        }
+        //找到我们需要的节点
+        while(fast -> next){
+            fast = fast -> next;
+            slow = slow -> next;
+        }
+        slow -> next = slow -> next -> next;
+        return head;
+    }
+```
+
+### 解法三 递归
+
+因为递归过程，所以我们实际上首先找到的是链表的最后一个，并向前回溯，回溯过程中cur++；当找到我们应该删掉的节点时，返回的实际上是next指针，相当于返回了下一个节点，等价于删除操作；正常应该返回的是当前节点。
+
+```c++
+int cur = 0;
+ListNode *removeNthFromEnd(ListNode *head, int n)
+{
+    if (!head)
+        return NULL;
+    head->next = removeNthFromEnd(head->next, n);
+    cur++;
+    if (n == cur)
+        return head->next;
+    return head;
+}
+```
+
