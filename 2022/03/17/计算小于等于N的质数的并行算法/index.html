@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://f7kyyy.github.io/img/article/prime.jpg">
 <meta property="article:published_time" content="2022-03-17T05:35:05.000Z">
-<meta property="article:modified_time" content="2022-03-17T09:31:24.957Z">
+<meta property="article:modified_time" content="2022-03-26T05:49:41.308Z">
 <meta property="article:author" content="F7kyyy">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="算法">
@@ -218,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.7k 字
+          3.6k 字
         
       </span>
     
@@ -280,7 +280,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年3月17日 下午
+                    本文最后更新于：2022年3月26日 下午
                   
                 
               </p>
@@ -303,9 +303,9 @@ class="math inline">\(\sqrt{N}\)</span>的数整除就可以了，因此代码�
 1000000\)</span>中有78498个质数</p>
 <figure>
 <img
-src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171647230.png" srcset="/img/loading.gif" lazyload
-alt="image-20220317164726164" />
-<figcaption aria-hidden="true">image-20220317164726164</figcaption>
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261347360.png" srcset="/img/loading.gif" lazyload
+alt="202203171647230" />
+<figcaption aria-hidden="true">202203171647230</figcaption>
 </figure>
 <p>而在使用openmp并行后，从2-SIZE，每个线程分配一部分，判断是否为质数。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">ifprime</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">2</span>; k &lt;= <span class="hljs-built_in">sqrt</span>(n); k++)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (n % k == <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getPrime</span><span class="hljs-params">(vector&lt;<span class="hljs-type">long</span>&gt; &amp;prime)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 并行的写入vector</span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel</span><br>    &#123;<br>        vector&lt;<span class="hljs-type">int</span>&gt; vec_private;<br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp for nowait schedule(static)</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= SIZE; i++)<br>        &#123;<br>            <span class="hljs-keyword">if</span> (ifprime(i))<br>                vec_private.<span class="hljs-built_in">emplace_back</span>(i);<br>        &#125;<br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp critical</span><br>        prime.<span class="hljs-built_in">insert</span>(prime.<span class="hljs-built_in">end</span>(), vec_private.<span class="hljs-built_in">begin</span>(), vec_private.<span class="hljs-built_in">end</span>());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -315,9 +315,9 @@ alt="image-20220317164726164" />
 </blockquote>
 <figure>
 <img
-src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171651834.png" srcset="/img/loading.gif" lazyload
-alt="image-20220317165100782" />
-<figcaption aria-hidden="true">image-20220317165100782</figcaption>
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261348208.png" srcset="/img/loading.gif" lazyload
+alt="202203171651834" />
+<figcaption aria-hidden="true">202203171651834</figcaption>
 </figure>
 <h3 id="优化判断质数函数">优化判断质数函数</h3>
 <p>首先，我们应该知道一个关于质数分布的规律：<strong>大于等于5的质数一定和6的倍数相邻</strong>。例如5和7，11和13,17和19,<strong>反之是不一定成立的</strong></p>
@@ -333,9 +333,9 @@ class="math inline">\(\frac{\sqrt{n}}{3}\)</span>),C++代码如下</p>
 </blockquote>
 <figure>
 <img
-src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171659060.png" srcset="/img/loading.gif" lazyload
-alt="image-20220317165924026" />
-<figcaption aria-hidden="true">image-20220317165924026</figcaption>
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261348573.png" srcset="/img/loading.gif" lazyload
+alt="202203171659060" />
+<figcaption aria-hidden="true">202203171659060</figcaption>
 </figure>
 <p>并行 <strong>此时运行时间为</strong></p>
 <blockquote>
@@ -343,9 +343,9 @@ alt="image-20220317165924026" />
 </blockquote>
 <figure>
 <img
-src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171713716.png" srcset="/img/loading.gif" lazyload
-alt="image-20220317171312687" />
-<figcaption aria-hidden="true">image-20220317171312687</figcaption>
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261348471.png" srcset="/img/loading.gif" lazyload
+alt="202203171713716" />
+<figcaption aria-hidden="true">202203171713716</figcaption>
 </figure>
 <h2 id="使用筛法">2. 使用筛法</h2>
 <p>我们可以标记所有合数，然后求质数</p>
@@ -360,9 +360,9 @@ class="math inline">\(i*j\leq SIZE\)</span></p>
 </blockquote>
 <figure>
 <img
-src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171712942.png" srcset="/img/loading.gif" lazyload
-alt="image-20220317171255886" />
-<figcaption aria-hidden="true">image-20220317171255886</figcaption>
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261349127.png" srcset="/img/loading.gif" lazyload
+alt="202203171712942" />
+<figcaption aria-hidden="true">202203171712942</figcaption>
 </figure>
 <h3 id="在遍历时并行">在遍历时并行</h3>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++">  <span class="hljs-type">int</span> N = <span class="hljs-built_in">sqrt</span>(SIZE);<br>  <span class="hljs-comment">// 并行的使用筛法找出所有合数</span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel for num_threads(NUM_THREADS)</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= N; i++)<br>  &#123;<br>    <span class="hljs-keyword">if</span> (!sign[i])<br>      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = i; j &lt;= SIZE / i; j++)<br>        sign[i * j] = <span class="hljs-literal">true</span>;<br>  &#125;<br></code></pre></td></tr></table></figure>
@@ -372,9 +372,9 @@ alt="image-20220317171255886" />
 </blockquote>
 <figure>
 <img
-src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171716363.png" srcset="/img/loading.gif" lazyload
-alt="image-20220317171656304" />
-<figcaption aria-hidden="true">image-20220317171656304</figcaption>
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261349515.png" srcset="/img/loading.gif" lazyload
+alt="202203171716363" />
+<figcaption aria-hidden="true">202203171716363</figcaption>
 </figure>
 <h3 id="在寻找合数时并行">在寻找合数时并行</h3>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++">  <span class="hljs-type">int</span> N = <span class="hljs-built_in">sqrt</span>(SIZE);<br><span class="hljs-comment">// 并行的使用筛法找出所有合数</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= N; i++)<br>  &#123;<br>    <span class="hljs-keyword">if</span> (!sign[i])<br>    <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel for num_threads(NUM_THREADS)</span><br>      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = i; j &lt;= SIZE / i; j++)<br>        sign[i * j] = <span class="hljs-literal">true</span>;<br>  &#125;<br></code></pre></td></tr></table></figure>
@@ -384,9 +384,9 @@ alt="image-20220317171656304" />
 </blockquote>
 <figure>
 <img
-src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171718941.png" srcset="/img/loading.gif" lazyload
-alt="image-20220317171841884" />
-<figcaption aria-hidden="true">image-20220317171841884</figcaption>
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261349256.png" srcset="/img/loading.gif" lazyload
+alt="202203171718941" />
+<figcaption aria-hidden="true">202203171718941</figcaption>
 </figure>
 <h2 id="时间对比">3. 时间对比</h2>
 <table>
