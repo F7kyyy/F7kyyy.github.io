@@ -6,7 +6,7 @@ tags:
   - 云计算
   - hexo
 categories: 云计算
-index_img: https://gitee.com/Fantastic-Feng/picgo/raw/master/202203111633391.png
+index_img: /img/article/CloudComputing.png
 ---
 
 # 山东大学  计算机科学与技术  学院 云计算技术  课程实验报告
@@ -101,7 +101,7 @@ hexo s
 
 - 复制SSH链接
 
-  <img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072023291.png" alt="" style="zoom: 80%;" />
+  ![202203072023291](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261339219.png)
 
 - 编辑 config_yml
 
@@ -123,13 +123,13 @@ hexo s
   hexo d
   ```
 
-  <img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072028743.png" alt="" style="zoom:50%;" />
+  ![202203072028743](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261339347.png)
 
 ### 5.7 访问
 
 https://f7kyyy.github.io/
 
-<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072031185.png" alt="" style="zoom: 50%;" />
+![202203072031185](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261340471.png)
 
 ### 5.7 添加一篇博客
 
@@ -145,7 +145,7 @@ hexo s    //启动本地服务器进行查看
 hexo d   //查看后没有问题即可部署到github上
 ```
 
-<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203072055102.png" alt="" style="zoom:50%;" />
+![202203072055102](C:\Users\FengisZZZ\Desktop\demo\picgo\202203072055102.png)
 
 ##   6. 结论分析与体会
 

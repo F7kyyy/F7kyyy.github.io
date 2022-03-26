@@ -17,7 +17,7 @@ index_img: /img/article/hexo_fluid.png
 
 [配置链接](https://hexo.fluid-dev.com/posts/fluid-footer-custom/)，效果如下：
 
-![image-20220317234230202](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203172342237.png)
+![202203172342237](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261337892.png)
 
 ## 2. markdown 使用emoji
 
@@ -40,15 +40,15 @@ emoji:
 
 效果如下:thumbsup::
 
-![image-20220317234604763](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203172346789.png)
+![202203172346789](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261338900.png)
 
 ## 3. 使用Tidio进行实时交流
 
  Tidio是一个客服服务平台，可以在blog中实现Live Chat,存在网页端和移动端，可以及时回复消息，同时免费功能足够我们使用，效果如下：
 
-<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203191703130.png" alt="image-20220319170332006" style="zoom:50%;" />
+![202203191703130](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261337746.png)
 
-<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203191703265.png" alt="image-20220319170356177" style="zoom: 50%;" />
+![202203191703265](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261338806.png)
 
 - 首先进入 [Tidio 官网](https://www.tidio.com/) 进行注册，可能需要魔法上网
 

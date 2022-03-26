@@ -13,7 +13,7 @@ index_img: /img/article/hexo_github.png
 
 在将博客部署在github后，因为仓库的默认分支中存储的是静态html，而不是源码，所以在重新部署时会非常麻烦，需要重新配置。因为本身是一个喜欢折腾的人，为了防止某一天环境搞乱后追悔莫及，也为了方便查看配置文件更改了什么内容，所以使用版本控制是十分必要的。（额。。每个主题config不同，而我未来换主题的次数可能有辣么一点点多。)
 
-<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203112113312.png" alt="image-20220311211359269" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261340923.png" alt="202203112113312" style="zoom:50%;" />
 
 网上的教程挺多的，但是有点过程十分繁琐而且没有必要。在尝试后，我总结了相对简单的步骤，使用vscode 进行图形化git操作，因为我身边的大部分人可能只会git clone 
 
@@ -21,19 +21,19 @@ index_img: /img/article/hexo_github.png
 
 一般来说，hexo生成的静态html文件都保存在master分支，我们需要新建一个分支用来存储源代码，我新建了source分支
 
-<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203112044392.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261341357.png" alt="202203112044392" style="zoom:50%;" />
 
 然后把source设置为默认分支
 
 **Settings->Branches->Default branches**
 
-<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203112047709.png" alt="image-20220311204717670" style="zoom: 67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261341110.png" alt="202203112047709" style="zoom:67%;" />
 
 ### 2. 本地操作
 
 将仓库克隆到本地，使用vscode打开，左下角应该显示source分支
 
-<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203112051236.png" alt="image-20220311205109210" style="zoom:80%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261342795.png" alt="202203112051236" style="zoom:80%;" />
 
 把里边的东西删掉，因为source是从master clone 过来的静态html我们并不需要这些东西，保留.git文件夹
 
@@ -71,17 +71,17 @@ deploy:
 
 将更改提交，并且推送到github
 
-![](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203112104237.png)
+![202203112104237](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261345221.png)
 
-<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203112106897.png" alt="image-20220311210640855" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261346720.png" alt="202203112106897" style="zoom:67%;" />
 
 这时我们就成功了，在本地做更改时，我们会将更改的config文件和md文件推送到source分支
 
-<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203112109311.png" alt="image-20220311210901157" style="zoom: 33%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261346277.png" alt="202203112109311" style="zoom:67%;" />
 
 而执行hexo d 会部署在master分支
 
-<img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203112110969.png" alt="image-20220311211024886" style="zoom:40%;" /><img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203112110060.png" alt="image-20220311211049948" style="zoom:40%;" />
+![202203112110969](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261346698.png)![202203112110060](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261347781.png)
 
 至此我们的目的就达到了，这样在弄些花里胡哨的东西时就不用担心出现错误无法回退了。
 

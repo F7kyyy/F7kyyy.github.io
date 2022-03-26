@@ -6,7 +6,7 @@ tags:
   - 算法
   - 笔记
 categories: 算法
-index_img: https://gitee.com/Fantastic-Feng/picgo/raw/master/202203111618917.jpg
+index_img: https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261452841.jpg
 math: true
 ---
 
@@ -17,7 +17,7 @@ math: true
 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
 
 你可以按任意顺序返回答案
- ![image-20220302182050779](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203021820930.png)
+ ![202203021820930](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261329962.png)
 
 链接：https://leetcode-cn.com/problems/two-sum
 
@@ -75,7 +75,7 @@ for (int i = 0; i < numslength; i++)
 
 请你将两个数相加，并以相同形式返回一个表示和的链表。
 
- ![image-20220302193756590](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203021937657.png)
+![202203021937657](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261330735.png)
 链接：https://leetcode-cn.com/problems/add-two-numbers
 
 ### 解题
@@ -125,11 +125,11 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
 
 给定一个字符串 `s` ，请你找出其中不含有重复字符的 **最长子串** 的长度。
 
- <img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203021951814.png" alt="image-20220302195158780" style="zoom:100%;" />
+![202203021951814](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261330085.png)
 
 
 
- <img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203021952737.png" alt="image-20220302195217708" style="zoom: 80%;" />
+![202203021952737](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261331174.png)
 
 ### 解题：
 
@@ -175,7 +175,7 @@ int lengthOfLongestSubstring(string s)
 
   我们知道字符串一定是对称的，所以我们可以每次循环的时候选择一个中心，进行左右扩展，判断新扩展的字符是否相等。
 
-   ![image-20220304185620795](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203041856092.png)
+  ![202203041856092](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261331315.png)
   
   因为存在奇数的字符串或者偶数的字符串，所以我们需要从一个字符开始扩展，或者两个连续的字符开始扩展，所以共有n + (n-1)个中心。
   
@@ -582,6 +582,172 @@ ListNode *removeNthFromEnd(ListNode *head, int n)
     if (n == cur)
         return head->next;
     return head;
+}
+```
+
+## 20. 有效的括号
+
+### 题目描述
+
+给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。
+
+有效字符串需满足：
+
+- 左括号必须用相同类型的右括号闭合。
+- 左括号必须以正确的顺序闭合。
+
+### 样例
+
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261453024.png" alt="image-20220326142418796" style="zoom: 67%;" />
+
+链接：https://leetcode-cn.com/problems/valid-parentheses
+
+### 思路
+
+这是一道栈的经典题型
+
+这道题让我们验证输入的字符串是否为括号字符串，包括大括号，中括号和小括号。我们使用**栈**来存储括号
+
+- 遍历输入字符串
+- 如果当前字符为左半边括号时，则将其压入栈中
+- 如果遇到右半边括号时，**分类讨论：**
+- 1）如栈不为空且为对应的左半边括号，则取出栈顶元素，继续循环  
+- 2）若此时栈为空，则直接返回false
+- 3）若不为对应的左半边括号，反之返回false
+
+```c++
+bool isValid(string s)
+{
+    int len = s.size();
+    if (len % 2 != 0)
+        return false;
+    stack<char> brackets;
+    for (int i = 0; i < len; i++)
+    {
+        //遇到左括号压入栈
+        if (s[i] == '{' || s[i] == '(' || s[i] == '[')
+            brackets.push(s[i]);
+        //右括号分情况
+        else
+        {
+            //情况1:栈为空，没有与右括号匹配，返回false
+            if (!brackets.size())
+                return false;
+            char cur = brackets.top(), match;
+            brackets.pop();
+            //匹配的左括号
+            if (s[i] == ')')
+                match = '(';
+            else if (s[i] == ']')
+                match = '[';
+            else
+                match = '{';
+            //情况2:扫描到的右括号所匹配的左括号！= 栈顶括号
+            if(match !=cur)
+                return false;
+        } 
+    }
+    // 扫描完字符串，是否清空栈
+    return brackets.size() == 0;
+}
+
+// 第二种代码写法
+bool isValid(string s)
+{
+    int len = s.size();
+    if (len % 2 != 0)
+        return false;
+    stack<char> brackets;
+    for (int i = 0; i < len; i++)
+    {
+        // 将左括号匹配的右括号压入栈
+        if (s[i] == '(')
+            brackets.push(')');
+        else if (s[i] == '{')
+            brackets.push('}');
+        else if (s[i] == '[')
+            brackets.push(']');
+        // 扫描遇到右括号
+        else
+        {
+            if (!brackets.size())
+                return false;
+            else if (brackets.top() != s[i])
+                return false;
+            else
+                brackets.pop();
+        }
+    }
+     return brackets.size() == 0;   
+}
+```
+
+
+
+## 21 合并两个有序链表
+
+### 题目描述
+
+将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261438672.png" alt="image-20220326143806602" style="zoom:67%;" />
+
+### 一般思路
+
+1. 比较链表1和链表2的第一个结点的值，将值小的结点保存下来为合并后的第一个结点。并且把第一个结点为最小的链表向后移动一个元素。
+2. 继续在剩下的元素中选择小的值，连接到第一个结点后面，并不断next将值小的结点连接到第一个结点后面，直到某一个链表为空。
+3. 当两个链表长度不一致时，也就是比较完成后其中一个链表为空，此时需要把另外一个链表剩下的元素都连接到第一个结点的后面。
+
+```c++
+ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
+{
+    ListNode *newList = new ListNode(0);
+    ListNode *dummyhead = newList, *p = list1, *q = list2;
+    while (p && q)
+    {
+        if (p->val <= q->val)
+        {
+            newList->next = new ListNode(p->val);
+            p = p->next;
+        }
+        else
+        {
+            newList->next = new ListNode(q->val);
+            q = q->next;
+        }
+        newList = newList->next;
+    }
+    if(p)
+        newList->next = p;
+    else
+        newList->next = q;
+    return dummyhead->next;
+}
+```
+
+### 递归实现
+
+（1）对空链表存在的情况进行处理，假如 list1 为空则返回 list2 ，list2 为空则返回 list1。
+（2）比较两个链表第一个结点的大小，确定头结点的位置
+（3）头结点确定后，继续在剩下的结点中选出下一个结点去链接到第二步选出的结点后面，然后在继续重复（2 ）（3） 步，直到有链表为空。
+
+```c++
+ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
+{
+    if (list1 == nullptr)
+        return list2;
+    if (list2 == nullptr)
+        return list1;
+    if (list1->val < list2->val)
+    {
+        list1->next = mergeTwoLists(list1->next, list2);
+        return list1;
+    }
+    else
+    {
+        list2->next = mergeTwoLists(list1, list2->next);
+        return list2;
+    }
 }
 ```
 

@@ -55,7 +55,7 @@ int main()
 
 时间后的1000000时参数SIZE，含义是$\leq 1000000$中有78498个质数
 
-![image-20220317164726164](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171647230.png)
+![202203171647230](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261347360.png)
 
 而在使用openmp并行后，从2-SIZE，每个线程分配一部分，判断是否为质数。
 
@@ -92,7 +92,7 @@ void getPrime(vector<long> &prime)
 
 > time=0.033235
 
-![image-20220317165100782](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171651834.png)
+![202203171651834](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261348208.png)
 
 ### 优化判断质数函数
 
@@ -120,13 +120,13 @@ bool ifprime(int n)
 
 >time=0.156363
 
-![image-20220317165924026](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171659060.png)
+![202203171659060](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261348573.png)
 
 并行 **此时运行时间为**
 
 >time=0.015401
 
-![image-20220317171312687](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171713716.png)
+![202203171713716](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261348471.png)
 
 ## 2. 使用筛法
 
@@ -154,7 +154,7 @@ sign[i]=true表示i为合数，当一个数i是质数时，我们标记$i*j$为�
 
 >time=0.021131
 
-![image-20220317171255886](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171712942.png)
+![202203171712942](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261349127.png)
 
 ### 在遍历时并行
 
@@ -174,7 +174,7 @@ sign[i]=true表示i为合数，当一个数i是质数时，我们标记$i*j$为�
 
 >time=0.012204
 
-![image-20220317171656304](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171716363.png)
+![202203171716363](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261349515.png)
 
 ### 在寻找合数时并行
 
@@ -194,7 +194,7 @@ sign[i]=true表示i为合数，当一个数i是质数时，我们标记$i*j$为�
 
 > time=0.006109
 
-![image-20220317171841884](https://gitee.com/Fantastic-Feng/picgo/raw/master/202203171718941.png)
+![202203171718941](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261349256.png)
 
 ## 3. 时间对比
 
