@@ -392,11 +392,1070 @@ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES .
 "cmake.copyCompileCommands": "",
 ```
 
-### 3.2 .clang
+### 3.2 .clang-tidy
 
 `Ctrl+Shft+p`配置如下内容,[官网配置](https://clangd.llvm.org/config.html)
 
 ![image-20220328225226433](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203282252474.png)
+
+可能官网配置较为繁琐，这里列举了大部分的中文含义和示例代码
+
+```c++
+Checks:
+// 从整数类型转换为字符串默认使用std::to_string
+1. boost-use-to-string
+
+// 参数注释
+2. bugprone-argument-comment
+// before
+void foo(int MeaningOfLife);
+foo(42);
+// after
+void foo(int MeaningOfLife);
+foo(/*MeaningOfLife=*/42);
+
+// 要求相同分支合并
+3. bugprone-branch-clone
+// before
+switch (ch) {
+case 'a':
+  return 10;
+case 'A':
+  return 10;
+default:
+  return 10;
+}
+// after
+switch (ch) {
+case 'a':
+case 'A':
+  return 10;
+default:
+  return 10;
+}
+
+return test_value(x) ? x : x;
+
+// 基类拷贝构造函数初始化
+4. bugprone-copy-constructor-init
+class Copyable {
+public:
+  Copyable() = default;
+  Copyable(const Copyable &) = default;
+};
+class X2 : public Copyable {
+  X2(const X2 &other) {} // Copyable(other) is missing
+};
+class X4 : public Copyable {
+  X4(const X4 &other) : Copyable() {} // other is missing
+};
+
+// 禁止返回动态初始化的静态变量
+5. bugprone-dynamic-static-initializers
+int foo() {
+  static int k = bar();
+  return k;
+}
+
+// 禁止在一些函数内抛出异常，避免带来一些风险（析构函数、移动构造函数、移动赋值运算符、main函数、swap函数等）
+6. bugprone-exception-escape
+
+// 检查截断和溢出的情况
+7. bugprone-fold-init-type
+auto a = {0.5f, 0.5f, 0.5f, 0.5f};
+return std::accumulate(std::begin(a), std::end(a), 0);
+auto a = {65536LL * 65536 * 65536};
+return std::accumulate(std::begin(a), std::end(a), 0);
+
+// 检查同名但未定义的命名空间
+8. bugprone-forward-declaration-namespace
+namespace na { struct A; }
+namespace nb { struct A {}; }
+nb::A a;
+
+// 排除不正确舍入问题
+9. bugprone-incorrect-roundings
+(int)(double_expression + 0.5)
+
+// 检查容易出错的无限循环
+10. bugprone-infinite-loop
+
+// 检查会导致精度损失的整数除法
+11. bugprone-integer-division
+
+// 查找由于缺少括号而可能具有意外行为的宏
+12. bugprone-macro-parentheses
+
+// 检查字符串操作的不当行为
+13. bugprone-misplaced-operator-in-strlen-in-alloc
+
+// 检查错误的指针动态分配内存
+14. bugprone-misplaced-pointer-arithmetic-in-alloc
+// before
+void bad_malloc(int n) {
+  char *p = (char*) malloc(n) + 10;
+}
+// after
+char *p = (char*) malloc(n + 10);
+
+// 类型转换造成的精度损失
+15. bugprone-misplaced-widening-cast
+// before
+return (long)(x * 1000);
+// after
+return (long)x * 1000;
+
+// 检查std::move()的错误使用
+16. bugprone-move-forwarding-reference
+
+// 检查多语句宏定义
+17. bugprone-multiple-statement-macro
+#define INCREMENT_TWO(x, y) (x)++; (y)++
+if (do_increment)
+  INCREMENT_TWO(a, b);  // (b)++ will be executed unconditionally.
+
+// 查找容易出错的noescape
+18. bugprone-no-escape
+void foo(__attribute__((noescape)) int *p) {
+  dispatch_async(queue, ^{
+    *p = 123;
+  });
+};
+
+// 检查可能导致非空终止结果的函数调用，使用strcpy()、strncpy()、strcpy_s()、 strncpy_s()代替memcpy()和memcpy_s()
+19. bugprone-not-null-terminated-result
+static char *stringCpy(const std::string &str) {
+  char *result = reinterpret_cast<char *>(malloc(str.size()));
+  memcpy(result, str.data(), str.size());
+  return result;
+}
+static char *stringCpy(const std::string &str) {
+  char *result = reinterpret_cast<char *>(malloc(str.size() + 1));
+  strcpy(result, str.data());
+  return result;
+}
+
+// 检查对父虚函数的调用
+20. bugprone-parent-virtual-call
+struct A {
+  int virtual foo() {...}
+};
+struct B: public A {
+  int foo() override {...}
+};
+struct C: public B {
+  int foo() override { A::foo(); }
+//                     ^^^^^^^^
+};
+
+// 检查对pthread_*或posix_*函数调用是否判断负返回值
+21. bugprone-posix-return
+// before
+if (posix_fadvise(...) < 0) {}
+// after
+if (posix_fadvise(...) > 0) {}
+
+// 检查逻辑if的重复判断冗余
+22. bugprone-redundant-branch-condition
+if (onFire) {
+  if (onFire && peopleInTheBuilding > 0)
+    scream();
+}
+
+// 检查不规范的下划线使用
+23. bugprone-reserved-identifier
+
+// 检查容易出错的信号处理程序
+24. bugprone-signal-handler
+
+// 检查错误的字符型与字符型、整型之间的强制转换和比较
+25. bugprone-signed-char-misuse
+
+// 检查可能出错的sizeof使用
+26. bugprone-sizeof-container
+27. bugprone-sizeof-expression
+std::string s;
+int a = 47 + sizeof(s); // 报错
+int b = sizeof(std::string); // 允许
+
+std::string array_of_strings[10];
+int c = sizeof(array_of_strings) / sizeof(array_of_strings[0]); // 允许
+
+std::array<int, 3> std_array;
+int d = sizeof(std_array); // 允许
+
+class Point {
+  [...]
+  size_t size() { return sizeof(this); }  // 不允许，可能是sizeof(*this)
+  [...]
+};
+
+// 检查唤醒函数的错误使用
+28. bugprone-spuriously-wake-up-functions
+
+// 检查容易出错的字符串初始化
+29. bugprone-string-constructor
+std::string str('x', 50); // should be str(50, 'x')
+
+// 检查容易出错的字符串赋值(可能导致误判)
+30. bugprone-string-integer-assignment
+std::string s;
+int x = 5965;
+s = 6;	
+s = x;
+
+// 检查带有嵌入\0字符的字符串
+31. bugprone-string-literal-with-embedded-nul
+const char *Bytes[] = "\x03\0x02\0x01\0x00\0xFF\0xFF\0xFF";
+std::string str("abc\0def"); 
+
+// 容易出错的枚举用法
+32. bugprone-suspicious-enum-usage
+
+// 检查错误的文件包含（只包含头文件）
+33. bugprone-suspicious-include.HeaderFileExtensions
+
+// 检查错误的memset的使用
+34. bugprone-suspicious-memset-usage
+void foo() {
+  int i[5] = {1, 2, 3, 4, 5};
+  int *ip = i;
+  char c = '1';
+  char *cp = &c;
+  int v = 0;
+
+  // Case 1
+  memset(ip, '0', 1); // suspicious
+  memset(cp, '0', 1); // OK
+
+  // Case 2
+  memset(ip, 0xabcd, 1); // fill value gets truncated
+  memset(ip, 0x00, 1);   // OK
+
+  // Case 3
+  memset(ip, sizeof(int), v); // zero length, potentially swapped
+  memset(ip, 0, 1);           // OK
+}
+
+// 检查可疑的逗号丢失
+35. bugprone-suspicious-missing-comma
+const char* B[] = "This" " is a "    "test"; // 允许
+const char* Test[] = {
+  "line 1",
+  "line 2"     // 报错
+  "line 3",
+  "line 4",
+  "line 5"
+};
+
+// 检查容易出错的可以分号
+36. bugprone-suspicious-semicolon
+if (x < y);
+{
+  x++;
+}
+
+// 检查可疑的字符串比较
+37. bugprone-suspicious-string-compare
+if (strcmp(...))       // 建议显式比较
+if (!strcmp(...))      // 允许
+if (strcmp(...) != 0)  // 允许
+if (strcmp(...) == -1) // 错误
+if (strcmp(...) < 0.)  // 错误
+
+// 检查容易出错的交换参数
+38. bugprone-swapped-arguments
+
+// 检查do-while常为false时的continue使用
+39. bugprone-terminating-continue
+do {
+  ...
+  continue; // 直接终止循环
+  ...
+} while(false);
+
+// 检查可能缺失的throw关键字
+40. bugprone-throw-keyword-missing
+void f(int i) {
+  if (i < 0) {
+    // Exception is created but is not thrown.
+    std::runtime_error("Unexpected argument");
+  }
+}
+
+// 检查容易出错的循环变量
+41. bugprone-too-small-loop-variable
+int main() {
+  long size = 294967296l;
+  for (short i = 0; i < size; ++i) {}
+}
+int doSomething(const std::vector& items) {
+  for (short i = 0; i < items.size(); ++i) {}
+}
+
+// 查找容易出错的未定义内存操作
+42. bugprone-undefined-memory-manipulation
+
+// 检查容易出错的委托构造函数
+43. bugprone-undelegated-constructor
+
+// 检查未对new进行异常处理
+44. bugprone-unhandled-exception-at-new
+int *f() noexcept {
+  int *p = new int[1000];
+  // ...
+  // std::bad_alloc
+  return p;
+}
+
+// 检查容易出错的未处理自赋值
+55. bugprone-unhandled-self-assignment
+
+// 检查看起来像RAII对象的临时对象。
+56. bugprone-unused-raii
+
+// 检查未使用的一些返回值（如返回指针）
+57. bugprone-unused-return-value
+
+// 禁止使用std::move之后的对象仍被使用
+58. bugprone-use-after-move
+
+// 检查函数名与基类虚函数类似的函数声明
+59. bugprone-virtual-near-miss
+
+// 会报未知的警告
+60. cert-dcl21-cpp
+61. cert-dcl50-cpp
+62. cert-env33-c
+
+// 检查对std posix等命名空间的修改
+61. cert-dcl58-cpp
+
+// 检查不验证转换字符串到数字的有效性的代码，如c语言atoi()
+62. cert-err34-c
+
+// 检查浮点类型的循环
+63. cert-flp30-c
+
+// 生成动态类型信息
+64. clang-analyzer-core.DynamicTypePropagation
+
+// 检查未初始化的块
+65. clang-analyzer-core.uninitialized.CapturedBlockVariable
+
+// 检查释放后的内部指针的使用
+66. clang-analyzer-cplusplus.InnerPointer
+
+// 检查从非空返回类型 返回 可能空的指针
+67. clang-analyzer-nullability.NullableReturnedFromNonnull
+
+68. clang-analyzer-optin.osx.OSObjectCStyleCast
+69. clang-analyzer-optin.performance.GCDAntipattern
+70. clang-analyzer-osx.MIG
+
+// 检查过度填充的结构
+71. clang-analyzer-optin.performance.Padding
+
+72. clang-analyzer-osx.OSObjectRetainCount
+
+// 检查objc
+73. clang-analyzer-osx.ObjCProperty 
+74. clang-analyzer-osx.cocoa.AutoreleaseWrite
+
+// cocoa相关
+75. -clang-analyzer-osx.cocoa-*
+
+// va_lists相关
+76. clang-analyzer-valist-
+
+// mt安全
+77. concurrency-mt-unsafe
+
+// 并发线程
+78. concurrency-thread-canceltype-asynchronous
+
+// 避免使用goto
+79. cppcoreguidelines-avoid-goto
+
+// 禁止非常量全局变量
+80. cppcoreguidelines-avoid-non-const-global-variables
+
+// 检查extern对象的全局变量的初始值设定项初始化顺序问题
+81. cppcoreguidelines-interfaces-global-init
+
+// 检查可能被认为有问题的宏用法
+82. -cppcoreguidelines-macro-usage
+
+83. -cppcoreguidelines-narrowing-conversions
+
+// 对c风格内存分配的检查
+84. cppcoreguidelines-no-malloc
+
+// 检查内存分配时是否使用gsl的方法
+85. -cppcoreguidelines-owning-memory
+
+86. cppcoreguidelines-prefer-member-initializer
+87. cppcoreguidelines-pro-bounds-array-to-pointer-decay
+88. cppcoreguidelines-pro-bounds-constant-array-index
+
+// 标记指针的算法使用
+89. -cppcoreguidelines-pro-bounds-pointer-arithmetic
+
+// 标记const_cast的使用
+90. -cppcoreguidelines-pro-type-const-cast
+91. -cppcoreguidelines-pro-type-cstyle-cast
+
+92. -cppcoreguidelines-pro-type-member-init
+
+// 标记reinterpret_cast的使用
+93. -cppcoreguidelines-pro-type-reinterpret-cast
+
+// 标记static_cast的使用
+94. -cppcoreguidelines-pro-type-static-cast-downcast 
+
+// 标记union成员的访问权限
+95. -cppcoreguidelines-pro-type-union-access
+
+// 标记对c样式可变参数函数调用以及对va_arg的使用
+96. cppcoreguidelines-pro-type-vararg
+
+// 检查导致slice的情况
+97. cppcoreguidelines-slicing
+struct B { int a; virtual int f(); };
+struct D : B { int b; int f() override; };
+void use(B b) {  // Missing reference, intended?
+  b.f();  // Calls B::f.
+}
+
+D d;
+use(d);  // Slice
+
+98. cppcoreguidelines-special-member-functions
+99. darwin-avoid-spinlock
+100. darwin-dispatch-once-nonstatic
+
+// 使用默认参数时发出警告
+101. -fuchsia-default-arguments-calls
+
+// 函数定义默认参数时发出警告
+102. -fuchsia-default-arguments-declarations
+
+// 继承自多个非纯虚类发出警告
+103. -fuchsia-multiple-inheritance
+
+// 检查已被重载的运算符
+104. -fuchsia-overloaded-operator
+
+// 限制创建静态对象（除非构造函数是constexpr类型或没有显式构造函数）
+105. fuchsia-statically-constructed-objects
+
+106. fuchsia-trailing-return
+
+// 对虚继承类发出警告(报错)
+107. fuchsia-virtual-inheritance
+class B : public virtual A {};
+
+// 检查make_pair是否推断出模板类型
+108. google-build-explicit-make-pair
+
+// 在标头中查找匿名命名空间
+109.google-build-namespaces
+- key:google-build-namespaces.HeaderFileExtensions
+    value:h,hh,hpp,hxx
+
+// 检查是否使用using namespace
+110. google-build-using-namespace
+
+// 为虚函数参数添加默认值
+111. google-default-arguments
+
+// 检查显式构造函数，避免隐式转换带来的风险
+112. -google-explicit-constructor
+
+// 在头文件中标记全局命名空间污染
+113. google-global-names-in-headers
+  - key: google-global-names-in-headers.HeaderFileExtensions
+    value: h
+
+// objc
+114. -google-objc-avoid-nsobject-new
+115. -google-objc-avoid-throwing-exception
+116. -google-objc-function-naming
+117. -google-objc-global-variable-declaration
+
+// 检查googletest的测试以及测试示例名称是否有下划线（测试名称和测试用例名称中不允许使用下划线）
+118. google-readability-avoid-underscore-in-googletest-name
+
+// 查找 C 风格强制转换的用法
+119. google-readability-casting
+
+// 查找TODO有没有署用户名、邮件等
+120. google-readability-todo
+// TODO(kl@gmail.com): Use a "*" here for concatenation operator.
+// TODO(Zeke) change this to use relations.
+// TODO(bug 12345): remove the "Last visitors" feature.
+
+// 检查整数定义，将short, long，long long改为intxx_类型
+121. -google-runtime-int
+
+// 检查用户自定义表述的重载运算符
+121. google-runtime-operator
+
+// 用户自定义函数名中，将带有case字符改为suite
+122. google-upgrade-googletest-case
+
+// 要求goto只跳过块的一部分（不使用goto）
+123. -hicpp-avoid-goto
+
+// 确保throw表达式中的每个值都是std::exception的实例
+124. hicpp-exception-baseclass
+
+// 有if和else if一定要包含else（即使内容为空），有switch要包含default，少量case用if代替。
+125. hicpp-multiway-paths-covered
+
+// 检查汇编语句
+126. hicpp-no-assembler
+
+// 检查对有符号整数类型的按位运算的使用，避免风险
+127. hicpp-signed-bitwise
+
+// 检查linux内核代码
+128. linuxkernel-must-use-errs
+
+// 检查不符合LLVM风格的头文件
+129. llvm-header-guard
+  - key: llvm-header-guard.HeaderFileExtensions
+    value: ',h,hh,hpp,hxx'
+
+// 检查include的正确顺序（llvm风格）
+130. llvm-include-order
+
+// 长命名空间结束注释
+131. llvm-namespace-comment
+
+// cast的一些变换
+132. llvm-prefer-isa-or-dyn-cast-in-conditionals
+// before
+if (auto x = cast<X>(y)) {}
+// after
+if (auto x = dyn_cast<X>(y)) {}
+// befo
+if (cast<X>(y)) {}
+// after
+if (isa<X>(y)) {}
+
+// unsigned用Register代替
+133. llvm-prefer-register-over-unsigned
+
+// Twine方法使用后面加.str()
+134. llvm-twine-local
+// before
+static Twine Moo = Twine("bark") + "bah";
+// after
+static std::string Moo = (Twine("bark") + "bah").str();
+
+// 检查调用解析为__llvm_libc命名空间内的函数
+135. llvmlibc-callee-namespace
+
+136. llvmlibc-implementation-in-namespace
+
+// 查找编译器未提供的系统 libc 头文件,如stdio.h
+137. llvmlibc-restrict-system-libc-headers
+
+// 在头文件中查找非 extern 非内联函数和变量定义
+138. -misc-definitions-in-headers
+int a = 1; //全局，不允许
+inline int e() { //允许
+  return 1;
+}
+
+// 检查const的错误使用
+139. misc-misplaced-const
+typedef int *int_ptr;
+void f(const int_ptr ptr) {
+  *ptr = 0; // 意外的修改了数值
+  ptr = 0; // 编译不通过
+}
+
+// 检查new和delete
+140. misc-new-delete-overloads
+
+// 检查函数递归错误
+141. misc-no-recursion
+
+// 检查一些对象，不允许复制，比如FILE
+142. misc-non-copyable-objects
+
+// 规定类成员变量必须为private
+143. -misc-non-private-member-variables-in-classes 
+
+// 检查冗余表达式
+144. misc-redundant-expression
+(p->x == p->x);
+(p->x < p->x);
+
+// 用static_assert()代替assert()
+145. misc-static-assert
+
+// 查找违反“按值抛出，按引用捕捉”的规则
+146. misc-throw-by-value-catch-by-reference
+
+// 检查重载运算符的错误返回类型
+147. misc-unconventional-assign-operator
+
+// 将unique_ptr::reset(release())替换为std::move()
+148. misc-uniqueptr-reset-release
+
+// 查找未使用的命名空间别名声明
+149. misc-unused-alias-decls
+
+// 查找未使用的参数并报错（可能代码有误）
+150. misc-unused-parameters
+
+// 查找未使用的using声明
+151. misc-unused-using-decls
+
+// 替换std::bind()的使用
+152. modernize-avoid-bind
+
+// 避免使用c语言的array
+153. modernize-avoid-c-arrays
+int a[] = {1, 2};//报错
+
+// 嵌套命名空间的简化（可以简化时）
+154. modernize-concat-nested-namespaces
+// before
+namespace n1 {
+namespace n2 {
+void t();
+}
+}
+// after
+namespace n1::n2 {
+void t();
+}
+
+// 检查c++中弃用的c头文件
+155. modernize-deprecated-headers
+
+// 检查弃用的类方法
+156. modernize-deprecated-ios-base-aliases
+弃用								替代
+std::ios_base::io_state			std::ios_base::iostate
+std::ios_base::open_mode		std::ios_base::openmode
+std::ios_base::seek_dir			std::ios_base::seekdir
+std::ios_base::streamoff	 
+std::ios_base::streampos	 
+
+// 避免有风险的循环，替换为c++11风格
+157. modernize-loop-convert
+
+// 对于share_ptr的一些更改
+158. modernize-make-shared
+// before
+auto my_ptr = std::shared_ptr<MyPair>(new MyPair(1, 2));
+my_ptr.reset(new MyPair(1, 2));
+// after
+auto my_ptr = std::make_shared<MyPair>(1, 2);
+my_ptr = std::make_shared<MyPair>(1, 2);
+
+// 对于unique_ptr的一些更改
+159. modernize-make-unique
+// before
+auto my_ptr = std::unique_ptr<MyPair>(new MyPair(1, 2));
+my_ptr.reset(new MyPair(1, 2));
+// after
+auto my_ptr = std::make_unique<MyPair>(1, 2);
+my_ptr = std::make_unique<MyPair>(1, 2);
+
+160. modernize-pass-by-value
+
+// 字符串初始化的风格检查
+161. modernize-raw-string-literal
+
+// 检查冗余的void
+162. modernize-redundant-void-arg
+int fun(void)
+
+// 用unique_ptr替换auto_ptr
+163. modernize-replace-auto-ptr
+
+164. modernize-replace-disallow-copy-and-assign-macro
+
+// 将std::random_shuffle替换为std::shuffle
+165. modernize-replace-random-shuffle
+
+// 用花括号初始化器列表替换返回中对构造函数的显式调用
+166. modernize-return-braced-init-list
+// before
+Foo bar() {
+  Baz baz;
+  return Foo(baz);
+}
+// after
+Foo bar() {
+  Baz baz;
+  return {baz};
+}
+
+// 关于缩放的使用
+167. modernize-shrink-to-fit
+
+// 关于static_assert空字符串的检查
+168. modernize-unary-static-assert
+
+// 检查auto的使用风格
+169. modernize-use-auto
+
+// 检查bool类型，用true和false表示
+170. modernize-use-bool-literals
+
+// 构造函数初始化的设定值风格
+171. modernize-use-default-member-init
+// before
+A() : i(5), j(10.0)
+int i;
+double j;
+// after
+A() {}
+int i{5};
+double j{10.0};
+
+// 在std::vector、std::deque、std::list中插入的使用限制
+172. -modernize-use-emplace
+
+// 将特殊成员函数的默认主体替换为显式默认函数声明
+173. modernize-use-equals-default
+// before
+A() {}
+// after
+A() = default;
+
+// 将删除的特殊成员函数显式表示
+174. modernize-use-equals-delete
+A(const A&) = delete;	
+
+// const成员函数的使用风格
+175. -modernize-use-nodiscard
+
+// 函数定义的throw替换为noexcept
+176. modernize-use-noexcept
+// before
+void foo() throw();
+// after
+void foo() noexcept;
+
+// 将空指针NULL改为nullptr
+177. -modernize-use-nullptr
+
+// 在重载虚函数中添加override声明
+178. modernize-use-override
+
+// 使用尾随返回类型
+179. -modernize-use-trailing-return-type
+
+180. modernize-use-transparent-functors
+181. modernize-use-uncaught-exceptions
+
+// 将typedef转换为using
+182. modernize-use-using
+// before
+typedef int variable;
+// after
+using variable = int;
+
+// 关于消息传递接口的检查
+183. mpi-buffer-deref
+
+// 检查消息传递接口不匹配问题
+184. mpi-type-mismatch
+
+// objc相关
+185. objc-avoid-nserror-init	 
+186. objc-dealloc-in-category	 
+187. objc-forbidden-subclassing	 
+188. objc-missing-hash	 
+189. objc-nsinvocation-argument-lifetime
+190. objc-property-declaration
+191. objc-super-self
+
+// openmp相关
+192. openmp-exception-escape	 
+193. openmp-use-default-none
+
+// 优化find的效率
+194. performance-faster-string-find
+// before
+str.find("A");
+// after
+str.find('A');
+
+// 不使用for循环里使用auto的警告
+195. performance-for-range-copy
+  - key:             performance-for-range-copy.WarnOnAllAutoCopies
+    value:           '0'
+
+// for循环中，变量的隐式表示（auto）代替显式表示
+196. performance-implicit-conversion-in-loop
+
+// 检查关联容器中的低效使用
+197. performance-inefficient-algorithm
+// before
+auto it = std::find(s.begin(), s.end(), 43);
+// after
+auto it = s.find(43);
+
+// 检查性能低效的字符串连接，字符串拼接改为append，而不是操作符+
+198. performance-inefficient-string-concatenation
+
+// 查找可能导致不必要的内存重新分配的低效vector操作
+199. -performance-inefficient-vector-operation
+
+// 关于std::move的一些警告
+200. performance-move-const-arg
+
+// 标记移动构造函数初始化
+201. performance-move-constructor-init
+
+202. performance-no-automatic-move
+
+// 限制整数到指针的转换
+203. performance-no-int-to-ptr
+
+// 检查移动构造函数没有标记noexcept或者为false的情况
+204. performance-noexcept-move-constructor
+
+// 检查外部可破坏析构函数的情况
+205. performance-trivially-destructible
+
+// 数学库，从c到c++的转换
+206. performance-type-promotion-in-math-fn
+
+207. performance-unnecessary-copy-initialization
+
+// 使用参数的移动(std::move)，而不是复制
+208. performance-unnecessary-value-param
+
+// 检查以选择性地允许或禁止系统标头的可配置列表
+209. portability-restrict-system-includes
+
+210. portability-simd-intrinsics
+
+// 检查函数声明是否具有顶级参数 const
+211. -readability-avoid-const-params-in-decls
+
+// 在逻辑语句是否添加大括号
+212. readability-braces-around-statements
+// before
+if (condition)
+  statement;
+// after
+if (condition) {
+  statement;
+}
+
+// 常量返回值的限制
+213. readability-const-return-type
+
+// 检查对size()调用是否可以用empty()来代替
+214. readability-container-size-empty
+
+// 将不使用this的非静态成员函数转换为静态成员函数
+215. readability-convert-member-functions-to-static
+
+// 查找检查指针是否存在的语句
+216. -readability-delete-null-pointer
+
+// 检查多余的else使用
+217. readability-else-after-return
+// before
+if (Value == 1) {
+  return;
+} else {
+  Local++;
+}
+// after
+if (Value == 1) {
+  return;
+}
+Local++;
+
+// 检查功能认知复杂性指标
+218. readability-function-cognitive-complexity
+
+// 根据各种指标检查大型函数
+219. readability-function-size
+// 限制函数的控制语句数
+- key:             readability-function-size.BranchThreshold
+value:           '-1'
+// 限制函数的行数
+- key:             readability-function-size.LineThreshold
+value:           '-1'
+// 限制函数的参数数量
+- key:             readability-function-size.ParameterThreshold
+value:           '-1'
+// 限制函数的语句数
+- key:             readability-function-size.StatementThreshold
+value:           '800'
+
+// 标识符命名方式限制
+220. readability-identifier-naming
+
+// 检查bool与int之间的转换
+221. readability-implicit-bool-conversion
+
+// 查找参数名称不一致的声明
+222. readability-inconsistent-declaration-parameter-name
+// in foo.hpp:
+void foo(int a, int b, int c);
+// in foo.cpp:
+void foo(int d, int e, int f); 
+
+// 将连续的变量声明拆分成逐一声明
+223. readability-isolate-declaration
+// before
+int * pointer = nullptr, value = 42, * const const_ptr = &value;
+// after
+int * pointer = nullptr;
+int value = 42;
+int * const const_ptr = &value;
+
+// magic numbers检查
+224. readability-magic-numbers
+
+// 检查可以被定义为const的非静态成员函数
+225. readability-make-member-function-const
+
+// 检查误导性缩进
+226. readability-misleading-indentation
+// Dangling else:
+if (cond1)
+  if (cond2)
+    foo1();
+else
+  foo2();
+
+// 检查出错的索引
+227. readability-misplaced-array-index
+void f(int *X, int Y) {
+  Y[X] = 0;
+}
+
+// 查找带有未命名参数的函数
+228. readability-named-parameter
+
+// 检查可以更改为指向常量类型的指针类型的函数参数
+229. readability-non-const-parameter
+
+// 将指针限定添加到auto推导为指针的类型变量
+230. readability-qualified-auto
+// before
+for (auto Data : MutatablePtrContainer) {
+  change(*Data);
+}
+for (auto Data : ConstantPtrContainer) {
+  observe(*Data);
+}
+// after
+for (auto *Data : MutatablePtrContainer) {
+  change(*Data);
+}
+for (const auto *Data : ConstantPtrContainer) {
+  observe(*Data);
+}
+
+// 删除冗余的访问类型说明
+231. readability-redundant-access-specifiers
+
+// 删除无用的return和continue
+232. readability-redundant-control-flow
+
+// 删除冗余的变量和函数声明
+233. readability-redundant-declaration
+
+// 删除多余的指针冗余
+234. readability-redundant-function-ptr-dereference
+// before
+int f(int,int);
+int (*p)(int, int) = &f;
+int i = (**p)(10, 50);
+// after
+int f(int,int);
+int (*p)(int, int) = &f;
+int i = (*p)(10, 50);
+
+// 查找多余的成员初始化
+235. readability-redundant-member-init
+
+// 查找潜在的冗余预处理器指令
+236. readability-redundant-preprocessor
+
+// 删除对智能指针.get()方法的冗余调用
+237. readability-redundant-smartptr-get
+
+// 检查不必要的调用：std::string::c_str()和std::string::data()
+238. readability-redundant-string-cstr
+
+// 查找不必要的字符串初始化
+239. readability-redundant-string-init
+
+// 简化对bool类型的使用
+240. readability-simplify-boolean-expr
+// before
+if (b == true)	
+// after
+if (b)
+
+// 简化下标表达式
+241. readability-simplify-subscript-expr
+// before
+char c = s.data()[i];  
+// after
+char c = s[i];
+
+// 优化类静态成员的访问方式
+242. readability-static-accessed-through-instance
+// before
+C *c1 = new C();
+c1->foo();
+c1->x;
+// after
+C *c1 = new C();
+C::foo();
+C::x;
+
+// 检查匿名命名空间中的静态成员定义
+243. readability-static-definition-in-anonymous-namespace
+
+// 优化字符串比较的使用，尽量使用==或者!=
+244. readability-string-compare
+if (str1.compare(str2))
+if (!str1.compare(str2))
+
+// 传参缩写检查
+245. readability-suspicious-call-argument
+
+// 替换<unique_ptr>.release()为<unique_ptr> = nullptr
+246. readability-uniqueptr-delete-release
+// before
+std::unique_ptr<int> P;
+delete P.release();
+// after
+std::unique_ptr<int> P;
+P = nullptr;
+
+// 要求整数后缀为大写字符
+247. readability-uppercase-literal-suffix
+// before
+auto x = 1u;
+// after
+auto x = 1U;
+
+248. readability-use-anyofallof
+249. zircon-temporary-objects
+```
+
+
 
 `.clangd`
 
@@ -434,7 +1493,7 @@ Diagnostics:
       readability-identifier-naming.VariableCase: camelCase
 ```
 
-`.clang-format`
+### 3.3 .clang-format
 
 ```
 # 语言: None, Cpp, Java, JavaScript, ObjC, Proto, TableGen, TextProto
