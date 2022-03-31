@@ -6,7 +6,7 @@ tags:
   - 算法
   - 笔记
 categories: 算法
-index_img: https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261452841.jpg
+index_img: /img/article/leetcodepost.png
 math: true
 ---
 

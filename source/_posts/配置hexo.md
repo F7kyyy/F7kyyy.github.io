@@ -145,7 +145,7 @@ hexo s    //启动本地服务器进行查看
 hexo d   //查看后没有问题即可部署到github上
 ```
 
-![202203072055102](C:\Users\FengisZZZ\Desktop\demo\picgo\202203072055102.png)
+![202203072055102](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203311340069.png)
 
 ##   6. 结论分析与体会
 
