@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>ubuntu 配置openstack</title>
+    <link href="/2022/04/01/ubuntu-%E9%85%8D%E7%BD%AEopenstack/"/>
+    <url>/2022/04/01/ubuntu-%E9%85%8D%E7%BD%AEopenstack/</url>
+    
+    <content type="html"><![CDATA[<h2 id="实验题目">实验题目</h2><p>面向IaaS的OpenStack部署</p><h2 id="实验目的">实验目的</h2><p>在Linux环境下，熟悉OpenStack环境。</p><p>具体包括：了解OpenStack编程环境的配置和部署，完成实验环境及实验工具的熟悉，撰写实验报告。</p><h2 id="实验环境">实验环境</h2><ul><li><p>硬件环境</p><p>Intel Core I5-8300H</p><p>Nvidia Geforce gtx1060</p></li><li><p>软件环境</p><p>VMware Workstation 16</p><p>ubuntu 20.04</p></li></ul><h2 id="实验步骤与内容">实验步骤与内容</h2><blockquote><p>选择安装MicroStack MicroStack是一个OpenStack上游发行版</p></blockquote><h3 id="安装">安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo snap install microstack --beta<br></code></pre></td></tr></table></figure><p>按如下方式查看已安装信息</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snap list microstack<br></code></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529741.png" alt="image-20220328232126221" style="zoom:50%;" /></p><p>在这里，我们看到OpenStack Ussuri已经部署！</p><h3 id="初始化">初始化</h3><p>初始化步骤会自动部署、配置和启动 OpenStack 服务。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo microstack init --auto --control<br></code></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529360.png" alt="image-20220328233234671" style="zoom:50%;" /></p><h3 id="验证">验证</h3><p>验证步骤的目的是确认云处于工作状态。验证将包括以下操作：</p><ul><li>执行各种 OpenStack 查询</li><li>创建实例</li><li>通过 SSH 连接到实例</li><li>访问云仪表板</li></ul><h4 id="列出默认的image">列出默认的image</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">microstack.openstack image list<br></code></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529907.png" alt="image-20220328233602010" style="zoom:67%;" /></p><h4 id="获取默认的实例列表">获取默认的实例列表</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">microstack.openstack flavor list<br></code></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529029.png" alt="image-20220328233752779" style="zoom:67%;" /></p><h4 id="创建实例">创建实例</h4><p>MicroStack附带了一个方便的实例创建命令<code>microstack launch</code>，它对其实例使用以下默认值：</p><ul><li>keypair <code>microstack</code></li><li>flavor <code>m1.tiny</code></li><li>floating IP address on subnet <code>10.20.20.0/24</code></li></ul><p>基于"cirros"映像创建名为"demo"的实例</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">microstack launch cirros -n demo<br></code></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529345.png" alt="image-20220328234855179" style="zoom: 50%;" /></p><p>使用与默认密钥对关联的私有 SSH 密钥访问实例：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh -i /home/feng/snap/microstack/common/.ssh/id_microstack cirros@10.20.20.222<br></code></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529537.png" alt="image-20220328235122956" style="zoom:60%;" /></p><h4 id="访问云仪表盘">访问云仪表盘</h4><ul><li><p>访问: https://10.20.20.1:443</p></li><li><p>获得密码</p></li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo snap get microstack config.credentials.keystone-password<br></code></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529297.png" alt="image-20220328235644333" style="zoom:67%;" /></p><ul><li><p>登录</p><p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529574.png" style="zoom: 50%;" /></p></li></ul><h2 id="结论分析与体会">6. 结论分析与体会</h2><p>Openstack是一个非常流行的创建私有云的框架，但是对资源消耗过大，安装较为繁琐。</p><p>使用MicroStack安装过程较为简单，但是因为其版本还停留在beta阶段，可能存在问题，需要以后解决。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>云计算</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>云计算</tag>
+      
+      <tag>环境配置</tag>
+      
+      <tag>Ubuntu</tag>
+      
+      <tag>实验报告</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>在vscode上使用clangd</title>
     <link href="/2022/03/28/%E5%9C%A8vscode%E4%B8%8A%E4%BD%BF%E7%94%A8clangd/"/>
     <url>/2022/03/28/%E5%9C%A8vscode%E4%B8%8A%E4%BD%BF%E7%94%A8clangd/</url>
@@ -270,6 +301,8 @@
       <tag>云计算</tag>
       
       <tag>环境配置</tag>
+      
+      <tag>实验报告</tag>
       
     </tags>
     
