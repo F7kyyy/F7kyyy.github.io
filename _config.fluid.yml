@@ -110,7 +110,7 @@ fun_features:
     # Options: left | right
     placement: left
     # Options: hover | always | touch
-    visible: hover
+    visible: always
     # Options: § | # | ❡
     icon: ""
 

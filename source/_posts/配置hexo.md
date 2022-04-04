@@ -5,6 +5,7 @@ tags:
   - 环境配置
   - 云计算
   - hexo
+  - 实验报告
 categories: 云计算
 index_img: /img/article/CloudComputing.png
 ---
