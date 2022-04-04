@@ -16,16 +16,16 @@
   <meta name="author" content="F7kyyy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="实验题目 面向IaaS的OpenStack部署 实验目的 在Linux环境下，熟悉OpenStack环境。 具体包括：了解OpenStack编程环境的配置和部署，完成实验环境及实验工具的熟悉，撰写实验报告。 实验环境  硬件环境 Intel Core I5-8300H Nvidia Geforce gtx1060 软件环境 VMware Workstation 16 ubu">
+    <meta name="description" content="没错，又到了每周一度痛苦的配环境环节，更痛苦的是配完的环境可能再也不会打开。   image-20220404235500586  官方文档 1 安装  添加仓库 12wget -q -O - https:&#x2F;&#x2F;packages.cloudfoundry.org&#x2F;debian&#x2F;cli.cloudfoundry.org.key | sudo apt-key add -echo &amp;qu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu 配置openstack">
-<meta property="og:url" content="http://f7kyyy.github.io/2022/04/01/ubuntu-%E9%85%8D%E7%BD%AEopenstack/index.html">
+<meta property="og:title" content="ubuntu 配置Cloudfoundry">
+<meta property="og:url" content="http://f7kyyy.github.io/2022/04/04/ubuntu-%E9%85%8D%E7%BD%AECloudfoundry/index.html">
 <meta property="og:site_name" content="F7kyyy的博客">
-<meta property="og:description" content="实验题目 面向IaaS的OpenStack部署 实验目的 在Linux环境下，熟悉OpenStack环境。 具体包括：了解OpenStack编程环境的配置和部署，完成实验环境及实验工具的熟悉，撰写实验报告。 实验环境  硬件环境 Intel Core I5-8300H Nvidia Geforce gtx1060 软件环境 VMware Workstation 16 ubu">
+<meta property="og:description" content="没错，又到了每周一度痛苦的配环境环节，更痛苦的是配完的环境可能再也不会打开。   image-20220404235500586  官方文档 1 安装  添加仓库 12wget -q -O - https:&#x2F;&#x2F;packages.cloudfoundry.org&#x2F;debian&#x2F;cli.cloudfoundry.org.key | sudo apt-key add -echo &amp;qu">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://f7kyyy.github.io/img/article/CloudComputing.png">
-<meta property="article:published_time" content="2022-04-01T07:27:03.000Z">
-<meta property="article:modified_time" content="2022-04-04T15:59:39.915Z">
+<meta property="article:published_time" content="2022-04-04T15:43:13.000Z">
+<meta property="article:modified_time" content="2022-04-04T15:55:03.295Z">
 <meta property="article:author" content="F7kyyy">
 <meta property="article:tag" content="云计算">
 <meta property="article:tag" content="环境配置">
@@ -35,7 +35,7 @@
 <meta name="twitter:image" content="http://f7kyyy.github.io/img/article/CloudComputing.png">
   
   
-  <title>ubuntu 配置openstack - F7kyyy的博客</title>
+  <title>ubuntu 配置Cloudfoundry - F7kyyy的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ubuntu 配置openstack"></span>
+            <span id="subtitle" data-typed-text="ubuntu 配置Cloudfoundry"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-04-01 15:27" pubdate>
-          2022年4月1日 下午
+        <time datetime="2022-04-04 23:43" pubdate>
+          2022年4月4日 晚上
         </time>
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          6 分钟
+          7 分钟
         
       </span>
     
@@ -276,7 +276,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ubuntu 配置openstack</h1>
+            <h1 style="display: none">ubuntu 配置Cloudfoundry</h1>
             
               <p class="note note-info">
                 
@@ -288,83 +288,191 @@
             
             <div class="markdown-body">
               
-              <h2 id="实验题目">实验题目</h2>
-<p>面向IaaS的OpenStack部署</p>
-<h2 id="实验目的">实验目的</h2>
-<p>在Linux环境下，熟悉OpenStack环境。</p>
-<p>具体包括：了解OpenStack编程环境的配置和部署，完成实验环境及实验工具的熟悉，撰写实验报告。</p>
-<h2 id="实验环境">实验环境</h2>
+              <p>没错，又到了每周一度痛苦的配环境环节，更痛苦的是配完的环境可能再也不会打开。</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042355639.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404235500586" />
+<figcaption aria-hidden="true">image-20220404235500586</figcaption>
+</figure>
+<p><a
+target="_blank" rel="noopener" href="https://docs.cloudfoundry.org/cf-cli/install-go-cli.html">官方文档</a></p>
+<h2 id="安装">1 安装</h2>
 <ul>
-<li><p>硬件环境</p>
-<p>Intel Core I5-8300H</p>
-<p>Nvidia Geforce gtx1060</p></li>
-<li><p>软件环境</p>
-<p>VMware Workstation 16</p>
-<p>ubuntu 20.04</p></li>
+<li><p>添加仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb https://packages.cloudfoundry.org/debian stable main&quot;</span> | sudo <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/cloudfoundry-cli.list<br></code></pre></td></tr></table></figure>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204041717625.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404171709580" />
+<figcaption aria-hidden="true">image-20220404171709580</figcaption>
+</figure></li>
+<li><p>更新系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get update<br></code></pre></td></tr></table></figure></li>
+<li><p>安装cli-v8版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install cf8-cli<br></code></pre></td></tr></table></figure>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204041722245.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404172248144" />
+<figcaption aria-hidden="true">image-20220404172248144</figcaption>
+</figure></li>
+<li><p>测试安装</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042132354.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404213210295" />
+<figcaption aria-hidden="true">image-20220404213210295</figcaption>
+</figure></li>
+<li><p>设置语言</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042136698.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404213645622" />
+<figcaption aria-hidden="true">image-20220404213645622</figcaption>
+</figure></li>
 </ul>
-<h2 id="实验步骤与内容">实验步骤与内容</h2>
-<blockquote>
-<p>选择安装MicroStack MicroStack是一个OpenStack上游发行版</p>
-</blockquote>
-<h3 id="安装">安装</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo snap install microstack --beta<br></code></pre></td></tr></table></figure>
-<p>按如下方式查看已安装信息</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">snap list microstack<br></code></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529741.png" srcset="/img/loading.gif" lazyload alt="image-20220328232126221" style="zoom:50%;" /></p>
-<p>在这里，我们看到OpenStack Ussuri已经部署！</p>
-<h3 id="初始化">初始化</h3>
-<p>初始化步骤会自动部署、配置和启动 OpenStack 服务。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo microstack init --auto --control<br></code></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529360.png" srcset="/img/loading.gif" lazyload alt="image-20220328233234671" style="zoom:50%;" /></p>
-<h3 id="验证">验证</h3>
-<p>验证步骤的目的是确认云处于工作状态。验证将包括以下操作：</p>
+<h2 id="设置环境并登录">2 设置环境并登录</h2>
 <ul>
-<li>执行各种 OpenStack 查询</li>
-<li>创建实例</li>
-<li>通过 SSH 连接到实例</li>
-<li>访问云仪表板</li>
+<li><p>注册 Cloudfoundry试用账户</p>
+<p><a
+target="_blank" rel="noopener" href="https://account.hanatrial.ondemand.com/cockpit#/home/trialhome">链接</a></p></li>
 </ul>
-<h4 id="列出默认的image">列出默认的image</h4>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">microstack.openstack image list<br></code></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529907.png" srcset="/img/loading.gif" lazyload alt="image-20220328233602010" style="zoom:67%;" /></p>
-<h4 id="获取默认的实例列表">获取默认的实例列表</h4>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">microstack.openstack flavor list<br></code></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529029.png" srcset="/img/loading.gif" lazyload alt="image-20220328233752779" style="zoom:67%;" /></p>
-<h4 id="创建实例">创建实例</h4>
-<p>MicroStack附带了一个方便的实例创建命令<code>microstack launch</code>，它对其实例使用以下默认值：</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042207657.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404220724578" />
+<figcaption aria-hidden="true">image-20220404220724578</figcaption>
+</figure>
 <ul>
-<li>keypair <code>microstack</code></li>
-<li>flavor <code>m1.tiny</code></li>
-<li>floating IP address on subnet <code>10.20.20.0/24</code></li>
+<li>设置API</li>
 </ul>
-<p>基于"cirros"映像创建名为"demo"的实例</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">microstack launch cirros -n demo<br></code></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529345.png" srcset="/img/loading.gif" lazyload alt="image-20220328234855179" style="zoom: 50%;" /></p>
-<p>使用与默认密钥对关联的私有 SSH 密钥访问实例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh -i /home/feng/snap/microstack/common/.ssh/id_microstack cirros@10.20.20.222<br></code></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529537.png" srcset="/img/loading.gif" lazyload alt="image-20220328235122956" style="zoom:60%;" /></p>
-<h4 id="访问云仪表盘">访问云仪表盘</h4>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042213764.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404221356694" />
+<figcaption aria-hidden="true">image-20220404221356694</figcaption>
+</figure>
 <ul>
-<li><p>访问: https://10.20.20.1:443</p></li>
-<li><p>获得密码</p></li>
+<li>登录</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo snap get microstack config.credentials.keystone-password<br></code></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529297.png" srcset="/img/loading.gif" lazyload alt="image-20220328235644333" style="zoom:67%;" /></p>
+<p>因为某种原因登陆失败</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042214245.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404221443087" />
+<figcaption aria-hidden="true">image-20220404221443087</figcaption>
+</figure>
+<p>使用短期验证码登录</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042220777.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404222010633" />
+<figcaption aria-hidden="true">image-20220404222010633</figcaption>
+</figure>
+<h2 id="测试命令">3 测试命令</h2>
 <ul>
-<li><p>登录</p>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204011529574.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" /></p></li>
+<li>列出组织名称</li>
 </ul>
-<h4 id="关闭">关闭</h4>
-<p>openstack
-在启动时会占用大量cpu,启动后，会一直占据至少4g内存，让我们本来就性能羸弱的虚拟机不堪重负<span
-class="github-emoji" data-alias="crying_cat_face" style=""
-data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f63f.png?v8">😿</span>。我们可以选择关闭它。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 关闭</span><br>sudo snap stop microstack<br><span class="hljs-comment"># 取消开机自启</span><br>sudo snap <span class="hljs-built_in">disable</span> microstack<br></code></pre></td></tr></table></figure>
-<p>当然我们也可以重新启动</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo snap <span class="hljs-built_in">enable</span> microstack<br>sudo snap start microstack<br></code></pre></td></tr></table></figure>
-<h2 id="结论分析与体会">结论分析与体会</h2>
-<p>Openstack是一个非常流行的创建私有云的框架，但是对资源消耗过大，安装较为繁琐。</p>
-<p>使用MicroStack安装过程较为简单，但是因为其版本还停留在beta阶段，可能存在问题，需要以后解决。</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042228192.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404222807113" />
+<figcaption aria-hidden="true">image-20220404222807113</figcaption>
+</figure>
+<ul>
+<li>重命名</li>
+</ul>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042229618.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404222929544" />
+<figcaption aria-hidden="true">image-20220404222929544</figcaption>
+</figure>
+<ul>
+<li>查看信息</li>
+</ul>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042230817.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404223008663" />
+<figcaption aria-hidden="true">image-20220404223008663</figcaption>
+</figure>
+<ul>
+<li>显示用户</li>
+</ul>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042231986.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404223144864" />
+<figcaption aria-hidden="true">image-20220404223144864</figcaption>
+</figure>
+<h2 id="部署python-版的hello-world">4 部署Python 版的hello world</h2>
+<h3 id="安装docker">4.1 安装docker</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -sSL https://get.daocloud.io/docker | sh<br></code></pre></td></tr></table></figure>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042241275.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404224134678" />
+<figcaption aria-hidden="true">image-20220404224134678</figcaption>
+</figure>
+<p>docker可能并不是必备的，只是安装文档中说需要装，就装了<span
+class="github-emoji" data-alias="laughing" style=""
+data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8">😆</span></p>
+<h3 id="使用cloud-foundry-cli-安装-cloud-foundry-本地插件">4.2 使用Cloud
+Foundry CLI 安装 Cloud Foundry 本地插件</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cf install-plugin cflocal<br></code></pre></td></tr></table></figure>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042244912.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404224439713" />
+<figcaption aria-hidden="true">image-20220404224439713</figcaption>
+</figure>
+<h3 id="部署python-flask版的hello-world">4.3 部署python flask版的hello
+world</h3>
+<h4 id="克隆项目">4.3.1 克隆项目</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/YoheiFukuhara/cloudfoundry-python-flask-sample.git<br></code></pre></td></tr></table></figure>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042249781.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404224917681" />
+<figcaption aria-hidden="true">image-20220404224917681</figcaption>
+</figure>
+<h4 id="部署">4.3.2 部署</h4>
+<p>进入文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cf push cf-helloworld<br></code></pre></td></tr></table></figure>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042318346.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404231803170" />
+<figcaption aria-hidden="true">image-20220404231803170</figcaption>
+</figure>
+<p>更改文件:</p>
+<ul>
+<li><p>runtime.txt</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">python-3.6.14<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>删除失败的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cf delete py-helloworld<br></code></pre></td></tr></table></figure>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042322290.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404232259210" />
+<figcaption aria-hidden="true">image-20220404232259210</figcaption>
+</figure>
+<p>重新push,成功</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042324836.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404232447652" />
+<figcaption aria-hidden="true">image-20220404232447652</figcaption>
+</figure>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042327333.png" srcset="/img/loading.gif" lazyload
+alt="image-20220404232719291" />
+<figcaption aria-hidden="true">image-20220404232719291</figcaption>
+</figure>
 
               
             </div>
@@ -417,18 +525,12 @@ data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/04/ubuntu-%E9%85%8D%E7%BD%AECloudfoundry/" title="ubuntu 配置Cloudfoundry">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ubuntu 配置Cloudfoundry</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/28/%E5%9C%A8vscode%E4%B8%8A%E4%BD%BF%E7%94%A8clangd/" title="在vscode上使用clangd">
-                        <span class="hidden-mobile">在vscode上使用clangd</span>
+                      <a href="/2022/04/01/ubuntu-%E9%85%8D%E7%BD%AEopenstack/" title="ubuntu 配置openstack">
+                        <span class="hidden-mobile">ubuntu 配置openstack</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
