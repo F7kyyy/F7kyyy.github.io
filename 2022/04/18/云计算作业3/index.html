@@ -16,26 +16,24 @@
   <meta name="author" content="F7kyyy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="没错，又到了每周一度痛苦的配环境环节，更痛苦的是配完的环境可能再也不会打开。   image-20220404235500586  官方文档 1 安装  添加仓库 12wget -q -O - https:&#x2F;&#x2F;packages.cloudfoundry.org&#x2F;debian&#x2F;cli.cloudfoundry.org.key | sudo apt-key add -echo &amp;qu">
+    <meta name="description" content="简述网络通信的四个安全要素  保密性 保密性是网络信息不被泄露给非授权的用户、实体或过程，或供其利用的特性。即，防止信息泄漏给非授权个人或实体，信息只为授权用户使用的特性。保密性是在可靠性和可用性基础之上，保障网络信息安全的重要手段。 完整性 完整性是网络信息未经授权不能进行改变的特性。即网络信息在存储或传输过程中保持不被偶然或蓄意地删除、修改、伪造、乱序、重放、插入等破坏和丢失的特性。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu 配置Cloudfoundry">
-<meta property="og:url" content="http://f7kyyy.github.io/2022/04/04/ubuntu-%E9%85%8D%E7%BD%AECloudfoundry/index.html">
+<meta property="og:title" content="云计算作业3">
+<meta property="og:url" content="http://f7kyyy.github.io/2022/04/18/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%BD%9C%E4%B8%9A3/index.html">
 <meta property="og:site_name" content="F7kyyy的博客">
-<meta property="og:description" content="没错，又到了每周一度痛苦的配环境环节，更痛苦的是配完的环境可能再也不会打开。   image-20220404235500586  官方文档 1 安装  添加仓库 12wget -q -O - https:&#x2F;&#x2F;packages.cloudfoundry.org&#x2F;debian&#x2F;cli.cloudfoundry.org.key | sudo apt-key add -echo &amp;qu">
+<meta property="og:description" content="简述网络通信的四个安全要素  保密性 保密性是网络信息不被泄露给非授权的用户、实体或过程，或供其利用的特性。即，防止信息泄漏给非授权个人或实体，信息只为授权用户使用的特性。保密性是在可靠性和可用性基础之上，保障网络信息安全的重要手段。 完整性 完整性是网络信息未经授权不能进行改变的特性。即网络信息在存储或传输过程中保持不被偶然或蓄意地删除、修改、伪造、乱序、重放、插入等破坏和丢失的特性。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://f7kyyy.github.io/img/article/CloudComputing.png">
-<meta property="article:published_time" content="2022-04-04T15:43:13.000Z">
-<meta property="article:modified_time" content="2022-04-04T15:55:03.295Z">
+<meta property="article:published_time" content="2022-04-18T11:39:13.000Z">
+<meta property="article:modified_time" content="2022-04-18T11:47:18.696Z">
 <meta property="article:author" content="F7kyyy">
 <meta property="article:tag" content="云计算">
-<meta property="article:tag" content="环境配置">
-<meta property="article:tag" content="Ubuntu">
-<meta property="article:tag" content="实验报告">
+<meta property="article:tag" content="作业">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://f7kyyy.github.io/img/article/CloudComputing.png">
   
   
-  <title>ubuntu 配置Cloudfoundry - F7kyyy的博客</title>
+  <title>云计算作业3 - F7kyyy的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +194,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ubuntu 配置Cloudfoundry"></span>
+            <span id="subtitle" data-typed-text="云计算作业3"></span>
           
         </div>
 
@@ -207,8 +205,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-04-04 23:43" pubdate>
-          2022年4月4日 晚上
+        <time datetime="2022-04-18 19:39" pubdate>
+          2022年4月18日 晚上
         </time>
       </span>
     
@@ -219,7 +217,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.1k 字
         
       </span>
     
@@ -230,7 +228,7 @@
         
         
         
-          7 分钟
+          6 分钟
         
       </span>
     
@@ -276,203 +274,67 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ubuntu 配置Cloudfoundry</h1>
+            <h1 style="display: none">云计算作业3</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年4月4日 晚上
+                    本文最后更新于：2022年4月18日 晚上
                   
                 
               </p>
             
             <div class="markdown-body">
               
-              <p>没错，又到了每周一度痛苦的配环境环节，更痛苦的是配完的环境可能再也不会打开。</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042355639.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404235500586" />
-<figcaption aria-hidden="true">image-20220404235500586</figcaption>
-</figure>
-<p><a
-target="_blank" rel="noopener" href="https://docs.cloudfoundry.org/cf-cli/install-go-cli.html">官方文档</a></p>
-<h2 id="安装">1 安装</h2>
+              <h3 id="简述网络通信的四个安全要素">简述网络通信的四个安全要素</h3>
 <ul>
-<li><p>添加仓库</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;deb https://packages.cloudfoundry.org/debian stable main&quot;</span> | sudo <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/cloudfoundry-cli.list<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204041717625.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404171709580" />
-<figcaption aria-hidden="true">image-20220404171709580</figcaption>
-</figure></li>
-<li><p>更新系统</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get update<br></code></pre></td></tr></table></figure></li>
-<li><p>安装cli-v8版本</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install cf8-cli<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204041722245.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404172248144" />
-<figcaption aria-hidden="true">image-20220404172248144</figcaption>
-</figure></li>
-<li><p>测试安装</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042132354.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404213210295" />
-<figcaption aria-hidden="true">image-20220404213210295</figcaption>
-</figure></li>
-<li><p>设置语言</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042136698.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404213645622" />
-<figcaption aria-hidden="true">image-20220404213645622</figcaption>
-</figure></li>
+<li><p><strong>保密性</strong></p>
+<p>保密性是网络信息不被泄露给非授权的用户、实体或过程，或供其利用的特性。即，防止信息泄漏给非授权个人或实体，信息只为授权用户使用的特性。保密性是在可靠性和可用性基础之上，保障网络信息安全的重要手段。</p></li>
+<li><p><strong>完整性</strong></p>
+<p>完整性是网络信息未经授权不能进行改变的特性。即网络信息在存储或传输过程中保持不被偶然或蓄意地删除、修改、伪造、乱序、重放、插入等破坏和丢失的特性。完整性是一种面向信息的安全性，它要求保持信息的原样，即信息的正确生成和正确存储和传输。</p></li>
+<li><p><strong>真实性</strong></p>
+<p>在信息传递的过程中，我们需要保证信息从源头开始的真实；现实世界中的例子：身份证、护照、信用卡、驾照；网络世界中的例子：数字证书、数字签名。</p></li>
+<li><p><strong>不可抵赖性</strong></p>
+<p>不可抵赖性也称作不可否认性，在网络信息系统的信息交互过程中，确信参与者的真实同一性。即，所有参与者都不可能否认或抵赖曾经完成的操作和承诺。利用信息源证据可以防止发信方不真实地否认已发送信息，利用递交接收证据可以防止收信方事后否认已经接收的信息。</p></li>
 </ul>
-<h2 id="设置环境并登录">2 设置环境并登录</h2>
-<ul>
-<li><p>注册 Cloudfoundry试用账户</p>
-<p><a
-target="_blank" rel="noopener" href="https://account.hanatrial.ondemand.com/cockpit#/home/trialhome">链接</a></p></li>
-</ul>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042207657.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404220724578" />
-<figcaption aria-hidden="true">image-20220404220724578</figcaption>
-</figure>
-<ul>
-<li>设置API</li>
-</ul>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042213764.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404221356694" />
-<figcaption aria-hidden="true">image-20220404221356694</figcaption>
-</figure>
-<ul>
-<li>登录</li>
-</ul>
-<p>因为某种原因登陆失败</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042214245.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404221443087" />
-<figcaption aria-hidden="true">image-20220404221443087</figcaption>
-</figure>
-<p>使用短期验证码登录</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042220777.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404222010633" />
-<figcaption aria-hidden="true">image-20220404222010633</figcaption>
-</figure>
-<h2 id="测试命令">3 测试命令</h2>
-<ul>
-<li>列出组织名称</li>
-</ul>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042228192.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404222807113" />
-<figcaption aria-hidden="true">image-20220404222807113</figcaption>
-</figure>
-<ul>
-<li>重命名</li>
-</ul>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042229618.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404222929544" />
-<figcaption aria-hidden="true">image-20220404222929544</figcaption>
-</figure>
-<ul>
-<li>查看信息</li>
-</ul>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042230817.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404223008663" />
-<figcaption aria-hidden="true">image-20220404223008663</figcaption>
-</figure>
-<ul>
-<li>显示用户</li>
-</ul>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042231986.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404223144864" />
-<figcaption aria-hidden="true">image-20220404223144864</figcaption>
-</figure>
-<h2 id="部署python-版的hello-world">4 部署Python 版的hello world</h2>
-<h3 id="安装docker">4.1 安装docker</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">curl -sSL https://get.daocloud.io/docker | sh<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042241275.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404224134678" />
-<figcaption aria-hidden="true">image-20220404224134678</figcaption>
-</figure>
-<p>docker可能并不是必备的，只是安装文档中说需要装，就装了<span
-class="github-emoji" data-alias="laughing" style=""
-data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8">😆</span></p>
-<h3 id="使用cloud-foundry-cli-安装-cloud-foundry-本地插件">4.2 使用Cloud
-Foundry CLI 安装 Cloud Foundry 本地插件</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cf install-plugin cflocal<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042244912.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404224439713" />
-<figcaption aria-hidden="true">image-20220404224439713</figcaption>
-</figure>
-<h3 id="部署python-flask版的hello-world">4.3 部署python flask版的hello
-world</h3>
-<h4 id="克隆项目">4.3.1 克隆项目</h4>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/YoheiFukuhara/cloudfoundry-python-flask-sample.git<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042249781.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404224917681" />
-<figcaption aria-hidden="true">image-20220404224917681</figcaption>
-</figure>
-<h4 id="部署">4.3.2 部署</h4>
-<p>进入文件夹</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cf push cf-helloworld<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042318346.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404231803170" />
-<figcaption aria-hidden="true">image-20220404231803170</figcaption>
-</figure>
-<p>更改文件:</p>
-<ul>
-<li><p>runtime.txt</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">python-3.6.14<br></code></pre></td></tr></table></figure></li>
-</ul>
-<p>删除失败的</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">cf delete py-helloworld<br></code></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042322290.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404232259210" />
-<figcaption aria-hidden="true">image-20220404232259210</figcaption>
-</figure>
-<p>重新push,成功</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042324836.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404232447652" />
-<figcaption aria-hidden="true">image-20220404232447652</figcaption>
-</figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204042327333.png" srcset="/img/loading.gif" lazyload
-alt="image-20220404232719291" />
-<figcaption aria-hidden="true">image-20220404232719291</figcaption>
-</figure>
+<h3
+id="简述各类加密方法哈希和数字签名的基本概念以及所能保证的安全特性">简述各类加密方法、哈希和数字签名的基本概念，以及所能保证的安全特性</h3>
+<h4 id="对称加密">1. 对称加密</h4>
+<h5 id="基本概念">基本概念</h5>
+<p>加密和解密使用同一个密钥</p>
+<h5 id="能保证的安全特性">能保证的安全特性</h5>
+<ol type="1">
+<li>算法公开，计算量小，加密速度快，加密效率高</li>
+<li>由于用一个密钥加密的消息只能用同一个密钥解密，因此拥有密钥的被授权方才能创建消息，因此保证了数据的保密性。</li>
+<li>对称加密不具备不可否认性，当有多方使用同一个密钥时，无法判断是哪一方执行的加密和解密</li>
+</ol>
+<h4 id="非对称加密">2. 非对称加密</h4>
+<h5 id="基本概念-1">基本概念</h5>
+<p>使用两个不同的密钥，称为公钥和私钥；私钥为所有者私钥，公钥共享。
+​算法强度复杂、安全性依赖于算法与密钥但是由于其算法复杂,而使得加密解密速度没有对称加密解密的速度快</p>
+<h5 id="能保证的安全特性-1">能保证的安全特性</h5>
+<ol type="1">
+<li>私钥加密只能通过对应的公钥解密，因此私钥加密提供了真实性、不可否认性和完整性保护。​</li>
+<li>公钥加密只能用对应的私钥进行解密，因此提供了保密性保护，但不提供完整性和真实性的保护。</li>
+</ol>
+<h4 id="哈希">3. 哈希</h4>
+<h5 id="基本概念-2">基本概念</h5>
+<p>哈希是一种单向、不可逆的数据保护机制，这种机制常见于密码的存储，常见的算法包括：MD5和SHA</p>
+<h5 id="能保证的安全特性-2">能保证的安全特性</h5>
+<ol type="1">
+<li>利用哈希可以用来获得消息摘要，消息摘要附加在消息后面，用于验证消息是否发生篡改。​</li>
+<li>哈希可以用于保护存储数据、减轻恶意媒介和授权不足带来的云威胁，保证数据完整性。</li>
+</ol>
+<h4 id="数字签名">4. 数字签名</h4>
+<h5 id="基本概念-3">基本概念</h5>
+<p>数字签名是一种通过身份验证和不可否认性来提供数据真实性和完整性的手段,常见的算法有：RSA，DSA，ECDSA
+​发送消息时，附加一个数字签名，如果消息被篡改，数字签名就会变得非法</p>
+<h5 id="能保证的安全特性-3">能保证的安全特性</h5>
+<ol type="1">
+<li>用私钥对消息摘要进行加密，附加到消息摘要后面。</li>
+<li>接受者收到后对消息进行哈希得到一个消息摘要，用公钥对加密后的消息摘要进行解密，如果一致则
+​ 保证了消息的完整性。</li>
+</ol>
 
               
             </div>
@@ -507,11 +369,7 @@ alt="image-20220404232719291" />
       
         <a href="/tags/%E4%BA%91%E8%AE%A1%E7%AE%97/">#云计算</a>
       
-        <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">#环境配置</a>
-      
-        <a href="/tags/Ubuntu/">#Ubuntu</a>
-      
-        <a href="/tags/%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/">#实验报告</a>
+        <a href="/tags/%E4%BD%9C%E4%B8%9A/">#作业</a>
       
     </div>
   
@@ -525,18 +383,12 @@ alt="image-20220404232719291" />
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/18/ubuntu-%E9%85%8D%E7%BD%AEhadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F/" title="ubuntu 配置hadoop伪分布式">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ubuntu 配置hadoop伪分布式</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/01/ubuntu-%E9%85%8D%E7%BD%AEopenstack/" title="ubuntu 配置openstack">
-                        <span class="hidden-mobile">ubuntu 配置openstack</span>
+                      <a href="/2022/04/18/ubuntu-%E9%85%8D%E7%BD%AEhadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F/" title="ubuntu 配置hadoop伪分布式">
+                        <span class="hidden-mobile">ubuntu 配置hadoop伪分布式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

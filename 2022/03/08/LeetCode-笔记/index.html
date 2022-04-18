@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://f7kyyy.github.io/img/article/leetcodepost.png">
 <meta property="article:published_time" content="2022-03-08T12:12:17.000Z">
-<meta property="article:modified_time" content="2022-03-28T02:18:59.551Z">
+<meta property="article:modified_time" content="2022-04-07T13:55:48.874Z">
 <meta property="article:author" content="F7kyyy">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="算法">
@@ -218,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          12k 字
+          13k 字
         
       </span>
     
@@ -229,7 +229,7 @@
         
         
         
-          59 分钟
+          65 分钟
         
       </span>
     
@@ -280,7 +280,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2022年3月28日 上午
+                    本文最后更新于：2022年4月7日 晚上
                   
                 
               </p>
@@ -528,6 +528,33 @@ c =</em> 0 ？找出所有满足条件且不重复的三元组。</p>
 （3）头结点确定后，继续在剩下的结点中选出下一个结点去链接到第二步选出的结点后面，然后在继续重复（2
 ）（3） 步，直到有链表为空。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">ListNode *<span class="hljs-title">mergeTwoLists</span><span class="hljs-params">(ListNode *list1, ListNode *list2)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (list1 == <span class="hljs-literal">nullptr</span>)<br>        <span class="hljs-keyword">return</span> list2;<br>    <span class="hljs-keyword">if</span> (list2 == <span class="hljs-literal">nullptr</span>)<br>        <span class="hljs-keyword">return</span> list1;<br>    <span class="hljs-keyword">if</span> (list1-&gt;val &lt; list2-&gt;val)<br>    &#123;<br>        list1-&gt;next = <span class="hljs-built_in">mergeTwoLists</span>(list1-&gt;next, list2);<br>        <span class="hljs-keyword">return</span> list1;<br>    &#125;<br>    <span class="hljs-keyword">else</span><br>    &#123;<br>        list2-&gt;next = <span class="hljs-built_in">mergeTwoLists</span>(list1, list2-&gt;next);<br>        <span class="hljs-keyword">return</span> list2;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="生成括号">25 生成括号</h2>
+<h3 id="题目描述-4">题目描述</h3>
+<p>数字 <code>n</code>
+代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且
+<strong>有效的</strong> 括号组合。</p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204071625432.png" srcset="/img/loading.gif" lazyload
+alt="image-20220407162502848" />
+<figcaption aria-hidden="true">image-20220407162502848</figcaption>
+</figure>
+<h3 id="动态规划">动态规划</h3>
+<p>核心思路：<strong>考虑 <code>i=n</code> 时相比 <code>n-1</code>
+组括号增加的那一组括号的位置</strong></p>
+<p>i&lt;n 的情况，那我们就可以对所有情况进行遍历：</p>
+<p>"(" + [i=p时所有括号的排列组合] + ")" +
+[i=q时所有括号的排列组合]，其中 p + q = n-1，且 p q 均为非负整数。</p>
+<p>事实上，当上述 p 从 0 取到 n-1，q 从 n-1 取到 0
+后，所有情况就遍历完了。</p>
+<p>注：上述遍历是没有重复情况出现的，即当 (p1,q1)≠(p2,q2)
+时，按上述方式取的括号组合一定不同。</p>
+<p>因为我们实际上是得出了从2-n的所有答案</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">vector&lt;string&gt; <span class="hljs-title">generateParenthesis</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> &#123;&#125;;<br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;()&quot;</span>&#125;;<br>    vector&lt;vector&lt;string&gt;&gt; <span class="hljs-built_in">dp</span>(n + <span class="hljs-number">1</span>);<br>    dp[<span class="hljs-number">0</span>] = &#123;<span class="hljs-string">&quot;&quot;</span>&#125;;<br>    dp[<span class="hljs-number">1</span>] = &#123;<span class="hljs-string">&quot;()&quot;</span>&#125;;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; i++) &#123; <span class="hljs-comment">//从2-n一步步向上迭代</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt;= i - <span class="hljs-number">1</span>; j++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> &amp;value1 : dp[j]) &#123;<br>                <span class="hljs-keyword">for</span> (<span class="hljs-type">const</span> <span class="hljs-keyword">auto</span> &amp;value2 : dp[i - <span class="hljs-number">1</span> - j]) &#123;<br>                    dp[i].<span class="hljs-built_in">emplace_back</span>(<span class="hljs-string">&#x27;(&#x27;</span> + value1 + <span class="hljs-string">&#x27;)&#x27;</span> += value2);<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> dp[n];<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="递归">递归</h3>
+<p>使用dfs进行，每次递归的时候，先一直加上<code>(</code>，再一直加上<code>)</code></p>
+<p>需要注意的是，在进行递归的时候，对于string类型的参数，<code>当传参的时候，不能传入引用</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(vector&lt;string&gt; &amp;res, string s, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (l &gt; n || r &gt; n)<br>        <span class="hljs-keyword">return</span>;<br>    <span class="hljs-keyword">if</span> ((l == r) &amp;&amp; (l == n)) &#123;<br>        res.<span class="hljs-built_in">emplace_back</span>(s);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-built_in">dfs</span>(res, s + <span class="hljs-string">&quot;(&quot;</span>, l + <span class="hljs-number">1</span>, r, n);<br>    <span class="hljs-built_in">dfs</span>(res, s + <span class="hljs-string">&quot;)&quot;</span>, l, r + <span class="hljs-number">1</span>, n);<br>&#125;<br><br><span class="hljs-function">vector&lt;string&gt; <span class="hljs-title">generateParenthesis</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;<br>    vector&lt;string&gt; res;<br>    <span class="hljs-built_in">dfs</span>(res, <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, n);<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
 
               
             </div>
