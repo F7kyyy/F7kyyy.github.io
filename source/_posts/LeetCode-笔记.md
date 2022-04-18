@@ -751,3 +751,72 @@ ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
 }
 ```
 
+## 25 生成括号
+
+### 题目描述
+
+数字 `n` 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 **有效的** 括号组合。
+
+![image-20220407162502848](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204071625432.png)
+
+### 动态规划
+
+核心思路：**考虑 `i=n` 时相比 `n-1` 组括号增加的那一组括号的位置**
+
+i<n 的情况，那我们就可以对所有情况进行遍历：
+
+"(" + [i=p时所有括号的排列组合] + ")" + [i=q时所有括号的排列组合]，其中 p + q = n-1，且 p q 均为非负整数。
+
+事实上，当上述 p 从 0 取到 n-1，q 从 n-1 取到 0 后，所有情况就遍历完了。
+
+注：上述遍历是没有重复情况出现的，即当 (p1,q1)≠(p2,q2) 时，按上述方式取的括号组合一定不同。
+
+因为我们实际上是得出了从2-n的所有答案
+
+```c++
+vector<string> generateParenthesis(int n) {
+    if (n == 0)
+        return {};
+    if (n == 1)
+        return {"()"};
+    vector<vector<string>> dp(n + 1);
+    dp[0] = {""};
+    dp[1] = {"()"};
+    for (int i = 2; i <= n; i++) { //从2-n一步步向上迭代
+        for (int j = 0; j <= i - 1; j++) {
+            for (const auto &value1 : dp[j]) {
+                for (const auto &value2 : dp[i - 1 - j]) {
+                    dp[i].emplace_back('(' + value1 + ')' += value2);
+                }
+            }
+        }
+    }
+    return dp[n];
+}
+```
+
+### 递归
+
+使用dfs进行，每次递归的时候，先一直加上`(`，再一直加上`)`
+
+需要注意的是，在进行递归的时候，对于string类型的参数，`当传参的时候，不能传入引用`
+
+```c++
+void dfs(vector<string> &res, string s, int l, int r, int n) {
+    if (l > n || r > n)
+        return;
+    if ((l == r) && (l == n)) {
+        res.emplace_back(s);
+        return;
+    }
+    dfs(res, s + "(", l + 1, r, n);
+    dfs(res, s + ")", l, r + 1, n);
+}
+
+vector<string> generateParenthesis(int n) {
+    vector<string> res;
+    dfs(res, "", 0, 0, n);
+    return res;
+}
+```
+
