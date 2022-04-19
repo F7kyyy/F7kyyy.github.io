@@ -52,11 +52,11 @@ ps: 上面部署方式是我自己的仓库
 
 2、点击左边的 `New` 创建一个仓库
 
-[<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901306.png" alt="img" style="zoom:67%;" />](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230018715.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901306.png" alt="img" style="zoom:67%;" />
 
 3、在打开的页面中填写仓库名称，然后点击 `Create repository` 创建仓库
 
-[<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901796.png" alt="img" style="zoom:67%;" />](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230019403.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901796.png" alt="img" style="zoom:67%;" />
 
 4、在新打开的页面下翻找到 `import`
 
@@ -64,23 +64,23 @@ ps: 上面部署方式是我自己的仓库
 
 5、在 `Your old repository’s clone URL` 中填入 `https://github.com/bclswl0827/v2ray-heroku.git`, 随后点击 `Begin import` 导入
 
-[<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901228.png" alt="img" style="zoom:67%;" />](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230020282.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901228.png" alt="img" style="zoom:67%;" />
 
 **这位大佬的github仓库已经被disable了，可以选择其他人的，搜索一下应该很容易找到**
 
 6、导入完成后，进入仓库，修改 `README.md` ，修改完成后点击下方 `Commit changes` 提交
 
-[<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901430.png" alt="img" style="zoom:67%;" />](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230020762.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901430.png" alt="img" style="zoom:67%;" />
 
 7、最后进入仓库点击 `Deploy to Heroku` 图标开始部署
 
 App name随便填写，可用就行；Choose a region就是你的服务器地区；UUID可自行修改（建议修改，使用默认UUID会使节点暴露在危险下）；然后点击`Deploy app`系统会自动部署
 
-[<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901573.png" alt="1.png" style="zoom:67%;" />](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161405003.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901573.png" alt="1.png" style="zoom:67%;" />
 
 稍微等待一会儿，几秒的样子，直到全部打勾变绿
 
-[<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902144.png" alt="2.png" style="zoom:67%;" />](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161457921.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902144.png" alt="2.png" style="zoom:67%;" />
 
 ## 二、客户端使用
 
@@ -90,21 +90,19 @@ App name随便填写，可用就行；Choose a region就是你的服务器地区
 
 注意：你会看到一个项目，点击上方的`Settings`进入，查看你的V2Ray具体配置，如图
 
-[<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902864.png" alt="img" style="zoom:67%;" />](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161458347.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902864.png" alt="img" style="zoom:67%;" />
 
 点击`Reveal Config Vars`显示V2RrayN相关配置信息，如图
 
-[<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902242.png" alt="img" style="zoom:67%;" />](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161500120.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902242.png" alt="img" style="zoom:67%;" /><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191906266.png" alt="img" style="zoom:67%;" />
 
-[<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191906266.png" alt="img" style="zoom:67%;" />](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161501582.png)
-
-### 2.2 V2rayN配置
+### 2.2 配置v2rayN
 
 开始配置V2Ray，如果你记好了以上两个（那串字母UUID和二级域名xxxx.herokuapp.com）
 
 ps: 二级域名不用加`https://`，直接填域名就好
 
-[<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902011.png" alt="img" style="zoom:67%;" />](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161519886.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902011.png" alt="img" style="zoom:67%;" />
 
 最基础的配置完成了，可以发现节点的速度慢的令人发指，接下来我们利用cloudflare + 自选ip进行加速
 
@@ -116,11 +114,11 @@ ps: 二级域名不用加`https://`，直接填域名就好
 
 在[Cloudflare Workers](https://dash.cloudflare.com/)中创建一个Workers
 
-[![img](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902438.png)](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161538514.png)
-[![img](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902747.png)](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161542604.png)
+![img](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902438.png)
+![img](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902747.png)
 
 点击`快速编辑`进入项目编辑
-[![img](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903865.png)](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161545214.png)
+![img](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903865.png)
 将原有的示例代码全部删除，复制如下代码，并将第四行的xxx.herokuapp.com 替换为你的V2Ray的地址 ps: 不需要`https://`
 
 ```js
@@ -139,14 +137,14 @@ addEventListener(
 
 点击右侧的`发送`按钮，看最后一行是否出现了`Bad Request`，出现则代表成功
 
-[![img](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903829.png)](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161554105.png)
+![img](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903829.png)
 
 成功后，点击`保存并部署`，并记下你的Workers二级域名
 
 ### 3.2修改V2rayN中的配置
 
 把V2RayN中原来的域名改为现在的Workers域名就行了，其实利用Cloudflare Workers进行反代以后速度已经可以了，但是优选ip以后速度会更加快
-[<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903475.png" alt="img" style="zoom:67%;" />](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161557052.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903475.png" alt="img" style="zoom:67%;" />](https://gitee.co
 
 **对速度有更高追求以及不怕折腾的人可以接着往下看，我个人测试，这个没什么太大的效果**
 
@@ -158,7 +156,7 @@ addEventListener(
 
 最后，配置V2Ray：
 
-[<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903472.png" alt="img" style="zoom:67%;" />](https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161617481.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903472.png" alt="img" style="zoom:67%;" />
 
 ### 注意事项
 
