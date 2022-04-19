@@ -1,0 +1,811 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/broswer.jpg">
+  <link rel="icon" href="/img/broswer.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="F7kyyy">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="注意！本教程仅且只能用于研究与学习，只是做一个记录 注意事项  Heroku免费套餐每月只有550小时的免费时间，限量2TB，适合在非常时期当做备胎使用 Heroku对流量检测有些严格，请避免大流量消耗 引用项目原作者的话：Heroku提供给我们免费的服务，我们不应该滥用它 绝大部分的Heroku服务器节点都被twitter屏蔽了，可能是我新建的暂时还没有 Heroku免费容器未使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="heroku配置v2ray">
+<meta property="og:url" content="http://f7kyyy.github.io/2022/04/19/heroku%E9%85%8D%E7%BD%AEv2ray/index.html">
+<meta property="og:site_name" content="F7kyyy的博客">
+<meta property="og:description" content="注意！本教程仅且只能用于研究与学习，只是做一个记录 注意事项  Heroku免费套餐每月只有550小时的免费时间，限量2TB，适合在非常时期当做备胎使用 Heroku对流量检测有些严格，请避免大流量消耗 引用项目原作者的话：Heroku提供给我们免费的服务，我们不应该滥用它 绝大部分的Heroku服务器节点都被twitter屏蔽了，可能是我新建的暂时还没有 Heroku免费容器未使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://f7kyyy.github.io/img/article/heroku.png">
+<meta property="article:published_time" content="2022-04-19T10:49:38.000Z">
+<meta property="article:modified_time" content="2022-04-19T10:59:01.011Z">
+<meta property="article:author" content="F7kyyy">
+<meta property="article:tag" content="环境配置">
+<meta property="article:tag" content="科学上网">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://f7kyyy.github.io/img/article/heroku.png">
+  
+  
+  <title>heroku配置v2ray - F7kyyy的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"f7kyyy.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"always","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>F7kyyy&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="heroku配置v2ray"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-19 18:49" pubdate>
+          2022年4月19日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">heroku配置v2ray</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年4月19日 晚上
+                  
+                
+              </p>
+            
+            <div class="markdown-body">
+              
+              <p><strong>注意！本教程仅且只能用于研究与学习，只是做一个记录</strong></p>
+<h2 id="注意事项">注意事项</h2>
+<ol type="1">
+<li><em>Heroku免费套餐每月只有<strong>550小时</strong>的免费时间，限量<strong>2TB</strong>，适合在非常时期当做备胎使用</em></li>
+<li><em>Heroku对流量检测有些严格，请避免大流量消耗</em></li>
+<li><em>引用项目原作者的话：Heroku提供给我们免费的服务，<strong>我们不应该滥用它</strong></em></li>
+<li><em><strong>绝大部分的Heroku服务器节点都被twitter屏蔽了</strong>，可能是我新建的暂时还没有</em></li>
+<li><em>Heroku免费容器未使用超过一段时间（三十分钟左右）就会休眠</em></li>
+</ol>
+<h2 id="必要的准备">必要的准备</h2>
+<ol type="1">
+<li><p>一个非国内邮箱地址，gmail 或者 outlook</p></li>
+<li><p>Heroku与Cloudflare国内访问速度并不理想，可使用非国内网络环境</p>
+<p>(也就是说必须有一个机场，机场的免费时间一般来说就够用了)</p></li>
+<li><p>翻译工具，也可以使用Google Chrome浏览器</p></li>
+<li><p>V2Ray软件，如果没有安装过请下载core版本，自带V2ray-Core<a
+target="_blank" rel="noopener" href="https://github.com/2dust/v2rayN/releases">点击下载</a></p></li>
+</ol>
+<h2 id="一服务端部署">一、服务端部署</h2>
+<h3 id="注册heroku账户">1.1 注册Heroku账户</h3>
+<p>很简单，根据官网的提示操作就行:<a
+target="_blank" rel="noopener" href="https://signup.heroku.com/">点击注册</a></p>
+<p>注意：请使用外网IP注册，且请准备好翻译工具，并在收到邮件后激活账户；注册时不能使用QQ邮箱</p>
+<h3 id="在heroku部署v2ray">1.2 在Heroku部署v2ray</h3>
+<p>点击下方按钮部署应用<a
+target="_blank" rel="noopener" href="https://dashboard.heroku.com/new?template=https://github.com/F7kyyy/heroku-v2ray"><img
+src="https://www.herokucdn.com/deploy/button.png" srcset="/img/loading.gif" lazyload
+alt="Deploy" /></a></p>
+<p>ps:
+（2022.01.16）最近大佬们的仓库都被heroku给ban了，所以想要使用可以自建一个仓库，<del>然后import大佬Fbclswl0827的heroku-v2ray项目自行部署</del></p>
+<p>ps: 上面部署方式是我自己的仓库</p>
+<h4 id="extra-创建github项目仓库">Extra 创建github项目仓库</h4>
+<p>1、打开 <a target="_blank" rel="noopener" href="https://github.com/">github</a> 登录你自己的账号</p>
+<p>2、点击左边的 <code>New</code> 创建一个仓库</p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230018715.png"><img src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230018715.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></a></p>
+<p>3、在打开的页面中填写仓库名称，然后点击
+<code>Create repository</code> 创建仓库</p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230019403.png"><img src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230019403.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></a></p>
+<p>4、在新打开的页面下翻找到 <code>import</code></p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230020258.png"><img src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230020258.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></a></p>
+<p>5、在 <code>Your old repository’s clone URL</code> 中填入
+<code>https://github.com/bclswl0827/v2ray-heroku.git</code>, 随后点击
+<code>Begin import</code> 导入</p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230020282.png"><img src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230020282.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></a></p>
+<p><strong>这位大佬的github仓库已经被disable了，可以选择其他人的，搜索一下应该很容易找到</strong></p>
+<p>6、导入完成后，进入仓库，修改 <code>README.md</code>
+，修改完成后点击下方 <code>Commit changes</code> 提交</p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230020762.png"><img src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202202230020762.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></a></p>
+<p>7、最后进入仓库点击 <code>Deploy to Heroku</code> 图标开始部署</p>
+<p>App name随便填写，可用就行；Choose a
+region就是你的服务器地区；UUID可自行修改（建议修改，使用默认UUID会使节点暴露在危险下）；然后点击<code>Deploy app</code>系统会自动部署</p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161405003.png"><img src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161405003.png" srcset="/img/loading.gif" lazyload alt="1.png" style="zoom:67%;" /></a></p>
+<p>稍微等待一会儿，几秒的样子，直到全部打勾变绿</p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161457921.png"><img src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161457921.png" srcset="/img/loading.gif" lazyload alt="2.png" style="zoom:67%;" /></a></p>
+<h2 id="二客户端使用">二、客户端使用</h2>
+<h3 id="相关配置信息">2.1 相关配置信息</h3>
+<p>点击Manage
+App进入你的项目；或者在https://dashboard.heroku.com/apps中找的到你的项目并进入</p>
+<p>注意：你会看到一个项目，点击上方的<code>Settings</code>进入，查看你的V2Ray具体配置，如图</p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161458347.png"><img src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161458347.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></a></p>
+<p>点击<code>Reveal Config Vars</code>显示V2RrayN相关配置信息，如图</p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161500120.png"><img src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161500120.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></a></p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161501582.png"><img src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161501582.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></a></p>
+<h3 id="v2rayn配置">2.2 V2rayN配置</h3>
+<p>开始配置V2Ray，如果你记好了以上两个（那串字母UUID和二级域名xxxx.herokuapp.com）</p>
+<p>ps: 二级域名不用加<code>https://</code>，直接填域名就好</p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161519886.png"><img src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161519886.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></a></p>
+<p>最基础的配置完成了，可以发现节点的速度慢的令人发指，接下来我们利用cloudflare
++ 自选ip进行加速</p>
+<h2 id="三cloudflare-workers反代加速">三、Cloudflare
+Workers反代加速</h2>
+<p>对速度有要求的人群（强迫症患者）可以看一下；主要是使用Cloudflare
+Workers加速，虽然免费套餐有调用限制，但是一般个人使用不可能用完</p>
+<h3 id="创建cloudflare-workers">3.1 创建Cloudflare Workers</h3>
+<p>在<a target="_blank" rel="noopener" href="https://dash.cloudflare.com/">Cloudflare
+Workers</a>中创建一个Workers</p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161538514.png"><img
+src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161538514.png" srcset="/img/loading.gif" lazyload
+alt="img" /></a> <a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161542604.png"><img
+src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161542604.png" srcset="/img/loading.gif" lazyload
+alt="img" /></a></p>
+<p>点击<code>快速编辑</code>进入项目编辑 <a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161545214.png"><img
+src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161545214.png" srcset="/img/loading.gif" lazyload
+alt="img" /></a>
+将原有的示例代码全部删除，复制如下代码，并将第四行的xxx.herokuapp.com
+替换为你的V2Ray的地址 ps: 不需要<code>https://</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-variable constant_">VBSCRIPT</span><br><span class="hljs-title function_">addEventListener</span>(<br>	<span class="hljs-string">&quot;fetch&quot;</span>,<span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> &#123;<br>		<span class="hljs-keyword">let</span> url=<span class="hljs-keyword">new</span> <span class="hljs-title function_">URL</span>(event.<span class="hljs-property">request</span>.<span class="hljs-property">url</span>);<br>		url.<span class="hljs-property">hostname</span>=<span class="hljs-string">&quot;xxxx.herokuapp.com&quot;</span>;<br>		<span class="hljs-keyword">let</span> request=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(url,event.<span class="hljs-property">request</span>);<br>		event. <span class="hljs-title function_">respondWith</span>(<br>			<span class="hljs-title function_">fetch</span>(request)<br>		)<br>	&#125;<br>)<br></code></pre></td></tr></table></figure>
+<p>点击右侧的<code>发送</code>按钮，看最后一行是否出现了<code>Bad Request</code>，出现则代表成功</p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161554105.png"><img
+src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161554105.png" srcset="/img/loading.gif" lazyload
+alt="img" /></a></p>
+<p>成功后，点击<code>保存并部署</code>，并记下你的Workers二级域名</p>
+<h3 id="修改v2rayn中的配置">3.2修改V2rayN中的配置</h3>
+<p>把V2RayN中原来的域名改为现在的Workers域名就行了，其实利用Cloudflare
+Workers进行反代以后速度已经可以了，但是优选ip以后速度会更加快 <a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161557052.png"><img src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161557052.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></a></p>
+<p><strong>对速度有更高追求以及不怕折腾的人可以接着往下看，我个人测试，这个没什么太大的效果</strong></p>
+<h2 id="四cloudflare自选ip">四、Cloudflare自选IP</h2>
+<p>点击下载<a
+target="_blank" rel="noopener" href="https://github.com/badafans/better-cloudflare-ip/releases/lastest/download/batch.zip">IP自选程序</a>，解压，在Windows系统下运行</p>
+<p>其他的<code>使用说明.txt</code>文件中都有说，在此就不过多赘述</p>
+<p>最后，配置V2Ray：</p>
+<p><a
+target="_blank" rel="noopener" href="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161617481.png"><img src="https://gitee.com/marne/imgs/raw/master/img/heroku-v2ray-cloudflare/202201161617481.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></a></p>
+<h3 id="注意事项-1">注意事项</h3>
+<p>由于各地的网络情况每天都不同，所以每天（甚至是每半天）的最优节点都不尽相同；但对于一个应急用的已经足够了</p>
+<h2 id="五移动端使用">五、移动端使用</h2>
+<p>iOS端需要外区apple ID
+平且基本移动端v2ray工具都需要付费下载，而这也需要信用卡较为麻烦，淘宝代充很多是盗刷信用卡，慎重考虑</p>
+<h3 id="下载apk">5.1 下载apk</h3>
+<p>可以选择google play 直接下载v2rayNG,可能存在困难，所以推荐<a
+target="_blank" rel="noopener" href="https://github.com/2dust/v2rayNG">github下载apk</a>
+直接选择release版本</p>
+<p>如果想使用最新版，也可以自己使用Android Studio 编译安装</p>
+<p><img src="C:\Users\FengisZZZ\AppData\Roaming\Typora\typora-user-images\image-20220322195545604.png" srcset="/img/loading.gif" lazyload alt="image-20220322195545604" style="zoom:67%;" /></p>
+<h3 id="复制订阅">5.2 复制订阅</h3>
+<p>v2rayN 右键点击服务器-&gt;导出url到剪贴板-&gt;发送到手机</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203221958180.png" srcset="/img/loading.gif" lazyload alt="image-20220322195844002" style="zoom:67%;" /></p>
+<h3 id="移动端使用">5.3 移动端使用</h3>
+<p>点击右上角加号，从剪贴板导入，即可使用</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203222004855.png" srcset="/img/loading.gif" lazyload alt="image-20220322200417813" style="zoom:67%;" /></p>
+<h2 id="效果图">效果图</h2>
+<p>实际使用效果图：</p>
+<ul>
+<li>4320P不要想了可以选择白嫖谷歌云3个月，但是需要国外信用卡，比较麻烦</li>
+<li>2160P看情况</li>
+<li>1440P，1080P没什么问题，Youtube码率比B站高得多
+(当然你想看的视频可能还没有720P<span class="github-emoji"
+data-alias="smile" style=""
+data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8">😄</span>)</li>
+</ul>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203211707537.png" srcset="/img/loading.gif" lazyload
+alt="image-20220321170725117" />
+<figcaption aria-hidden="true">image-20220321170725117</figcaption>
+</figure>
+<p>比某些大部分的机场免费套餐都好，甚至直逼少数机场的初级付费套餐；和我自己买的流量包10块30GB（他涨价了，之前50GB）差不太多，至少上个github，stackoverflow没什么太大问题。<strong>在这个越来越严格的大环境下，在你的机场时不时抽风的时候，作为备选还是不错的。</strong></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="category-chain-item">环境配置</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">#环境配置</a>
+      
+        <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">#科学上网</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/18/linux-%E9%85%8D%E7%BD%AEdocker%EF%BC%8C%E9%83%A8%E7%BD%B2mysql/" title="linux 配置docker，部署mysql">
+                        <span class="hidden-mobile">linux 配置docker，部署mysql</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+  
+  <!-- 在线通讯Tidio -->
+  
+    <script src="//code.tidio.co/cek0qomnlvhhdar1huindmvyc6asqced.js"></script>
+  
+</div>
+
+
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js"></script>
+<script src="/js/sakura.js"></script>
+<script src="/js/star.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
