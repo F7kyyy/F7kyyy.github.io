@@ -1491,7 +1491,6 @@ Diagnostics:
         bugprone-easily-swappable-parameters,
         modernize-use-default-member-init
     ]
-
 ```
 
 ### 3.3 .clang-format
@@ -1739,7 +1738,7 @@ UseTab: Never
 
 使用msys2安装工具链的时候，`因为clang 和 mingw-w64是两套完全不同的工具链，分别在mingw64，clang64目录下，而且第三方包并不共享，因此推荐安装mingw-w64版的clang,llvm`
 
-例如使用tdmgcc64（一个mingw-ww64的windows发行版） 编译的opencv在使用clang64文件夹下的clang++是无法通过编译的
+例如使用tdmgcc64（一个mingw-w64的windows发行版） 编译的opencv在使用clang64文件夹下的clang++是无法通过编译的
 
 ```bash
 # mingw-w64工具链
@@ -1756,7 +1755,7 @@ mingw-w64-x86_64-llvm
 
 记得添加环境变量
 
-<img src="C:\Users\FengisZZZ\AppData\Roaming\Typora\typora-user-images\image-20220508131557192.png" alt="image-20220508131557192" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205081323254.png" alt="image-20220508131557192" style="zoom:67%;" />
 
 ### 4.2 json配置
 
