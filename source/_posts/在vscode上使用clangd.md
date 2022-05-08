@@ -1463,9 +1463,9 @@ auto x = 1U;
 CompileFlags:                             
     Add: 
       [
-        -std=c++14,
+        -std=c++20,
         -Wno-documentation,
-        -Wno-missing-prototypes,
+        -Wno-missing-prototypes
       ]
 Diagnostics:
   ClangTidy:
@@ -1475,7 +1475,7 @@ Diagnostics:
         bugprone-*,
         modernize-*,
         clang-analyzer-*,
-        readability-identifier*,
+        modernize-use-emplace,
     ]
     Remove:
     [
@@ -1488,9 +1488,10 @@ Diagnostics:
         readability-braces-around-statements,
         hicpp-braces-around-statements,
         modernize-use-trailing-return-type,
+        bugprone-easily-swappable-parameters,
+        modernize-use-default-member-init
     ]
-    CheckOptions:
-      readability-identifier-naming.VariableCase: camelCase
+
 ```
 
 ### 3.3 .clang-format
@@ -1734,9 +1735,36 @@ UseTab: Never
 
 - [MYSY2](https://www.msys2.org/) 模拟Linux环境，使用Pacman 作为包管理器，作为一个曾经在物理机上安装Arch Linux 的人，Pacman 的强大让我念念不忘，可惜的是Linux下没有好用的QQ,微信。Pacman 中有最新的软件包和几乎永远不需要担心依赖和编译问题，在配置环境中带来巨大痛苦的OpenGL,OpenCV,Eigen，甚至是hadoop的安装只需要一条命令，已经有人为你做好了一切，包管理器让更新变得十分容易。
 
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205081312305.png" alt="image-20220508131232171" style="zoom:67%;" />
 
+使用msys2安装工具链的时候，`因为clang 和 mingw-w64是两套完全不同的工具链，分别在mingw64，clang64目录下，而且第三方包并不共享，因此推荐安装mingw-w64版的clang,llvm`
+
+例如使用tdmgcc64（一个mingw-ww64的windows发行版） 编译的opencv在使用clang64文件夹下的clang++是无法通过编译的
+
+```bash
+# mingw-w64工具链
+pacman -S --needed base-devel mingw-w64-x86_64-toolchain
+# 包含clang,clang++等工具
+mingw-w64-x86_64-clang
+# clangd clang-tidy等工具
+mingw-w64-x86_64-clang-tools-extra
+# llvm相关
+mingw-w64-x86_64-llvm
+```
+
+安装后发现clang,clang++,clangd都在`./mingw64/bin`目录下,`./clang64`下都是空目录
+
+记得添加环境变量
+
+<img src="C:\Users\FengisZZZ\AppData\Roaming\Typora\typora-user-images\image-20220508131557192.png" alt="image-20220508131557192" style="zoom:67%;" />
 
 ### 4.2 json配置
+
+因为上述安装的包都是为了mingw-w64工具链而服务，所以我们可以使用clang++编译，gdb调试；正常安装clang,mingw-w64则不能如此。
+
+同时还有意外惊喜:smile:，就是可以将cpp文件命名为中文，只用g++,gdb不能正常打断点调试，而用clang++是可以的。
+
+以下是`使用c/c++ 插件`的配置，分别表示使用g++编译，和clang++编译。
 
 ```json
 {
@@ -1744,13 +1772,14 @@ UseTab: Never
         {
             "type": "shell",
             "label": "g++ build",
-            "command": "C:\\Users\\FengisZZZ\\ServerTools\\mingw64\\bin\\g++.exe",
+            "command": "C:\\Users\\FengisZZZ\\ServerTools\\msys\\mingw64\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
+                "-Wall",
                 "-o",
-                "${workspaceFolder}\\build\\${fileBasenameNoExtension}.exe"
+                "${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -1762,28 +1791,40 @@ UseTab: Never
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "调试器生成的任务。"
+            "presentation": {
+                "echo": false,
+                "panel": "shared",
+                "reveal": "always",
+                "focus": true
+            },
         },
         {
             "type": "shell",
             "label": "clang++ build",
-            "command": "C:\\Users\\FengisZZZ\\ServerTools\\mingw64\\bin\\clang++.exe",
+            "command": "C:\\Users\\FengisZZZ\\ServerTools\\msys\\mingw64\\bin\\clang++.exe",
             "args": [
-                "-std=c++20",
-                "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
+                "-Wall",
                 "-o",
-                "${workspaceFolder}\\build\\${fileBasenameNoExtension}.exe"
+                "${workspaceFolder}\\bin\\leetcode.exe"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
             },
+            "problemMatcher": [
+                "$gcc"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "调试器生成的任务。"
+            "presentation": {
+                "echo": false,
+                "panel": "shared",
+                "reveal": "always",
+                "focus": true
+            },
         }
     ],
     "version": "2.0.0"
@@ -1795,10 +1836,10 @@ UseTab: Never
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "gdb",
+            "name": "gcc debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}\\build\\${fileBasenameNoExtension}.exe",
+            "program": "${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -1806,10 +1847,10 @@ UseTab: Never
             "externalConsole": false,
             "internalConsoleOptions": "neverOpen",
             "MIMode": "gdb",
-            "miDebuggerPath": "C:\\Users\\FengisZZZ\\ServerTools\\mingw64\\bin\\gdb.exe",
+            "miDebuggerPath": "C:\\Users\\FengisZZZ\\ServerTools\\msys\\mingw64\\bin\\gdb.exe",
             "setupCommands": [
                 {
-                    "description": "Enable pretty-printing for gdb",
+                    "description": "为 gdb 启用整齐打印",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
@@ -1817,17 +1858,26 @@ UseTab: Never
             "preLaunchTask": "g++ build",
         },
         {
-            "type": "lldb",
+            "name": "clang debug",
+            "type": "cppdbg",
             "request": "launch",
-            "name": "lldb",
-            "program": "${workspaceFolder}\\build\\${fileBasenameNoExtension}.exe",
+            "program": "${workspaceFolder}\\bin\\leetcode.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "internalConsoleOptions": "neverOpen",
-            "preLaunchTask": "g++ build",
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\Users\\FengisZZZ\\ServerTools\\msys\\mingw64\\bin\\gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "为 gdb 启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "clang++ build",
         }
     ]
 }
