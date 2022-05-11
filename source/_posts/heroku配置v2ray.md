@@ -18,6 +18,8 @@ index_img: /img/article/heroku.png
 3. ***绝大部分的Heroku服务器节点都被twitter屏蔽了**，可能是我新建的暂时还没有*
 4. *Heroku免费容器未使用超过一段时间（三十分钟左右）就会休眠*
 
+**2022.5.9更新，Cloud flare 的work.dev凉了，设置反代看[链接](https://my.freenom.com/domains.php)**
+
 ## 必要的准备
 
 1. 一个非国内邮箱地址，gmail 或者 outlook
@@ -141,7 +143,7 @@ addEventListener(
 
 成功后，点击`保存并部署`，并记下你的Workers二级域名
 
-### 3.2修改V2rayN中的配置
+### 3.2 修改V2rayN中的配置
 
 把V2RayN中原来的域名改为现在的Workers域名就行了，其实利用Cloudflare Workers进行反代以后速度已经可以了，但是优选ip以后速度会更加快
 <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903475.png" alt="img" style="zoom:67%;" />](https://gitee.co
@@ -197,4 +199,102 @@ v2rayN 右键点击服务器->导出url到剪贴板->发送到手机
 ![image-20220321170725117](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203211707537.png)
 
 比某些大部分的机场免费套餐都好，甚至直逼少数机场的初级付费套餐；和我自己买的流量包10块30GB（他涨价了，之前50GB）差不太多，至少上个github，stackoverflow没什么太大问题。**在这个越来越严格的大环境下，在你的机场时不时抽风的时候，作为备选还是不错的。**
+
+## 六、2022/5/9 cloudflare worker.dev被封
+
+[问题链接:cry:][https://github.com/XIU2/CloudflareSpeedTest/issues/205]
+
+需要绑定一个自己的域名，才可以继续使用
+
+### 6.1 免费域名申请
+
+[参考链接](https://zhuanlan.zhihu.com/p/109553641)
+
+- 输入想要的`域名带后缀`，点击查询 例如： `abcd.tk`
+- 加入购物车， 默认3个月。修改成 12个月free
+- 结算 填入邮件，然后邮箱收到邮件
+- 点开邮箱连接，然后填写信息，网上找个美国人的信息详细填写上去,电话也是假的
+- 注册成功
+
+注：
+
+1. 信息：网上有美国人信息生成器；
+2. 要用美国的IP地址，节点设置为美国；
+3. freenom免费域名很少可以撑到一年的，大概几个月就不行了
+
+### 6.2 在cloudflare 上绑定刚才申请的域名
+
+- 点击 网站→添加站点
+
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111041954.png" alt="image-20220511104027760" style="zoom:67%;" />
+
+- 填入网址
+
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111041615.png" alt="image-20220511104130570" style="zoom:80%;" />
+
+- 选择 free计划 创建
+
+  
+
+- 会先扫描以前的 dns, 扫描完成后。手动添加 记录。
+
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111042042.png" alt="image-20220511104205909" style="zoom: 50%;" />
+
+- 填写 名称 和 ip地址随便写 点击保存 这里地址写成了422，是错误的。最大不超过255
+
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111042849.png" alt="image-20220511104237731" style="zoom:67%;" />
+
+- 点击 继续
+
+- 提示：更改域名的 服务器
+
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111044379.png" alt="image-20220511104400265" style="zoom:50%;" />
+
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111043039.png" alt="image-20220511104338930" style="zoom:50%;" />
+
+- 然后打开 域名所在的管理网站 这里是 https://www.freenom.com/ 添加这两条记录
+
+  具体操作见下面6.3
+
+### 6.3 在freenom 更换dns 服务器
+
+- 选择 我的站点
+
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111046635.png" alt="image-20220511104649550" style="zoom:50%;" />
+
+- 点击 管理
+
+  ![image-20220511104724133](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111047193.png)
+
+- 点击 name server
+
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111048537.png" alt="image-20220511104828464" style="zoom:50%;" />
+
+  
+
+- 把上面的复制的dns服务器 添加到 这里
+
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111048755.png" alt="image-20220511104850657" style="zoom:50%;" />
+
+- 然后点击  下面的按钮 change name 完成。
+
+### 6.4 在cloudflare 添加 worker路由并绑定
+
+- 查看是否有效，点击域名
+
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111050724.png" alt="image-20220511105018690" style="zoom:67%;" />
+
+- 先点击主页的这个域名，这个域名的下添加 worker 路由
+
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111051692.png" alt="image-20220511105129561" style="zoom: 33%;" />
+
+- 设置路由 ，选择自己的worker 绑定
+
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111052241.png" alt="image-20220511105208172" style="zoom:50%;" />
+
+- v2ray上替换
+
+  将原有地址，替换为设置的路由(不加 / )
+
+**其实直接是用heroku速度上个github也够了:laughing:**
 
