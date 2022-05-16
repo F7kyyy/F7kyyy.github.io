@@ -10,6 +10,10 @@ index_img: /img/article/wsl.png
 ---
 ## 1. 更新系统提示
 
+### 1.1 安装cuda前
+
+你会发现没有这个文件夹
+
 `/usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link`
 
 解决方法：
@@ -22,6 +26,18 @@ index_img: /img/article/wsl.png
    sudo ln -sr /mnt/c/Windows/System32/lxss/lib/libcuda.so.1.1 /mnt/c/Windows/System32/lxss/lib/libcuda.so.1
    sudo ln -sr /mnt/c/Windows/System32/lxss/lib/libcuda.so.1.1 /mnt/c/Windows/System32/lxss/lib/libcuda.so
    ```
+
+### 1.2 安装cuda后
+
+不同的系统安装位置不一样，一般来说会安装在`/usr/local/cuda/`文件夹下，但是我使用的是arch linux，使用pacman 直接安装会安装在`/opt/cuda`文件夹中
+
+使用以下命令建立软连接
+
+```bash
+sudo ln -s /usr/lib/wsl/lib/libcuda.so.1 /opt/cuda/lib64/libcuda.so
+```
+
+
 
 ## 2. 系统代理
 
