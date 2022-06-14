@@ -37,8 +37,6 @@ index_img: /img/article/wsl.png
 sudo ln -s /usr/lib/wsl/lib/libcuda.so.1 /opt/cuda/lib64/libcuda.so
 ```
 
-
-
 ## 2. 系统代理
 
 wsl1没有独立的IP,可以直接给`127.0.0.1:port`，进行代理
@@ -69,7 +67,7 @@ function setproxy
 end
 ```
 
-注意端口，在windows代理软甲中打开`allow LAN`，或者`允许局域网代理`
+注意端口，在windows代理软件中打开`allow LAN`，或者`允许局域网代理`
 
 *测试*：
 

@@ -1,5 +1,5 @@
 ---
-title: linux 配置docker，部署mysql
+title: 配置docker
 date: 2022-04-18 19:57:28
 tags: 
     - 环境配置
@@ -188,5 +188,65 @@ docker images
   - 允许安装的linux发行版使用
   
     ![image-20220418201010181](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204182010263.png)
+    
+    ## 5 docker 配置
+    
+    ### 5.1 为容器配置代理
+    
+    更改`C:\Users\UserName\.docker\config.json`文件，更改之后，新建立的容器就会默认使用代理
+    
+    ```json
+    {
+        "credsStore": "desktop",
+        "proxies": 
+        {
+            "default": 
+            {
+                "httpProxy": "http://host.docker.internal:10811",
+                "httpsProxy": "http://host.docker.internal:10811",
+                "noProxy": "docker-registry.somecorporation.com,*.test.example.com,.example2.com"
+            }
+        }
+    }
+    ```
+    
+    `不能使用127.0.0.1,Port应该使用局域网的端口，V2rayN 就是10811，clash就是7890`
+    
+    ### 5.2 安装常见容器
+    
+    #### 5.2.1 Ubuntu 20.04
+    
+    - 安装
+    
+      `挂载`
+    
+    ```dock
+    # 拉取镜像
+    docker pull ubuntu:latest
+    # -p 端口转发 -v 将/root挂载到本地
+    docker run -it -p 50022:22 --name ubuntu -v C:\Users\FengisZZZ\Documents\DockerFiles\DockerUbuntu\root\:/root/ -d ubuntu:latest
+    ```
+    
+    - 换源
+    
+      需要安装`ca-certificates`,之后正常换源
+    
+      ```bash
+      apt install ca-certificates
+      ```
+    
+    #### 5.3.2 Mysql
+    
+    - 安装
+    
+      ```bash
+      # 拉取镜像
+      docker pull mysql:latest
+      # 启动
+      docker run --name=mysql -it -p 3306:3306 -e MYSQL_ROOT_PASSWORD=040057 -v C:\Users\FengisZZZ\Documents\DockerFiles\DockerMysql\data:/var/lib/mysql-files 
+      -v C:\Users\FengisZZZ\Documents\DockerFiles\DockerMysql\conf:/etc/mysql -v C:\Users\FengisZZZ\Documents\DockerFiles\DockerMysql\log:/var/log/mysql -d mysql
+      ```
+    
+      
   
   
