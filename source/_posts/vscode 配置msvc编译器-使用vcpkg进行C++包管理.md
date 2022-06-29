@@ -1,5 +1,5 @@
 ---
-title: 使用vcpkg进行C++包管理
+title: vscode 配置msvc编译器 使用vcpkg进行C++包管理
 date: 2022-06-27 21:58:53
 tags:
     - 环境配置
@@ -76,11 +76,35 @@ vcpkg integrate install
 
 详见github
 
-### 4. 在Visual Studio Code中使用
+### 4. 在VS code Clion中使用
 
 这个项目是同时使用`OpenCV`,`fmt`库
 
 ![image-20220627233132298](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627233132298.png)
+
+`测试代码`
+
+```c++
+#include <iostream>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/core/utils/logger.hpp>
+#include <fmt/format.h>
+
+int main() {
+    cv::utils::logging::setLogLevel(cv::utils::logging::LOG_LEVEL_ERROR);
+    cv::Mat myMat = cv::imread("C:/Users/f7ky/Pictures/Saved Pictures/R.jpg");
+    std::string s = fmt::format("{0} is {1}", "abra", 12);
+    std::cout << s << std::endl;
+    fmt::print("Elapsed time: {0:.2f} seconds", 1.23);
+    cv::imshow("picture", myMat);
+    cv::waitKey();
+    return 0;
+}
+
+```
+
+
 
 #### 4.1 必须
 
@@ -124,7 +148,9 @@ vcpkg integrate install
   
   这种方法可能存在问题，建议直接设置Cmake Path
   
-  `Clion中`， 在`CMake Setting`中设置 ，在 `CMake options`添加一行, 
+  
+  
+- `Clion中`， 在`CMake Setting`中设置 ，在 `CMake options`添加一行, 
   
   ```
   -DCMAKE_TOOLCHAIN_FILE=[vcpkg root]/scripts/buildsystems/vcpkg.cmake
@@ -132,13 +158,13 @@ vcpkg integrate install
   
   每个项目都要添加
 
-#### 4.2 优化、、、、、、、、、、l
+#### 4.2 优化
 
 - setting.json(全局)
 
-  - 使用MSVC的工具链，但是生成Ninja更加简洁,为ckangd插件提供补全
+  - 使用MSVC的工具链，但是生成Ninja更加简洁,为clangd插件提供补全
   - CMAKE_TOOLCHAIN_FILE 可以加载Vcpkg的包
-  - clangd插件使用自己安装的clangd
+  - clangd插件使用插件自己安装的clangd，为了让clangd找到头文件，需要生成`Ninja`
 
   ```json
   "cmake.configureSettings": {
@@ -182,6 +208,7 @@ vcpkg integrate install
           // 设置项目，或者用户config
           "--enable-config",
       ],
+      // cmake-tools debug 图像使用integratedTerminal
       "cmake.debugConfig": {
           "console":"integratedTerminal"
       },
@@ -212,4 +239,81 @@ vcpkg integrate install
   }
   ```
 
-  
+
+### 5. VScode使用MSVC单文件编译
+
+**正常使用需要从VS命令行窗口打开**
+
+<img src="C:\Users\FengisZZZ\AppData\Roaming\Typora\typora-user-images\image-20220629141805160.png" alt="image-20220629141805160" style="zoom: 33%;" />
+
+观察到从命令实际上上启动了一个批处理命令，相当于配置了MSVC的环境变量
+
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220629142144595.png" alt="image-20220629142144595" style="zoom:50%;" />
+
+所以我们只需要tasks.json执行这个命令
+
+#### 5.1 tasks.json
+
+`vcvarsall.bat`相当于是配置环境变量；`x64`生成64位的可执行文件；添加位置是指定中间文件的输出位置
+
+![image-20220629144006206](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220629144006206.png)
+
+```json
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Compile",
+            "command": "\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvarsall.bat\" x64 && cl.exe",
+            "args": [
+                "/Zi",
+                "/EHsc",
+                "/nologo",
+                "/Fd${workspaceFolder}\\bin\\vc140.pdb",
+                "/Fo${workspaceFolder}\\bin\\${fileBasenameNoExtension}.obj",
+                "/Fe${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe",
+                "${file}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "调试器生成的任务。"
+        }
+    ],
+    "version": "2.0.0"
+}
+```
+
+也可以直接指定规定的模式
+
+![image-20220629144457736](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220629144457736.png)
+
+#### 5.2 launch.json
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(Windows) DEBUG",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "preLaunchTask": "Compile"
+        }
+    ]
+}
+```
+
