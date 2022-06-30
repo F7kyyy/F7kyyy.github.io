@@ -18,11 +18,11 @@ index_img: https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627221
 
 我们可以选择只安装[MS Build Toos](https://visualstudio.microsoft.com/zh-hans/downloads/),但是当我们选择最基本的C++开发组件，大概需要4G左右存储空间，语言包需要额外选上英文，这是Vcpkg依赖。
 
-![image-20220627223858130](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627223858130.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627223858130.png" alt="image-20220627223858130" style="zoom:50%;" />
 
 不过，我们为什么不选择直接安装Visual Studio 2022 ，体验一下宇宙第一IDE，毕竟完整安装也只要8G左右空间。**强烈建议直接安装完整版，因为只安装开发工具的话想要再次完整安装会重新下载另外一份开发工具，十分扯淡**，同样的`语言包需要额外选上英文`
 
-![image-20220627224405597](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627224405597.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627224405597.png" alt="image-20220627224405597" style="zoom:50%;" />
 
 ### 2. 安装Vcpkg
 
@@ -56,9 +56,9 @@ vcpkg search fmt
 vcpkg install fmt:x64-windows
 ```
 
-![image-20220627225537803](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627225537803.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627225537803.png" alt="image-20220627225537803" style="zoom:50%;" />
 
-![image-20220627225902749](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627225902749.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627225902749.png" alt="image-20220627225902749" style="zoom:50%;" />
 
 ### 3.集成在VS中
 
@@ -70,7 +70,7 @@ vcpkg install fmt:x64-windows
 vcpkg integrate install
 ```
 
-![image-20220627231533379](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627231533379.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627231533379.png" alt="image-20220627231533379" style="zoom: 40%;" />
 
 #### 3.2 工程集成和CMake集成
 
@@ -80,7 +80,7 @@ vcpkg integrate install
 
 这个项目是同时使用`OpenCV`,`fmt`库
 
-![image-20220627233132298](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627233132298.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627233132298.png" alt="image-20220627233132298" style="zoom: 40%;" />
 
 `测试代码`
 
@@ -162,9 +162,9 @@ int main() {
 
 - setting.json(全局)
 
-  - 使用MSVC的工具链，但是生成Ninja更加简洁,为clangd插件提供补全
+  - 使用MSVC的工具链，但是生成Ninja更加简洁,生成compile_commands.json，为clangd插件提供补全
   - CMAKE_TOOLCHAIN_FILE 可以加载Vcpkg的包
-  - clangd插件使用插件自己安装的clangd，为了让clangd找到头文件，需要生成`Ninja`
+  - clangd插件使用插件自己安装的clangd，同时提供了某些头文件
 
   ```json
   "cmake.configureSettings": {
@@ -174,7 +174,7 @@ int main() {
   "clangd.path": "c:\\Users\\f7ky\\AppData\\Roaming\\Code\\User\\globalStorage\\llvm-vs-code-extensions.vscode-clangd\\install\\14.0.3\\clangd_14.0.3\\bin\\clangd.exe"
   ```
 
-- setting.json(工作区)
+- setting.json (工作区) 
 
   - clangd配置；
   - 在使用cmake插件debug时将结果输出在终端中；
@@ -208,7 +208,8 @@ int main() {
           // 设置项目，或者用户config
           "--enable-config",
       ],
-      // cmake-tools debug 图像使用integratedTerminal
+      // cmake-tools图形化 debug 结果输出在integratedTerminal
+      // 因为只有使用MSVC工具链才有"console"选项，使用Mingw-64可能是"integratedTerminal",与launch.json相同
       "cmake.debugConfig": {
           "console":"integratedTerminal"
       },
@@ -244,11 +245,15 @@ int main() {
 
 **正常使用需要从VS命令行窗口打开**
 
-<img src="C:\Users\FengisZZZ\AppData\Roaming\Typora\typora-user-images\image-20220629141805160.png" alt="image-20220629141805160" style="zoom: 33%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202206302219889.png" alt="image-20220629141805160" style="zoom: 40%;" />
 
-观察到从命令实际上上启动了一个批处理命令，相当于配置了MSVC的环境变量
+观察到从命令实际上上启动了一个批处理命令，相当于配置了MSVC的环境变量,图中的命令需要使用` "type": "shell"`
 
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220629142144595.png" alt="image-20220629142144595" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220629142144595.png" alt="image-20220629142144595" style="zoom: 40%;" />
+
+`"type": "cppbuild"`需要此目录下的
+
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220630220746980.png" alt="image-20220630220746980" style="zoom: 67%;" />
 
 所以我们只需要tasks.json执行这个命令
 
@@ -258,6 +263,34 @@ int main() {
 
 ![image-20220629144006206](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220629144006206.png)
 
+`args`是编译选项，在[官方网站](https://docs.microsoft.com/zh-cn/cpp/build/reference/align-section-alignment?view=msvc-170)，可以查看每个编译选项的含义，中文版的，非常nice
+
+```
+// c++标准是c++20
+"/std:c++20",
+// 保留完整的调试信息，不加的化没办法打断点
+"/Zi",
+// 标准 c + + 异常处理模型的完全编译器
+"/EHsc",
+// 在编译器启动时禁止显示版权横幅，在编译过程中显示信息性消息
+"/nologo",
+// 编译器选项是一次设置多个特定优化选项的一种快速方法
+"/O2",
+// W1 显示等级 1 (严重) 警告。 /W1 是命令行编译器中的默认设置。
+"/W1",
+// 没有 /Fd，PDB 文件名默认为 VCx0.pdb，其中 x 是当前Visual C++版本,指定输出位置
+"/Fd${workspaceFolder}\\bin\\",
+// 为 CL 编译器命令生成的所有对象文件设置输出目录
+"/Fo${workspaceFolder}\\bin\\${fileBasenameNoExtension}.obj",
+// 指定编译器创建的 .exe或 DLL 的名称和目录
+"/Fe${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe",
+"${file}",
+// 并行计算课程使用openmp，llvm openmp支持，使用的是vscode clangd插件安装的omp.h
+"/openmp:llvm"
+```
+
+
+
 ```json
 {
     "tasks": [
@@ -266,13 +299,17 @@ int main() {
             "label": "Compile",
             "command": "\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvarsall.bat\" x64 && cl.exe",
             "args": [
+                "/std:c++20",
                 "/Zi",
                 "/EHsc",
                 "/nologo",
-                "/Fd${workspaceFolder}\\bin\\vc140.pdb",
+                "/O2",
+                "/W1",
+                "/Fd${workspaceFolder}\\bin\\",
                 "/Fo${workspaceFolder}\\bin\\${fileBasenameNoExtension}.obj",
                 "/Fe${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe",
-                "${file}"
+                "${file}",
+                "/openmp:llvm"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
@@ -293,7 +330,7 @@ int main() {
 
 也可以直接指定规定的模式
 
-![image-20220629144457736](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220629144457736.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220629144457736.png" alt="image-20220629144457736" style="zoom: 80%;" />
 
 #### 5.2 launch.json
 
