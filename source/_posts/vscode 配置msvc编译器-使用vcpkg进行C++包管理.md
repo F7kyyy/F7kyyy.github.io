@@ -263,34 +263,6 @@ int main() {
 
 ![image-20220629144006206](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220629144006206.png)
 
-`args`是编译选项，在[官方网站](https://docs.microsoft.com/zh-cn/cpp/build/reference/align-section-alignment?view=msvc-170)，可以查看每个编译选项的含义，中文版的，非常nice
-
-```
-// c++标准是c++20
-"/std:c++20",
-// 保留完整的调试信息，不加的化没办法打断点
-"/Zi",
-// 标准 c + + 异常处理模型的完全编译器
-"/EHsc",
-// 在编译器启动时禁止显示版权横幅，在编译过程中显示信息性消息
-"/nologo",
-// 编译器选项是一次设置多个特定优化选项的一种快速方法
-"/O2",
-// W1 显示等级 1 (严重) 警告。 /W1 是命令行编译器中的默认设置。
-"/W1",
-// 没有 /Fd，PDB 文件名默认为 VCx0.pdb，其中 x 是当前Visual C++版本,指定输出位置
-"/Fd${workspaceFolder}\\bin\\",
-// 为 CL 编译器命令生成的所有对象文件设置输出目录
-"/Fo${workspaceFolder}\\bin\\${fileBasenameNoExtension}.obj",
-// 指定编译器创建的 .exe或 DLL 的名称和目录
-"/Fe${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe",
-"${file}",
-// 并行计算课程使用openmp，llvm openmp支持，使用的是vscode clangd插件安装的omp.h
-"/openmp:llvm"
-```
-
-
-
 ```json
 {
     "tasks": [
@@ -328,9 +300,37 @@ int main() {
 }
 ```
 
-也可以直接指定规定的模式
+也可以直接指定规定的模式,不需要指定x64
 
 <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220629144457736.png" alt="image-20220629144457736" style="zoom: 80%;" />
+
+`args`是编译选项，在[官方网站](https://docs.microsoft.com/zh-cn/cpp/build/reference/align-section-alignment?view=msvc-170)，可以查看每个编译选项的含义，中文版的，非常nice
+
+```
+// c++标准是c++20
+"/std:c++20",
+// 保留完整的调试信息，不加的化没办法打断点
+"/Zi",
+// 标准 c + + 异常处理模型的完全编译器
+"/EHsc",
+// 在编译器启动时禁止显示版权横幅，在编译过程中显示信息性消息
+"/nologo",
+// 编译器选项是一次设置多个特定优化选项的一种快速方法
+"/O2",
+// W1 显示等级 1 (严重) 警告。 /W1 是命令行编译器中的默认设置。
+"/W1",
+// 没有 /Fd，PDB 文件名默认为 VCx0.pdb，其中 x 是当前Visual C++版本,指定输出位置
+"/Fd${workspaceFolder}\\bin\\",
+// 为 CL 编译器命令生成的所有对象文件设置输出目录
+"/Fo${workspaceFolder}\\bin\\${fileBasenameNoExtension}.obj",
+// 指定编译器创建的 .exe或 DLL 的名称和目录
+"/Fe${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe",
+"${file}",
+// 并行计算课程使用openmp，llvm openmp支持，使用的是vscode clangd插件安装的omp.h
+"/openmp:llvm"
+```
+
+
 
 #### 5.2 launch.json
 
