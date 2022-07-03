@@ -48,7 +48,7 @@ emoji:
 
 ![202203191703130](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261337746.png)
 
-![202203191703265](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261338806.png)
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261338806.png" alt="202203191703265" style="zoom:50%;" />
 
 - 首先进入 [Tidio 官网](https://www.tidio.com/) 进行注册，可能需要魔法上网
 
@@ -56,7 +56,7 @@ emoji:
 
 - 在setting->developver中复制public key
 
-  <img src="https://gitee.com/Fantastic-Feng/picgo/raw/master/202203191711294.png" alt="image-20220319171101114" style="zoom: 50%;" />
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202207031414402.png" alt="202203191711294" style="zoom:50%;" />
 
 - 在主题的配置文件中添加
 
@@ -77,6 +77,8 @@ emoji:
   	<script src="//code.tidio.co/your_public_key.js"></script>
   <% } %>
   ```
+
+  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202207031416121.png" alt="image-20220703141600054" style="zoom:50%;" />
 
 - 重新部署
 

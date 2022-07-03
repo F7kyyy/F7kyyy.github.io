@@ -10,7 +10,7 @@ categories: 环境配置
 math: false
 index_img: https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/image-20220627221709538.png
 ---
->主要是还在考试的过程中，完全不想准备考研，在知乎刷到了一篇关于现代c++的介绍，介绍了一些流行的第三方库，如google 的 `abseil`,facebook 的`folly`,所以想安装试一试。一般都需要编译安装，非常的麻烦，所以考虑使用msys2来安装，但是`folly`库msys2居然都没有,果然Windows 还是老老实实的用MSVC吧:dog:。Vcpkg经过几年的发展已经完全可用了，开源库都有Vcpkg的安装方式。
+>主要是还在考试的过程中，完全不想准备考研，在知乎刷到了一篇关于现代c++的介绍，介绍了一些流行的第三方库，如google 的 `abseil`,facebook 的`folly`,所以想安装试一试。一般都需要编译安装，非常的麻烦，所以考虑使用msys2来安装，但是`folly`库msys2居然都没有,果然Windows 还是老老实实的用MSVC吧✌。Vcpkg经过几年的发展已经完全可用了，开源库都有Vcpkg的安装方式。
 
 
 
