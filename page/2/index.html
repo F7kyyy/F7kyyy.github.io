@@ -25,6 +25,9 @@
 <meta name="twitter:card" content="summary_large_image">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
   <title>F7kyyy的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
@@ -60,10 +63,18 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"f7kyyy.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"always","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"f7kyyy.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
+  
+
 
   
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -176,7 +187,7 @@
 <div id="banner" class="banner" parallax=true
      style="background: url('/img/18.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
@@ -229,9 +240,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/03/17/fluid%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/03/17/fluid%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/" target="_self">
         <div>
-          
           虽然fluid 主题已经非常好看了，但我依旧可以通过一些简单的操作，让你的博客更加易用（更花里胡哨和装逼）&amp;#x1f604; 1. Fluid 页脚增加网站运行时长主题预览网站中有了很详细的介绍，这里就不在重复了 配置链接，效果如下：  2. markdown 使用emoji默认不支持输入emoji表情，我们可以通过hexo-filter-emoji插件实现 1npm install he
         </div>
       </a>
@@ -298,9 +309,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/03/17/%E8%AE%A1%E7%AE%97%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8EN%E7%9A%84%E8%B4%A8%E6%95%B0%E7%9A%84%E5%B9%B6%E8%A1%8C%E7%AE%97%E6%B3%95/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/03/17/%E8%AE%A1%E7%AE%97%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8EN%E7%9A%84%E8%B4%A8%E6%95%B0%E7%9A%84%E5%B9%B6%E8%A1%8C%E7%AE%97%E6%B3%95/" target="_self">
         <div>
-          
           1. 遍历每一个数，判断是否是质数 朴素方法 是否可以被整除 我们判断\(N\)是否是质数时，不选要考虑\(\leq N\)的所有情况,只需要考虑\(N\)是否可以被小于等于\(\sqrt{N}\)的数整除就可以了，因此代码如下(此时不考虑并行情况) 123456789101112131415161718192021222324252627282930bool ifprime(int n)&amp;
         </div>
       </a>
@@ -369,9 +380,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/03/13/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%BD%9C%E4%B8%9A1/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/03/13/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%BD%9C%E4%B8%9A1/" target="_self">
         <div>
-          
           一、云使能技术主要包括哪些技术组件？简要说明其关键特征。 1. 数据中心技术 一种特殊的IT基础设施，用于集中放置IT资源，包括服务器、数据库、网络与通信设备以及软件系统。数据中心是全球协作的特定设备网络，用来在因特网上传递、加速、展示、计算、存储数据信息。数据中心大部分电子元件都是由低直流电源驱动运行的。 数据中心的产生致使人们的认识从定量、结构的世界进入到不确定和非结构的世界中，它将和交
         </div>
       </a>
@@ -438,9 +449,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/03/11/%E5%B0%86hexo%E6%BA%90%E7%A0%81%E4%B8%8A%E4%BC%A0github/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/03/11/%E5%B0%86hexo%E6%BA%90%E7%A0%81%E4%B8%8A%E4%BC%A0github/" target="_self">
         <div>
-          
           在将博客部署在github后，因为仓库的默认分支中存储的是静态html，而不是源码，所以在重新部署时会非常麻烦，需要重新配置。因为本身是一个喜欢折腾的人，为了防止某一天环境搞乱后追悔莫及，也为了方便查看配置文件更改了什么内容，所以使用版本控制是十分必要的。（额。。每个主题config不同，而我未来换主题的次数可能有辣么一点点多。)  网上的教程挺多的，但是有点过程十分繁琐而且没有必要。在尝试后
         </div>
       </a>
@@ -507,9 +518,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/03/11/%E5%87%86%E5%A4%87%E8%80%83%E7%A0%94%E6%9C%89%E6%84%9F/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/03/11/%E5%87%86%E5%A4%87%E8%80%83%E7%A0%94%E6%9C%89%E6%84%9F/" target="_self">
         <div>
-          
           之前 基本上大家对学习的态度，你拉着我走，我也不想走：  现在 上课到处都是拿着考研书籍的人，图书馆也都是熟人，这让躺在床上的我很难啊   202203111549187  争取努力努力，拼搏9个月，我要有学上 💪
         </div>
       </a>
@@ -574,9 +585,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/03/09/hello-world/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/03/09/hello-world/" target="_self">
         <div>
-          
           Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
         </div>
       </a>
@@ -641,9 +652,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/03/08/LeetCode-%E7%AC%94%E8%AE%B0/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/03/08/LeetCode-%E7%AC%94%E8%AE%B0/" target="_self">
         <div>
-          
           1. 两数之和 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target 的那 两个 整数，并返回它们的数组下标。 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。 你可以按任意顺序返回答案  链接：https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;two-sum 解法： 常规思路是使用两
         </div>
       </a>
@@ -712,9 +723,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/03/08/%E9%85%8D%E7%BD%AEhexo/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/03/08/%E9%85%8D%E7%BD%AEhexo/" target="_self">
         <div>
-          
           山东大学 计算机科学与技术 学院 云计算技术 课程实验报告 1. 姓名学号 201900130128 冯子恺 数据19 2. 实验题目 Github + Hexo搭建个人博客系统 3. 实验目的 熟悉个人博客系统的搭建 4. 实验环境  硬件环境 Intel Core I5-8300H Nvidia Geforce gtx1060 软件环境 Windows10 21H2
         </div>
       </a>
@@ -828,14 +839,11 @@
   
   
   
-  
   <!-- 在线通讯Tidio -->
   
     <script src="//code.tidio.co/cek0qomnlvhhdar1huindmvyc6asqced.js"></script>
   
 </div>
-
-
 
   </footer>
 
@@ -903,8 +911,6 @@
       
     })(window, document);
   </script>
-
-
 
 
 

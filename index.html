@@ -25,6 +25,9 @@
 <meta name="twitter:card" content="summary_large_image">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
   <title>F7kyyy的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
@@ -60,10 +63,18 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"f7kyyy.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"always","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"f7kyyy.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
+  
+
 
   
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -176,7 +187,7 @@
 <div id="banner" class="banner" parallax=true
      style="background: url('/img/18.jpg') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
@@ -229,10 +240,10 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/06/27/vscode%20%E9%85%8D%E7%BD%AEmsvc%E7%BC%96%E8%AF%91%E5%99%A8-%E4%BD%BF%E7%94%A8vcpkg%E8%BF%9B%E8%A1%8CC++%E5%8C%85%E7%AE%A1%E7%90%86/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/06/27/vscode%20%E9%85%8D%E7%BD%AEmsvc%E7%BC%96%E8%AF%91%E5%99%A8-%E4%BD%BF%E7%94%A8vcpkg%E8%BF%9B%E8%A1%8CC++%E5%8C%85%E7%AE%A1%E7%90%86/" target="_self">
         <div>
-          
-          主要是还在考试的过程中，完全不想准备考研，在知乎刷到了一篇关于现代c++的介绍，介绍了一些流行的第三方库，如google 的 abseil,facebook 的folly,所以想安装试一试。一般都需要编译安装，非常的麻烦，所以考虑使用msys2来安装，但是folly库msys2居然都没有,果然Windows 还是老老实实的用MSVC吧&amp;#x1f436;。Vcpkg经过几年的发展已经完全可
+          主要是还在考试的过程中，完全不想准备考研，在知乎刷到了一篇关于现代c++的介绍，介绍了一些流行的第三方库，如google 的 abseil,facebook 的folly,所以想安装试一试。一般都需要编译安装，非常的麻烦，所以考虑使用msys2来安装，但是folly库msys2居然都没有,果然Windows 还是老老实实的用MSVC吧✌。Vcpkg经过几年的发展已经完全可用了，开源库都有
         </div>
       </a>
 
@@ -302,9 +313,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/05/08/%E8%A7%A3%E5%86%B3wsl2%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/05/08/%E8%A7%A3%E5%86%B3wsl2%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" target="_self">
         <div>
-          
           1. 更新系统提示1.1 安装cuda前你会发现没有这个文件夹 &#x2F;usr&#x2F;lib&#x2F;wsl&#x2F;lib&#x2F;libcuda.so.1 is not a symbolic link 解决方法：  从C:\Windows\System32\lxss\lib 删除libcuda.so and libcuda.so.1   以管理员打开powershell，输入wsl,进入wsl环境,执行 12sudo ln -s
         </div>
       </a>
@@ -371,9 +382,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/04/19/heroku%E9%85%8D%E7%BD%AEv2ray/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/04/19/heroku%E9%85%8D%E7%BD%AEv2ray/" target="_self">
         <div>
-          
           注意！本教程仅且只能用于研究与学习，只是做一个记录 注意事项 Heroku免费套餐每月只有550小时的免费时间，限量2TB，适合在非常时期当做备胎使用 Heroku对流量检测有些严格，请避免大流量消耗 引用项目原作者的话：Heroku提供给我们免费的服务，我们不应该滥用它 绝大部分的Heroku服务器节点都被twitter屏蔽了，可能是我新建的暂时还没有 Heroku免费容器未使用超过一段时间（三
         </div>
       </a>
@@ -440,9 +451,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/04/18/%E9%85%8D%E7%BD%AEdocker/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/04/18/%E9%85%8D%E7%BD%AEdocker/" target="_self">
         <div>
-          
           1 安装 使用脚本安装  1curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker | sh     更改权限  1sudo chmod 666 &#x2F;var&#x2F;run&#x2F;docker.soc    查看版本    更改镜像源  12cd &#x2F;etc&#x2F;dockersudo vim daemon.json	  ​    写入以下内容 12345678&amp;#123;  &quot;reg
         </div>
       </a>
@@ -517,9 +528,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/04/18/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%BD%9C%E4%B8%9A3/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/04/18/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%BD%9C%E4%B8%9A3/" target="_self">
         <div>
-          
           简述网络通信的四个安全要素  保密性 保密性是网络信息不被泄露给非授权的用户、实体或过程，或供其利用的特性。即，防止信息泄漏给非授权个人或实体，信息只为授权用户使用的特性。保密性是在可靠性和可用性基础之上，保障网络信息安全的重要手段。 完整性 完整性是网络信息未经授权不能进行改变的特性。即网络信息在存储或传输过程中保持不被偶然或蓄意地删除、修改、伪造、乱序、重放、插入等破坏和丢失的特性。
         </div>
       </a>
@@ -586,9 +597,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/04/18/ubuntu-%E9%85%8D%E7%BD%AEhadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/04/18/ubuntu-%E9%85%8D%E7%BD%AEhadoop%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F/" target="_self">
         <div>
-          
           这里选择安装伪分布式的形式原文链接 1 安装前准备 下载hadoop和jdk安装包，因为伪分布式版本要求，我们选择hadoop2.7.3 与java 1.8 下载链接：hadoop,jdk   image-20220418162025511  2 安装 ssh server 1sudo apt-get install openssh-server 1ssh localhost
         </div>
       </a>
@@ -659,9 +670,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/04/04/ubuntu-%E9%85%8D%E7%BD%AECloudfoundry/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/04/04/ubuntu-%E9%85%8D%E7%BD%AECloudfoundry/" target="_self">
         <div>
-          
           没错，又到了每周一度痛苦的配环境环节，更痛苦的是配完的环境可能再也不会打开。   image-20220404235500586  官方文档 1 安装  添加仓库 12wget -q -O - https:&#x2F;&#x2F;packages.cloudfoundry.org&#x2F;debian&#x2F;cli.cloudfoundry.org.key | sudo apt-key add -echo &amp;qu
         </div>
       </a>
@@ -732,9 +743,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/04/01/ubuntu-%E9%85%8D%E7%BD%AEopenstack/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/04/01/ubuntu-%E9%85%8D%E7%BD%AEopenstack/" target="_self">
         <div>
-          
           实验题目 面向IaaS的OpenStack部署 实验目的 在Linux环境下，熟悉OpenStack环境。 具体包括：了解OpenStack编程环境的配置和部署，完成实验环境及实验工具的熟悉，撰写实验报告。 实验环境  硬件环境 Intel Core I5-8300H Nvidia Geforce gtx1060 软件环境 VMware Workstation 16 ubu
         </div>
       </a>
@@ -805,9 +816,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/03/28/%E5%9C%A8vscode%E4%B8%8A%E4%BD%BF%E7%94%A8clangd/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/03/28/%E5%9C%A8vscode%E4%B8%8A%E4%BD%BF%E7%94%A8clangd/" target="_self">
         <div>
-          
           首先我们先明白一个概念LSP，额，当然不是老色批🤣  LSP（Language Server Protocol）开源的语言服务器协定。由RedHat、Microsoft和 Codenvy 联合推出，可以让不同的程序编辑器与集成开发环境（IDE）方便嵌入各种程序语言，允许开发人员在最喜爱的工具中使用各种语言来撰写程序  而C++的LSP有  ms-vscode.cpptools clangd cc
         </div>
       </a>
@@ -876,9 +887,9 @@
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/2022/03/19/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%BD%9C%E4%B8%9A2/" target="_self">
+      
+      <a class="index-excerpt " href="/2022/03/19/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%BD%9C%E4%B8%9A2/" target="_self">
         <div>
-          
           1. 列举威胁作用者有哪些，并简要说明 威胁作用者是引发威胁的实体，因为与它能够实施攻击。云安全威胁可能来自内部也可以来自外部，可能来自于软件程序。相对于漏洞、威胁和风险以及安全策略和安全机制建立起来的保护措施而言，威胁作用者所承担的角色，如下图所示：   匿名攻击者 匿名攻击者是云中没有权限、不被信任的云服务用户，它通常是一个外部软件程序，通过公网发动网络攻击。当匿名攻击者对安全策略
         </div>
       </a>
@@ -988,14 +999,11 @@
   
   
   
-  
   <!-- 在线通讯Tidio -->
   
     <script src="//code.tidio.co/cek0qomnlvhhdar1huindmvyc6asqced.js"></script>
   
 </div>
-
-
 
   </footer>
 
@@ -1063,8 +1071,6 @@
       
     })(window, document);
   </script>
-
-
 
 
 
