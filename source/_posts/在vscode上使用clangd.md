@@ -1882,6 +1882,24 @@ UseTab: Never
 
   <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205081312305.png" alt="image-20220508131232171" style="zoom:67%;" />
 
+  将`msys2 shell`集成在 Windows Terminal中，命令行`C:\Users\FengisZZZ\ServerTools\msys\msys2_shell.cmd -msys -defterm -no-start`;集成在VScode中,
+  ```json
+  "msys2": {
+            "path": "C:\\Users\\FengisZZZ\\ServerTools\\msys\\usr\\bin\\bash.exe",
+            "args": [
+                "--login",
+                "-i"
+            ],
+            "env": {
+                "MSYSTEM": "MINGW64",
+                "CHERE_INVOKING": "1",
+                "MSYS2_PATH_TYPE": "inherit"
+            },
+            "color": "terminal.ansiYellow",
+            "icon": "terminal-bash"
+        },
+  ```
+
 使用msys2安装工具链的时候，`因为clang 和 mingw-w64是两套完全不同的工具链，分别在mingw64，clang64目录下，而且第三方包并不共享，因此推荐安装mingw-w64版的clang,llvm`
 
 例如使用tdmgcc64（一个mingw-w64的windows发行版） 编译的opencv在使用clang64文件夹下的clang++是无法通过编译的
