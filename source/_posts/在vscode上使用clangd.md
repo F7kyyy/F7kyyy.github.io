@@ -1882,7 +1882,10 @@ UseTab: Never
 
   <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205081312305.png" alt="image-20220508131232171" style="zoom:67%;" />
 
-  将`msys2 shell`集成在 Windows Terminal中，命令行`C:\Users\FengisZZZ\ServerTools\msys\msys2_shell.cmd -msys -defterm -no-start`;集成在VScode中,
+  将`msys2 shell`集成在 Windows Terminal中，命令行`C:\Users\FengisZZZ\ServerTools\msys\msys2_shell.cmd -msys -defterm -no-start`;
+  
+  集成在VScode中,
+  
   ```json
   "msys2": {
             "path": "C:\\Users\\FengisZZZ\\ServerTools\\msys\\usr\\bin\\bash.exe",
