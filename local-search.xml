@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>JavaSE中与C++语法的区别</title>
+    <link href="/2023/05/16/JavaSE%E4%B8%AD%E4%B8%8EC-%E8%AF%AD%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <url>/2023/05/16/JavaSE%E4%B8%AD%E4%B8%8EC-%E8%AF%AD%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    
+    <content type="html"><![CDATA[<h2 id="数据类型">1. 数据类型</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">boolean</span> a=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">bool</span> a=<span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure><h2 id="控制语句">2. 控制语句</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java">outer:<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">4</span>; ++i) &#123; <span class="hljs-comment">// 在循环语句前，添加 标签: 来进行标记</span><br>    inner:<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; j &lt; <span class="hljs-number">4</span>; ++j) &#123;<br>        <span class="hljs-keyword">if</span> (i == j)<br>            <span class="hljs-keyword">break</span> outer; <span class="hljs-comment">// break后紧跟要结束的循环标记，当i == j时终止外层循环</span><br>        System.out.println(i + <span class="hljs-string">&quot;, &quot;</span> + j);<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="声明对象">3. 声明对象</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Person p1=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Person</span>();<br>Person p2=p1;<br><span class="hljs-comment">// 允许，运算符&#x27;==&#x27;可以比较</span><br>System.out.println(p1==p2);<br></code></pre></td></tr></table></figure><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++">Person p1=<span class="hljs-built_in">Person</span>();<br>Person p2=p1;<br><span class="hljs-comment">// 不允许，运算符&#x27;==&#x27;可以比较</span><br>cout &lt;&lt; (p1 == p2) &lt;&lt; <span class="hljs-string">&quot;\n&quot;</span>;<br><br>Person *p3 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Person</span>();<br>Person *p4 = p3;<br><span class="hljs-comment">// 允许，比较</span><br>cout &lt;&lt; (p3 == p4) &lt;&lt; <span class="hljs-string">&quot;\n&quot;</span>;<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>Java</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Java</tag>
+      
+      <tag>编程语言</tag>
+      
+      <tag>工作</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>公民参与社区治理采访与调查</title>
     <link href="/2022/10/15/%E5%85%AC%E6%B0%91%E5%8F%82%E4%B8%8E%E7%A4%BE%E5%8C%BA%E6%B2%BB%E7%90%86%E9%87%87%E8%AE%BF%E4%B8%8E%E8%B0%83%E6%9F%A5/"/>
     <url>/2022/10/15/%E5%85%AC%E6%B0%91%E5%8F%82%E4%B8%8E%E7%A4%BE%E5%8C%BA%E6%B2%BB%E7%90%86%E9%87%87%E8%AE%BF%E4%B8%8E%E8%B0%83%E6%9F%A5/</url>
