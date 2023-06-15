@@ -8,9 +8,71 @@ categories: 环境配置
 math: false
 index_img: /img/article/wsl.png
 ---
-## 1. 更新系统提示
+## 1. 系统安装
 
-### 1.1 安装cuda前
+### 1.1 选择发行版
+
+展示选择的发行版wsl --shutdown
+
+```powershell
+wsl --list --online
+```
+
+安装
+
+建议安装Ubuntu,或者Arch 一个用的人多；一个软件新，社区活跃；Debian 日常使用软件包太老了
+
+```powershell
+wsl --install -d Ubuntu-22.04
+```
+
+### 1.2 修改安装位置
+
+- 首先关闭运行的linux发行版
+
+  ```powershell
+  wsl --shutdown
+  ```
+
+- 在D盘创建一个目录用来存放新的WSL，比如我创建了一个`D:\Environment\UbuntuWSL`，导出它的备份
+
+  ```powershell
+  wsl --export Ubuntu-22.04 D:\Environment\UbuntuWSL\Ubuntu.tar
+  ```
+
+  <img src="https://raw.githubusercontent.com/F7kyyy/picture/main/img/202305261819078.png" alt="image-20230526181905016" style="zoom:67%;" />
+
+- 注销原有的发行版
+
+  ```powershell
+  wsl --unregister Ubuntu-22.04
+  ```
+
+  正常卸载也是这么卸载，再注销之后直接在开始菜单搜索安装的发行版名字点击卸载就可以从磁盘中删除了
+
+- 备份文件回复到新的子系统中，可以重命名
+
+  `import 发行版名称 新的磁盘位置 导出压缩包位置` 
+
+  ```powershell
+  wsl --import Ubuntu D:\Environment\UbuntuWSL D:\Environment\UbuntuWSL\Ubuntu.tar
+  ```
+
+  <img src="https://raw.githubusercontent.com/F7kyyy/picture/main/img/202305261824929.png" alt="image-20230526182410865" style="zoom: 67%;" />
+
+- 恢复默认用户`f7kyyy`
+
+  ```powershell
+  Ubuntu2204 config --default-user f7kyyy
+  ```
+
+  这里应该是纯英文或者纯数字，如果名字叫做`Ubuntu-22.04`就改为 `Ubuntu2204`
+
+  
+
+## 2. 更新系统提示
+
+### 2.1 安装cuda前
 
 你会发现没有这个文件夹
 
@@ -27,7 +89,7 @@ index_img: /img/article/wsl.png
    sudo ln -sr /mnt/c/Windows/System32/lxss/lib/libcuda.so.1.1 /mnt/c/Windows/System32/lxss/lib/libcuda.so
    ```
 
-### 1.2 安装cuda后
+### 2.2 安装cuda后
 
 不同的系统安装位置不一样，一般来说会安装在`/usr/local/cuda/`文件夹下，但是我使用的是arch linux，使用pacman 直接安装会安装在`/opt/cuda`文件夹中
 
@@ -37,7 +99,9 @@ index_img: /img/article/wsl.png
 sudo ln -s /usr/lib/wsl/lib/libcuda.so.1 /opt/cuda/lib64/libcuda.so
 ```
 
-## 2. 系统代理
+## 3. 系统代理
+
+### 3.1  系统代理
 
 wsl1没有独立的IP,可以直接给`127.0.0.1:port`，进行代理
 
@@ -75,7 +139,7 @@ end
 
 ![image-20220508164357859](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205081643996.png)
 
-## 3. 为git设置代理
+### 3.2 为git设置代理
 
 写一个简单的python 脚本`setgitproxy.py`，为git设置代理
 
