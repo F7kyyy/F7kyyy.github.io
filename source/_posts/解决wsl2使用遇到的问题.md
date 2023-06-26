@@ -68,6 +68,10 @@ wsl --install -d Ubuntu-22.04
 
   这里应该是纯英文或者纯数字，如果名字叫做`Ubuntu-22.04`就改为 `Ubuntu2204`
 
+  **不知道为什么，我在使用Ubuntu的时候，powershell 提示找不到命令，始终未解决。**
+  
+  建议前往[网站](https://learn.microsoft.com/zh-cn/windows/wsl/install-manual)，手动下载发行版，然后将后缀改为`zip`,在想要安装的位置解压，然后双击`.exe`文件手动安装。
+  
   
 
 ## 2. 更新系统提示
@@ -205,3 +209,9 @@ if __name__ == "__main__":
 使用git 命令或者其他git GUI客户端前，执行`python setgitproxy.py`为git添加代理
 
 ![image-20220508164137335](https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205081641462.png)
+
+
+
+
+
+**最新更新，Clash Tun 模式使用全局代理解决一切问题**
