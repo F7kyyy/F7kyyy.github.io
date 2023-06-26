@@ -1,429 +1,305 @@
+
+
 <!DOCTYPE html>
-<html>
-  <!-- meta/link... -->
-  
+<html lang="zh-CN" data-default-color-scheme=auto>
 
 
 
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-
-
-  <title>heroku配置v2ray | F7kyyy的博客</title>
-
-  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
-  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
-  <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/broswer.jpg">
+  <link rel="icon" href="/img/broswer.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="F7kyyy">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="注意！本教程仅且只能用于研究与学习，只是做一个记录 注意事项 Heroku免费套餐每月只有550小时的免费时间，限量2TB，适合在非常时期当做备胎使用 Heroku对流量检测有些严格，请避免大流量消耗 引用项目原作者的话：Heroku提供给我们免费的服务，我们不应该滥用它 绝大部分的Heroku服务器节点都被twitter屏蔽了，可能是我新建的暂时还没有 Heroku免费容器未使用超过一段时间（三">
+<meta property="og:type" content="article">
+<meta property="og:title" content="heroku配置v2ray">
+<meta property="og:url" content="http://f7kyyy.github.io/2022/04/19/heroku%E9%85%8D%E7%BD%AEv2ray/index.html">
+<meta property="og:site_name" content="F7kyyy的博客">
+<meta property="og:description" content="注意！本教程仅且只能用于研究与学习，只是做一个记录 注意事项 Heroku免费套餐每月只有550小时的免费时间，限量2TB，适合在非常时期当做备胎使用 Heroku对流量检测有些严格，请避免大流量消耗 引用项目原作者的话：Heroku提供给我们免费的服务，我们不应该滥用它 绝大部分的Heroku服务器节点都被twitter屏蔽了，可能是我新建的暂时还没有 Heroku免费容器未使用超过一段时间（三">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://f7kyyy.github.io/img/article/heroku.png">
+<meta property="article:published_time" content="2022-04-19T10:49:38.000Z">
+<meta property="article:modified_time" content="2022-05-11T02:54:14.641Z">
+<meta property="article:author" content="F7kyyy">
+<meta property="article:tag" content="环境配置">
+<meta property="article:tag" content="科学上网">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://f7kyyy.github.io/img/article/heroku.png">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-<link rel="stylesheet" href="/css/animate.min.css">
+  <title>heroku配置v2ray - F7kyyy的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
   
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"f7kyyy.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
 
   
-  
-    <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" rel="stylesheet">
-  
-  
-    
-<link rel="stylesheet" href="/js/shareJs/share.min.css">
-
-  
-  <style>
-        @media (max-width: 992px) {
-            #waifu {
-                display: none;
-            }
-        }
-    </style>
-    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
-
-    
-    
-    <!-- 依赖于jquery和vue -->
-    
-        <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
-    
-
-    
-        <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
-    
-
-    <!-- import link -->
-    
-        
-            
-        
-            
-        
-    
-    <!-- import script -->
-    
-        
-            
-        
-            
-        
-    
-
 <meta name="generator" content="Hexo 6.3.0"></head>
 
+
+<body>
   
-  <!-- 预加载动画 -->
-  <!-- 页面预加载动画 -->
 
-  
-    <div class="preloader_2" id="loader">
-  <div class="loader"></div>
-</div>
-
-  
-<script>
-  var endLoading = function () {
-    document.body.style.overflow = 'auto';
-    document.getElementById('loader').classList.add("loading");
-  }
-  window.addEventListener('DOMContentLoaded',endLoading);
-</script>
-
-  <body>
-    <!-- 判断是否为暗黑风格 -->
-    <!-- 判断是否为黑夜模式 -->
-<script>
-  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
-
-  if (isDark) {
-    $(document.body).addClass('darkModel');
-  }
-</script>
-
-    <!-- 需要在上面加载的js -->
-    <script>
-  function loadScript(src, cb) {
-    return new Promise(resolve => {
-      setTimeout(function () {
-        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
-        var script = document.createElement("script");
-        script.setAttribute("type", "text/javascript");
-        if (cb) {
-          if (JSON.stringify(cb)) {
-            for (let p in cb) {
-              if (p == "onload") {
-                script[p] = () => {
-                  cb[p]()
-                  resolve()
-                }
-              } else {
-                script[p] = cb[p]
-                script.onload = resolve
-              }
-            }
-          } else {
-            script.onload = () => {
-              cb()
-              resolve()
-            };
-          }
-        } else {
-          script.onload = resolve
-        }
-        script.setAttribute("src", src);
-        HEAD.appendChild(script);
-      });
-    });
-  }
-
-  //https://github.com/filamentgroup/loadCSS
-  var loadCSS = function (src) {
-    return new Promise(resolve => {
-      setTimeout(function () {
-        var link = document.createElement('link');
-        link.rel = "stylesheet";
-        link.href = src;
-        link.onload = resolve;
-        document.getElementsByTagName("head")[0].appendChild(link);
-      });
-    });
-  };
-
-</script> 
-
-<!-- 轮播图所需要的js -->
-<script src="/js/swiper/swiper.min.js"></script>
-<script src="/js/swiper/vue-awesome-swiper.js"></script>
-<script src="/js/swiper/swiper.animate1.0.3.min.js"></script>
-
-<script type="text/javascript">
-  Vue.use(window.VueAwesomeSwiper)
-</script>
-
-
-  <script src="/js/vue-typed-js/index.js"></script>
-
-
-<!-- 首页的公告滚动插件的js需要重新加载 -->
-<script src="/js/vue-seamless-scroll/index.js"></script>
-
-<!-- 打字机效果js -->
-<script src="https://unpkg.com/typed.js@2.0.11"></script>
-
-
-    <div id="safearea">
-      <main class="main" id="pjax-container">
-        <!-- 头部导航 -->
-        
-<header class="header  " 
-  id="navHeader"
-  style="position: fixed;
-  left: 0; top: 0; z-index: 10;width: 100%;"
->
-  <div class="header-content">
-    <div class="bars">
-      <div id="appDrawer" class="sidebar-image">
-  <div class="drawer-box-icon">
-    <i class="fas fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
-  </div>
-  
-  <transition name="fade">
-    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
-    </div>
-  </transition>
-  <div class="drawer-box" :class="{'active': visible}">
-    <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
-      <h3 class="drawer-box-head_title">F7kyyy的博客</h3>
-      <h5 class="drawer-box-head_desc"></h5>
-    </div>
+  <header>
     
-    <div class="drawer-box-content">
-      <ul class="drawer-box-content_menu">
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>F7kyyy&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
         
         
-          <li class="drawer-box-content_item">
-            <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo">
-              <i class="fas fa-github" aria-hidden="true"></i>
-              <span>Github</span>
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
             </a>
           </li>
         
       </ul>
     </div>
   </div>
-</div>
+</nav>
 
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appDrawer',
-    data: {
-      visible: false,
-      top: 0,
-      openArr: [],
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      isOpen(index) {
-        if (this.openArr.includes(index)) {
-          return true;
-        } else {
-          return false;
-        }
-      },
-      openOrCloseMenu(curIndex) {
-        const index = this.openArr.indexOf(curIndex);
-        if (index !== -1) {
-          this.openArr.splice(index, 1);
-        } else {
-          this.openArr.push(curIndex);
-        }
-      },
-      showDialogDrawer() {
-        this.visible = true;
-        // 防止页面滚动，只能让弹框滚动
-        this.top = $(document).scrollTop()
-        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
-      },
-      cancelDialogDrawer() {
-        this.visible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      }
-    },
-    created() {}
-  })
-</script>
+  
 
-    </div>
-    <div class="blog-title" id="author-avatar">
-      
-        <div class="avatar">
-          <img src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="heroku配置v2ray"></span>
+          
         </div>
-      
-      <a href="/" class="logo">F7kyyy的博客</a>
-    </div>
-    <nav class="navbar">
-      <ul class="menu">
+
         
-      </ul>
-      
-      
-        <div id="appSearch">
-  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
-  <transition name="fade">
-    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
-      <div class="message-box animated bounceInDown">
-        <h2>
-          <span>
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="title">本地搜索</span>
-          </span>
-          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
-        </h2>
-        <form class="site-search-form">
-          <input type="text"
-            placeholder="请输入关键字"
-            id="local-search-input" 
-            @click="getSearchFile()"
-            class="st-search-input"
-            v-model="searchInput"
-          />
-        </form>
-        <div class="result-wrapper">
-          <div id="local-search-result" class="local-search-result-cls"></div>
-        </div>
-      </div>
-    </div>
-  </transition>
-</div>
-<script src="/js/local_search.js"></script>
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appSearch',
-    data: {
-      dialogVisible: false,
-      searchInput: '',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-      window.addEventListener('pjax:complete', () => {
-        this.cancelDialogVisible();
-      })
-    },
-    methods: {
-      showDialog() {
-        this.dialogVisible = true;
-        // 防止页面滚动，只能让弹框滚动
-        this.top = $(document).scrollTop()
-        body.style.cssText = 'overflow: hidden;';
-      },
-      getSearchFile() {
-        if (!this.searchInput) {
-          getSearchFile("/search.xml");
-        }
-      },
-      cancelDialogVisible() {
-        this.dialogVisible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-    },
-    created() {}
-  })
-</script>
-<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
-<!-- 下面是搜索基本写法 -->
-<!-- <script type="text/javascript" id="local.search.active">
-  var inputArea = document.querySelector("#local-search-input");
-  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
-  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
-</script> -->
-
-      
-
-    </nav>
-  </div>
-  
-    <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-  
-  
-</header>
-        <!-- 内容区域 -->
-        
- <!-- prismjs 代码高亮 -->
- 
-
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
-
-
-
-
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
-  
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        heroku配置v2ray
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-19 18:49" pubdate>
+          2022年4月19日 晚上
+        </time>
       </span>
-    </div>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 分钟
+        
+      </span>
+    
+
     
     
       
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2022-04-19 |
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
         </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> 分类：
-          
-            <a href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="post-detail-header_category">
-              环境配置
-            </a>
-          
-        </span>
-      
-
+        
       
     
   </div>
-  
-  
-    <script src="/js/bubble/bubble.js"></script>
-  
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
 </div>
 
+</div>
 
+  </header>
 
+  <main>
+    
+      
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
 
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <p><strong>注意！本教程仅且只能用于研究与学习，只是做一个记录</strong></p>
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">heroku配置v2ray</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2022年5月11日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p><strong>注意！本教程仅且只能用于研究与学习，只是做一个记录</strong></p>
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
 <li><em>Heroku免费套餐每月只有<strong>550小时</strong>的免费时间，限量<strong>2TB</strong>，适合在非常时期当做备胎使用</em></li>
 <li><em>Heroku对流量检测有些严格，请避免大流量消耗</em></li>
@@ -445,71 +321,71 @@
 </ol>
 <h2 id="一、服务端部署"><a href="#一、服务端部署" class="headerlink" title="一、服务端部署"></a>一、服务端部署</h2><h3 id="1-1-注册Heroku账户"><a href="#1-1-注册Heroku账户" class="headerlink" title="1.1 注册Heroku账户"></a>1.1 注册Heroku账户</h3><p>很简单，根据官网的提示操作就行:<a target="_blank" rel="noopener" href="https://signup.heroku.com/">点击注册</a></p>
 <p>注意：请使用外网IP注册，且请准备好翻译工具，并在收到邮件后激活账户；注册时不能使用QQ邮箱</p>
-<h3 id="1-2-在Heroku部署v2ray"><a href="#1-2-在Heroku部署v2ray" class="headerlink" title="1.2 在Heroku部署v2ray"></a>1.2 在Heroku部署v2ray</h3><p>点击下方按钮部署应用<a target="_blank" rel="noopener" href="https://dashboard.heroku.com/new?template=https://github.com/F7kyyy/heroku-v2ray"><img src="https://www.herokucdn.com/deploy/button.png" class="lazyload placeholder" data-srcset="https://www.herokucdn.com/deploy/button.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Deploy"></a></p>
+<h3 id="1-2-在Heroku部署v2ray"><a href="#1-2-在Heroku部署v2ray" class="headerlink" title="1.2 在Heroku部署v2ray"></a>1.2 在Heroku部署v2ray</h3><p>点击下方按钮部署应用<a target="_blank" rel="noopener" href="https://dashboard.heroku.com/new?template=https://github.com/F7kyyy/heroku-v2ray"><img src="https://www.herokucdn.com/deploy/button.png" srcset="/img/loading.gif" lazyload alt="Deploy"></a></p>
 <p>ps: （2022.01.16）最近大佬们的仓库都被heroku给ban了，所以想要使用可以自建一个仓库，<del>然后import大佬Fbclswl0827的heroku-v2ray项目自行部署</del></p>
 <p>ps: 上面部署方式是我自己的仓库</p>
 <h4 id="Extra-创建github项目仓库"><a href="#Extra-创建github项目仓库" class="headerlink" title="Extra 创建github项目仓库"></a>Extra 创建github项目仓库</h4><p>1、打开 <a target="_blank" rel="noopener" href="https://github.com/">github</a> 登录你自己的账号</p>
 <p>2、点击左边的 <code>New</code> 创建一个仓库</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901306.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901306.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901306.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
 
 <p>3、在打开的页面中填写仓库名称，然后点击 <code>Create repository</code> 创建仓库</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901796.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901796.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901796.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
 
 <p>4、在新打开的页面下翻找到 <code>import</code></p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191905575.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191905575.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191905575.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
 
 <p>5、在 <code>Your old repository’s clone URL</code> 中填入 <code>https://github.com/bclswl0827/v2ray-heroku.git</code>, 随后点击 <code>Begin import</code> 导入</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901228.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901228.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901228.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
 
 <p><strong>这位大佬的github仓库已经被disable了，可以选择其他人的，搜索一下应该很容易找到</strong></p>
 <p>6、导入完成后，进入仓库，修改 <code>README.md</code> ，修改完成后点击下方 <code>Commit changes</code> 提交</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901430.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901430.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901430.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
 
 <p>7、最后进入仓库点击 <code>Deploy to Heroku</code> 图标开始部署</p>
 <p>App name随便填写，可用就行；Choose a region就是你的服务器地区；UUID可自行修改（建议修改，使用默认UUID会使节点暴露在危险下）；然后点击<code>Deploy app</code>系统会自动部署</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901573.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901573.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="1.png" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901573.png" srcset="/img/loading.gif" lazyload alt="1.png" style="zoom:67%;" />
 
 <p>稍微等待一会儿，几秒的样子，直到全部打勾变绿</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902144.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902144.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="2.png" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902144.png" srcset="/img/loading.gif" lazyload alt="2.png" style="zoom:67%;" />
 
 <h2 id="二、客户端使用"><a href="#二、客户端使用" class="headerlink" title="二、客户端使用"></a>二、客户端使用</h2><h3 id="2-1-相关配置信息"><a href="#2-1-相关配置信息" class="headerlink" title="2.1 相关配置信息"></a>2.1 相关配置信息</h3><p>点击Manage App进入你的项目；或者在<a target="_blank" rel="noopener" href="https://dashboard.heroku.com/apps%E4%B8%AD%E6%89%BE%E7%9A%84%E5%88%B0%E4%BD%A0%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%B9%B6%E8%BF%9B%E5%85%A5">https://dashboard.heroku.com/apps中找的到你的项目并进入</a></p>
 <p>注意：你会看到一个项目，点击上方的<code>Settings</code>进入，查看你的V2Ray具体配置，如图</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902864.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902864.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902864.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
 
 <p>点击<code>Reveal Config Vars</code>显示V2RrayN相关配置信息，如图</p>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902242.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902242.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img" style="zoom:67%;" /><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191906266.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191906266.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img" style="zoom:67%;" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902242.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191906266.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></p>
 <h3 id="2-2-配置v2rayN"><a href="#2-2-配置v2rayN" class="headerlink" title="2.2 配置v2rayN"></a>2.2 配置v2rayN</h3><p>开始配置V2Ray，如果你记好了以上两个（那串字母UUID和二级域名xxxx.herokuapp.com）</p>
 <p>ps: 二级域名不用加<code>https://</code>，直接填域名就好</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902011.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902011.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902011.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
 
 <p>最基础的配置完成了，可以发现节点的速度慢的令人发指，接下来我们利用cloudflare + 自选ip进行加速</p>
 <h2 id="三、Cloudflare-Workers反代加速"><a href="#三、Cloudflare-Workers反代加速" class="headerlink" title="三、Cloudflare Workers反代加速"></a>三、Cloudflare Workers反代加速</h2><p>对速度有要求的人群（强迫症患者）可以看一下；主要是使用Cloudflare Workers加速，虽然免费套餐有调用限制，但是一般个人使用不可能用完</p>
 <h3 id="3-1-创建Cloudflare-Workers"><a href="#3-1-创建Cloudflare-Workers" class="headerlink" title="3.1 创建Cloudflare Workers"></a>3.1 创建Cloudflare Workers</h3><p>在<a target="_blank" rel="noopener" href="https://dash.cloudflare.com/">Cloudflare Workers</a>中创建一个Workers</p>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902438.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902438.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"><br><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902747.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902747.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
-<p>点击<code>快速编辑</code>进入项目编辑<br><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903865.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903865.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"><br>将原有的示例代码全部删除，复制如下代码，并将第四行的xxx.herokuapp.com 替换为你的V2Ray的地址 ps: 不需要<code>https://</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902438.png" srcset="/img/loading.gif" lazyload alt="img"><br><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902747.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>点击<code>快速编辑</code>进入项目编辑<br><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903865.png" srcset="/img/loading.gif" lazyload alt="img"><br>将原有的示例代码全部删除，复制如下代码，并将第四行的xxx.herokuapp.com 替换为你的V2Ray的地址 ps: 不需要<code>https://</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-variable constant_">VBSCRIPT</span><br><span class="hljs-title function_">addEventListener</span>(<br>	<span class="hljs-string">&quot;fetch&quot;</span>,<span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> &#123;<br>		<span class="hljs-keyword">let</span> url=<span class="hljs-keyword">new</span> <span class="hljs-title function_">URL</span>(event.<span class="hljs-property">request</span>.<span class="hljs-property">url</span>);<br>		url.<span class="hljs-property">hostname</span>=<span class="hljs-string">&quot;xxxx.herokuapp.com&quot;</span>;<br>		<span class="hljs-keyword">let</span> request=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(url,event.<span class="hljs-property">request</span>);<br>		event. <span class="hljs-title function_">respondWith</span>(<br>			<span class="hljs-title function_">fetch</span>(request)<br>		)<br>	&#125;<br>)<br></code></pre></td></tr></table></figure>
 
 <p>点击右侧的<code>发送</code>按钮，看最后一行是否出现了<code>Bad Request</code>，出现则代表成功</p>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903829.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903829.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903829.png" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>成功后，点击<code>保存并部署</code>，并记下你的Workers二级域名</p>
-<h3 id="3-2-修改V2rayN中的配置"><a href="#3-2-修改V2rayN中的配置" class="headerlink" title="3.2 修改V2rayN中的配置"></a>3.2 修改V2rayN中的配置</h3><p>把V2RayN中原来的域名改为现在的Workers域名就行了，其实利用Cloudflare Workers进行反代以后速度已经可以了，但是优选ip以后速度会更加快<br><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903475.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903475.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img" style="zoom:67%;" />](<a target="_blank" rel="noopener" href="https://gitee.co/">https://gitee.co</a></p>
+<h3 id="3-2-修改V2rayN中的配置"><a href="#3-2-修改V2rayN中的配置" class="headerlink" title="3.2 修改V2rayN中的配置"></a>3.2 修改V2rayN中的配置</h3><p>把V2RayN中原来的域名改为现在的Workers域名就行了，其实利用Cloudflare Workers进行反代以后速度已经可以了，但是优选ip以后速度会更加快<br><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903475.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />](<a target="_blank" rel="noopener" href="https://gitee.co/">https://gitee.co</a></p>
 <p><strong>对速度有更高追求以及不怕折腾的人可以接着往下看，我个人测试，这个没什么太大的效果</strong></p>
 <h2 id="四、Cloudflare自选IP"><a href="#四、Cloudflare自选IP" class="headerlink" title="四、Cloudflare自选IP"></a>四、Cloudflare自选IP</h2><p>点击下载<a target="_blank" rel="noopener" href="https://github.com/badafans/better-cloudflare-ip/releases/lastest/download/batch.zip">IP自选程序</a>，解压，在Windows系统下运行</p>
 <p>其他的<code>使用说明.txt</code>文件中都有说，在此就不过多赘述</p>
 <p>最后，配置V2Ray：</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903472.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903472.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903472.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
 
 <h3 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h3><p>由于各地的网络情况每天都不同，所以每天（甚至是每半天）的最优节点都不尽相同；但对于一个应急用的已经足够了</p>
 <h2 id="五、移动端使用"><a href="#五、移动端使用" class="headerlink" title="五、移动端使用"></a>五、移动端使用</h2><p>iOS端需要外区apple ID 平且基本移动端v2ray工具都需要付费下载，而这也需要信用卡较为麻烦，淘宝代充很多是盗刷信用卡，慎重考虑</p>
 <h3 id="5-1-下载apk"><a href="#5-1-下载apk" class="headerlink" title="5.1 下载apk"></a>5.1 下载apk</h3><p>可以选择google play 直接下载v2rayNG,可能存在困难，所以推荐<a target="_blank" rel="noopener" href="https://github.com/2dust/v2rayNG">github下载apk</a> 直接选择release版本</p>
 <p>如果想使用最新版，也可以自己使用Android Studio 编译安装</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903746.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903746.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220322195545604" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903746.png" srcset="/img/loading.gif" lazyload alt="image-20220322195545604" style="zoom:67%;" />
 
 <h3 id="5-2-复制订阅"><a href="#5-2-复制订阅" class="headerlink" title="5.2 复制订阅"></a>5.2 复制订阅</h3><p>v2rayN 右键点击服务器-&gt;导出url到剪贴板-&gt;发送到手机</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203221958180.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203221958180.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220322195844002" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203221958180.png" srcset="/img/loading.gif" lazyload alt="image-20220322195844002" style="zoom:67%;" />
 
 <h3 id="5-3-移动端使用"><a href="#5-3-移动端使用" class="headerlink" title="5.3 移动端使用"></a>5.3 移动端使用</h3><p>点击右上角加号，从剪贴板导入，即可使用</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203222004855.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203222004855.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220322200417813" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203222004855.png" srcset="/img/loading.gif" lazyload alt="image-20220322200417813" style="zoom:67%;" />
 
 <h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p>实际使用效果图：</p>
 <ul>
@@ -517,7 +393,7 @@
 <li>2160P看情况</li>
 <li>1440P，1080P没什么问题，Youtube码率比B站高得多 (当然你想看的视频可能还没有720P<span class="github-emoji" alias="smile" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8">&amp;#x1f604;</span>)</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203211707537.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203211707537.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220321170725117"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203211707537.png" srcset="/img/loading.gif" lazyload alt="image-20220321170725117"></p>
 <p>比某些大部分的机场免费套餐都好，甚至直逼少数机场的初级付费套餐；和我自己买的流量包10块30GB（他涨价了，之前50GB）差不太多，至少上个github，stackoverflow没什么太大问题。<strong>在这个越来越严格的大环境下，在你的机场时不时抽风的时候，作为备选还是不错的。</strong></p>
 <h2 id="六、2022-x2F-5-x2F-9-cloudflare-worker-dev被封"><a href="#六、2022-x2F-5-x2F-9-cloudflare-worker-dev被封" class="headerlink" title="六、2022&#x2F;5&#x2F;9 cloudflare worker.dev被封"></a>六、2022&#x2F;5&#x2F;9 cloudflare worker.dev被封</h2><p>[问题链接<span class="github-emoji" alias="cry" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8">&amp;#x1f622;</span>][<a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/issues/205]">https://github.com/XIU2/CloudflareSpeedTest/issues/205]</a></p>
 <p>需要绑定一个自己的域名，才可以继续使用</p>
@@ -537,25 +413,25 @@
 </ol>
 <h3 id="6-2-在cloudflare-上绑定刚才申请的域名"><a href="#6-2-在cloudflare-上绑定刚才申请的域名" class="headerlink" title="6.2 在cloudflare 上绑定刚才申请的域名"></a>6.2 在cloudflare 上绑定刚才申请的域名</h3><ul>
 <li><p>点击 网站→添加站点</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111041954.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111041954.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220511104027760" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111041954.png" srcset="/img/loading.gif" lazyload alt="image-20220511104027760" style="zoom:67%;" />
 </li>
 <li><p>填入网址</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111041615.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111041615.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220511104130570" style="zoom:80%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111041615.png" srcset="/img/loading.gif" lazyload alt="image-20220511104130570" style="zoom:80%;" />
 </li>
 <li><p>选择 free计划 创建</p>
 </li>
 <li><p>会先扫描以前的 dns, 扫描完成后。手动添加 记录。</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111042042.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111042042.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220511104205909" style="zoom: 50%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111042042.png" srcset="/img/loading.gif" lazyload alt="image-20220511104205909" style="zoom: 50%;" />
 </li>
 <li><p>填写 名称 和 ip地址随便写 点击保存 这里地址写成了422，是错误的。最大不超过255</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111042849.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111042849.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220511104237731" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111042849.png" srcset="/img/loading.gif" lazyload alt="image-20220511104237731" style="zoom:67%;" />
 </li>
 <li><p>点击 继续</p>
 </li>
 <li><p>提示：更改域名的 服务器</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111044379.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111044379.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220511104400265" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111044379.png" srcset="/img/loading.gif" lazyload alt="image-20220511104400265" style="zoom:50%;" />
 
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111043039.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111043039.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220511104338930" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111043039.png" srcset="/img/loading.gif" lazyload alt="image-20220511104338930" style="zoom:50%;" />
 </li>
 <li><p>然后打开 域名所在的管理网站 这里是 <a target="_blank" rel="noopener" href="https://www.freenom.com/">https://www.freenom.com/</a> 添加这两条记录</p>
 <p>具体操作见下面6.3</p>
@@ -563,31 +439,31 @@
 </ul>
 <h3 id="6-3-在freenom-更换dns-服务器"><a href="#6-3-在freenom-更换dns-服务器" class="headerlink" title="6.3 在freenom 更换dns 服务器"></a>6.3 在freenom 更换dns 服务器</h3><ul>
 <li><p>选择 我的站点</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111046635.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111046635.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220511104649550" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111046635.png" srcset="/img/loading.gif" lazyload alt="image-20220511104649550" style="zoom:50%;" />
 </li>
 <li><p>点击 管理</p>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111047193.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111047193.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220511104724133"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111047193.png" srcset="/img/loading.gif" lazyload alt="image-20220511104724133"></p>
 </li>
 <li><p>点击 name server</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111048537.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111048537.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220511104828464" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111048537.png" srcset="/img/loading.gif" lazyload alt="image-20220511104828464" style="zoom:50%;" />
 
 
 </li>
 <li><p>把上面的复制的dns服务器 添加到 这里</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111048755.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111048755.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220511104850657" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111048755.png" srcset="/img/loading.gif" lazyload alt="image-20220511104850657" style="zoom:50%;" />
 </li>
 <li><p>然后点击  下面的按钮 change name 完成。</p>
 </li>
 </ul>
 <h3 id="6-4-在cloudflare-添加-worker路由并绑定"><a href="#6-4-在cloudflare-添加-worker路由并绑定" class="headerlink" title="6.4 在cloudflare 添加 worker路由并绑定"></a>6.4 在cloudflare 添加 worker路由并绑定</h3><ul>
 <li><p>查看是否有效，点击域名</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111050724.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111050724.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220511105018690" style="zoom:67%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111050724.png" srcset="/img/loading.gif" lazyload alt="image-20220511105018690" style="zoom:67%;" />
 </li>
 <li><p>先点击主页的这个域名，这个域名的下添加 worker 路由</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111051692.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111051692.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220511105129561" style="zoom: 33%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111051692.png" srcset="/img/loading.gif" lazyload alt="image-20220511105129561" style="zoom: 33%;" />
 </li>
 <li><p>设置路由 ，选择自己的worker 绑定</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111052241.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111052241.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20220511105208172" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111052241.png" srcset="/img/loading.gif" lazyload alt="image-20220511105208172" style="zoom:50%;" />
 </li>
 <li><p>v2ray上替换</p>
 <p>将原有地址，替换为设置的路由(不加 &#x2F; )</p>
@@ -595,1540 +471,336 @@
 </ul>
 <p><strong>其实直接是用heroku速度上个github也够了<span class="github-emoji" alias="laughing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8">&amp;#x1f606;</span></strong></p>
 
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="">
-              环境配置
-            </a>
-          
-            <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" class="">
-              科学上网
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>F7kyyy</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="//2022/04/19/heroku配置v2ray/" target="_blank" title="heroku配置v2ray">http://f7kyyy.github.io//2022/04/19/heroku配置v2ray/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
-
-
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/2022/05/08/%E8%A7%A3%E5%86%B3wsl2%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">解决wsl2使用遇到的问题</div>
-      </div>
-      
-      <!-- <div class="content">
-        1. 系统安装
-1.1 选择发行版
-展示选择的发行版wsl --shutdown
-1wsl --list --on
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
-    </div>
-    <a href="/2022/04/18/%E9%85%8D%E7%BD%AEdocker/" class="post-nav-link">
-      <div class="title">
-        下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">配置docker</div>
-      </div>
-      <!-- <div class="content">
-        1 安装
-使用脚本安装
-
-1curl -sSL https://get.daocloud.io/docker | sh
-
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-      <div id="appDonate" class="post-donate">
-  <div id="donate_board" class="donate_bar center" ref="donate">
-    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
-  </div>
-  <transition name="fade">
-    <div 
-      class="donate-box-mask"
-      v-cloak 
-      v-show="visible"
-      @click="cancelDialogDrawer()"
-    >
-    </div>
-  </transition>
-  <transition name="bounce">
-    <div class="donate-box" v-cloak v-show="visible">
-      <div class="donate-box_close">
-        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
-      </div>
-      <div class="donate-box_title">
-        <h4>
-          你的赏识是我前进的动力
-        </h4>
-      </div>
-      <div class="donate-box_tab">
-        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
-          支付宝
-        </div>
-        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
-          微信
-        </div>
-      </div>
-      <div class="donate-box_img">
-        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
-          <img src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
-        </div> 
-        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
-          <img src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
-        </div>
-      </div>
-    </div>
-  </transition>
-</div>
-
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appDonate',
-    data: {
-      visible: false,
-      tabActive: 'Alipay',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      showDialogDrawer() {
-        this.visible = true;
-        // 防止页面滚动，只能让弹框滚动
-        // function getScroll() {
-        //   return {
-        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
-        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-        //   };
-        // }
-        this.top = $(document).scrollTop() // or getScroll().top
-        // console.log('aa', $('.main-content'));
-        body.style.cssText = 'overflow: hidden;';
-      },
-      cancelDialogDrawer() {
-        this.visible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-      changeTabActive(name) {
-        this.tabActive = name;
-      }
-    },
-    created() {}
-  })
-</script>
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
-  }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-    <!-- 评论 -->
-
-  <div id="myComment">
-    
-      <div id="gitment-container"></div>
-
-    
-  </div>
-
-<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
-
-
-  </div>
-
-  <!-- 目录 -->
-  <aside id='l_side'>
-  
-    
-      <section class="widget side_blogger">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>青墨书晚风</h2>
-        
-        
-          <p>我是副标题</p>
-
-        
-        
-          <p><span id="jinrishici-sentence">F7kyyy的博客</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/yuang01/hexo-theme-bamboo"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=你的qq号码"
-              class="social fab fa-qq flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-    
-  
-  
-  
-
-  <div class="layout_sticky">    
-    
-      
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%85%E8%A6%81%E7%9A%84%E5%87%86%E5%A4%87"><span class="toc-text">必要的准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%83%A8%E7%BD%B2"><span class="toc-text">一、服务端部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%B3%A8%E5%86%8CHeroku%E8%B4%A6%E6%88%B7"><span class="toc-text">1.1 注册Heroku账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%9C%A8Heroku%E9%83%A8%E7%BD%B2v2ray"><span class="toc-text">1.2 在Heroku部署v2ray</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Extra-%E5%88%9B%E5%BB%BAgithub%E9%A1%B9%E7%9B%AE%E4%BB%93%E5%BA%93"><span class="toc-text">Extra 创建github项目仓库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8"><span class="toc-text">二、客户端使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-text">2.1 相关配置信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%85%8D%E7%BD%AEv2rayN"><span class="toc-text">2.2 配置v2rayN</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81Cloudflare-Workers%E5%8F%8D%E4%BB%A3%E5%8A%A0%E9%80%9F"><span class="toc-text">三、Cloudflare Workers反代加速</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%88%9B%E5%BB%BACloudflare-Workers"><span class="toc-text">3.1 创建Cloudflare Workers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BF%AE%E6%94%B9V2rayN%E4%B8%AD%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">3.2 修改V2rayN中的配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Cloudflare%E8%87%AA%E9%80%89IP"><span class="toc-text">四、Cloudflare自选IP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9-1"><span class="toc-text">注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%A7%BB%E5%8A%A8%E7%AB%AF%E4%BD%BF%E7%94%A8"><span class="toc-text">五、移动端使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%B8%8B%E8%BD%BDapk"><span class="toc-text">5.1 下载apk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%A4%8D%E5%88%B6%E8%AE%A2%E9%98%85"><span class="toc-text">5.2 复制订阅</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E4%BD%BF%E7%94%A8"><span class="toc-text">5.3 移动端使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%9B%BE"><span class="toc-text">效果图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%812022-x2F-5-x2F-9-cloudflare-worker-dev%E8%A2%AB%E5%B0%81"><span class="toc-text">六、2022&#x2F;5&#x2F;9 cloudflare worker.dev被封</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%85%8D%E8%B4%B9%E5%9F%9F%E5%90%8D%E7%94%B3%E8%AF%B7"><span class="toc-text">6.1 免费域名申请</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E5%9C%A8cloudflare-%E4%B8%8A%E7%BB%91%E5%AE%9A%E5%88%9A%E6%89%8D%E7%94%B3%E8%AF%B7%E7%9A%84%E5%9F%9F%E5%90%8D"><span class="toc-text">6.2 在cloudflare 上绑定刚才申请的域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E5%9C%A8freenom-%E6%9B%B4%E6%8D%A2dns-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">6.3 在freenom 更换dns 服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E5%9C%A8cloudflare-%E6%B7%BB%E5%8A%A0-worker%E8%B7%AF%E7%94%B1%E5%B9%B6%E7%BB%91%E5%AE%9A"><span class="toc-text">6.4 在cloudflare 添加 worker路由并绑定</span></a></li></ol></li></ol> -->
-        <div class="toc"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
-</div>
-
-      
-  <section class="widget side_recent_post">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      
-      <!-- hash算法 -->
-      
-      <div class="aside-list">
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2023/05/16/JavaSE%E4%B8%AD%E4%B8%8EC-%E8%AF%AD%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-16</span>
                 
               </div>
-              <a class="post-title" href="/2023/05/16/JavaSE%E4%B8%AD%E4%B8%8EC-%E8%AF%AD%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB/">JavaSE中与C++语法的区别</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
             
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2022/10/15/%E5%85%AC%E6%B0%91%E5%8F%82%E4%B8%8E%E7%A4%BE%E5%8C%BA%E6%B2%BB%E7%90%86%E9%87%87%E8%AE%BF%E4%B8%8E%E8%B0%83%E6%9F%A5/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">10-15</span>
-                
-              </div>
-              <a class="post-title" href="/2022/10/15/%E5%85%AC%E6%B0%91%E5%8F%82%E4%B8%8E%E7%A4%BE%E5%8C%BA%E6%B2%BB%E7%90%86%E9%87%87%E8%AE%BF%E4%B8%8E%E8%B0%83%E6%9F%A5/">公民参与社区治理采访与调查</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2022/06/27/vscode%20%E9%85%8D%E7%BD%AEmsvc%E7%BC%96%E8%AF%91%E5%99%A8-%E4%BD%BF%E7%94%A8vcpkg%E8%BF%9B%E8%A1%8CC++%E5%8C%85%E7%AE%A1%E7%90%86/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-27</span>
-                
-              </div>
-              <a class="post-title" href="/2022/06/27/vscode%20%E9%85%8D%E7%BD%AEmsvc%E7%BC%96%E8%AF%91%E5%99%A8-%E4%BD%BF%E7%94%A8vcpkg%E8%BF%9B%E8%A1%8CC++%E5%8C%85%E7%AE%A1%E7%90%86/">vscode 配置msvc编译器 使用vcpkg进行C++包管理</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2022/05/08/%E8%A7%A3%E5%86%B3wsl2%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-08</span>
-                
-              </div>
-              <a class="post-title" href="/2022/05/08/%E8%A7%A3%E5%86%B3wsl2%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">解决wsl2使用遇到的问题</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2022/04/19/heroku%E9%85%8D%E7%BD%AEv2ray/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">04-19</span>
-                
-              </div>
-              <a class="post-title" href="/2022/04/19/heroku%E9%85%8D%E7%BD%AEv2ray/">heroku配置v2ray</a>
-            </div>
-          </div>
-        
-      </div>
-    </div>
-  </section>
-
-    
-  </div>
-</aside>
-
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script src="/js/wrapImage.js"></script>
-</div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || '';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-
-
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
   
-</script>
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
 
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="category-chain-item">环境配置</a>
+  
+  
 
-      </main>
-    </div>
-
-    <!-- 页脚 -->
+      </span>
     
   
-  
-    <!-- 底部鱼儿跳动效果，依赖于jquery-->
-<div id="j-fish-skip" style=" position: relative;height: 153px;width: auto;"></div>
-<script>
-  var RENDERER = {
-    POINT_INTERVAL: 5,
-    FISH_COUNT: 3,
-    MAX_INTERVAL_COUNT: 50,
-    INIT_HEIGHT_RATE: .5,
-    THRESHOLD: 50,
-    FISH_COLOR: '',
-    init: function () {
-      this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
-    },
-    setFishColor: function () {
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
-      if (isDark) {
-        this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
-      } else {
-        this.FISH_COLOR = '' || 'rgba(66, 185, 133, 0.8)';
-      }
-    },
-    setParameters: function () {
-      this.$window = $(window), this.$container = $("#j-fish-skip"), this.$canvas = $("<canvas />"), this.context = this.$canvas.appendTo(this.$container).get(0).getContext("2d"), this.points = [], this.fishes = [], this.watchIds = []
-    },
-    createSurfacePoints: function () {
-      var t = Math.round(this.width / this.POINT_INTERVAL);
-      this.pointInterval = this.width / (t - 1), this.points.push(new SURFACE_POINT(this, 0));
-      for (var i = 1; i < t; i++) {
-        var e = new SURFACE_POINT(this, i * this.pointInterval),
-          h = this.points[i - 1];
-        e.setPreviousPoint(h), h.setNextPoint(e), this.points.push(e)
-      }
-    },
-    reconstructMethods: function () {
-      this.watchWindowSize = this.watchWindowSize.bind(this), this.jdugeToStopResize = this.jdugeToStopResize.bind(this), this.startEpicenter = this.startEpicenter.bind(this), this.moveEpicenter = this.moveEpicenter.bind(this), this.reverseVertical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
-    },
-    setup: function () {
-      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
-        width: this.width,
-        height: this.height
-      }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
-    },
-    watchWindowSize: function () {
-      this.clearTimer(), this.tmpWidth = this.$window.width(), this.tmpHeight = this.$window.height(), this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL))
-    },
-    clearTimer: function () {
-      for (; this.watchIds.length > 0;) clearTimeout(this.watchIds.pop())
-    },
-    jdugeToStopResize: function () {
-      var t = this.$window.width(),
-        i = this.$window.height(),
-        e = t == this.tmpWidth && i == this.tmpHeight;
-      this.tmpWidth = t, this.tmpHeight = i, e && this.setup()
-    },
-    bindEvent: function () {
-      this.$window.on("resize", this.watchWindowSize), this.$container.on("mouseenter", this.startEpicenter), this.$container.on("mousemove", this.moveEpicenter)
-    },
-    getAxis: function (t) {
-      var i = this.$container.offset();
-      return {
-        x: t.clientX - i.left + this.$window.scrollLeft(),
-        y: t.clientY - i.top + this.$window.scrollTop()
-      }
-    },
-    startEpicenter: function (t) {
-      this.axis = this.getAxis(t)
-    },
-    moveEpicenter: function (t) {
-      var i = this.getAxis(t);
-      this.axis || (this.axis = i), this.generateEpicenter(i.x, i.y, i.y - this.axis.y), this.axis = i
-    },
-    generateEpicenter: function (t, i, e) {
-      if (!(i < this.height / 2 - this.THRESHOLD || i > this.height / 2 + this.THRESHOLD)) {
-        var h = Math.round(t / this.pointInterval);
-        h < 0 || h >= this.points.length || this.points[h].interfere(i, e)
-      }
-    },
-    reverseVertical: function () {
-      this.reverse = !this.reverse;
-      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
-    },
-    controlStatus: function () {
-      for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
-      for (t = 0, i = this.points.length; t < i; t++) this.points[t].updateNeighbors();
-      this.fishes.length < this.fishCount && 0 == --this.intervalCount && (this.intervalCount = this.MAX_INTERVAL_COUNT, this.fishes.push(new FISH(this)))
-    },
-    render: function () {
-      requestAnimationFrame(this.render), this.controlStatus(), this.context.clearRect(0, 0, this.width, this.height), this.context.fillStyle = this.FISH_COLOR;
-      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].render(this.context);
-      this.context.save(), this.context.globalCompositeOperation = "xor", this.context.beginPath(), this.context.moveTo(0, this.reverse ? 0 : this.height);
-      for (t = 0, i = this.points.length; t < i; t++) this.points[t].render(this.context);
-      this.context.lineTo(this.width, this.reverse ? 0 : this.height), this.context.closePath(), this.context.fill(), this.context.restore()
-    }
-  },
-  SURFACE_POINT = function (t, i) {
-    this.renderer = t, this.x = i, this.init()
-  };
-  SURFACE_POINT.prototype = {
-    SPRING_CONSTANT: .03,
-    SPRING_FRICTION: .9,
-    WAVE_SPREAD: .3,
-    ACCELARATION_RATE: .01,
-    init: function () {
-      this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE, this.height = this.initHeight, this.fy = 0, this.force = {
-        previous: 0,
-        next: 0
-      }
-    },
-    setPreviousPoint: function (t) {
-      this.previous = t
-    },
-    setNextPoint: function (t) {
-      this.next = t
-    },
-    interfere: function (t, i) {
-      this.fy = this.renderer.height * this.ACCELARATION_RATE * (this.renderer.height - this.height - t >= 0 ? -1 : 1) * Math.abs(i)
-    },
-    updateSelf: function () {
-      this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height), this.fy *= this.SPRING_FRICTION, this.height += this.fy
-    },
-    updateNeighbors: function () {
-      this.previous && (this.force.previous = this.WAVE_SPREAD * (this.height - this.previous.height)), this.next && (this.force.next = this.WAVE_SPREAD * (this.height - this.next.height))
-    },
-    render: function (t) {
-      this.previous && (this.previous.height += this.force.previous, this.previous.fy += this.force.previous), this.next && (this.next.height += this.force.next, this.next.fy += this.force.next), t.lineTo(this.x, this.renderer.height - this.height)
-    }
-  };
-  var FISH = function (t) {
-    this.renderer = t, this.init()
-  };
-  FISH.prototype = {
-    GRAVITY: .4,
-    init: function () {
-      this.direction = Math.random() < .5, this.x = this.direction ? this.renderer.width + this.renderer.THRESHOLD : -this.renderer.THRESHOLD, this.previousY = this.y, this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1), this.renderer.reverse ? (this.y = this.getRandomValue(1 * this.renderer.height / 10, 4 * this.renderer.height / 10), this.vy = this.getRandomValue(2, 5), this.ay = this.getRandomValue(.05, .2)) : (this.y = this.getRandomValue(6 * this.renderer.height / 10, 9 * this.renderer.height / 10), this.vy = this.getRandomValue(-5, -2), this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1, this.theta = 0, this.phi = 0
-    },
-    getRandomValue: function (t, i) {
-      return t + (i - t) * Math.random()
-    },
-    reverseVertical: function () {
-      this.isOut = !this.isOut, this.ay *= -1
-    },
-    controlStatus: function (t) {
-      this.previousY = this.y, this.x += this.vx, this.y += this.vy, this.vy += this.ay, this.renderer.reverse ? this.y > this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy -= this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(.05, .2)), this.isOut = !1) : this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy += this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1), this.isOut || (this.theta += Math.PI / 20, this.theta %= 2 * Math.PI, this.phi += Math.PI / 30, this.phi %= 2 * Math.PI), this.renderer.generateEpicenter(this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD, this.y, this.y - this.previousY), (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD || this.vx < 0 && this.x < -this.renderer.THRESHOLD) && this.init()
-    },
-    render: function (t) {
-      t.save(), t.translate(this.x, this.y), t.rotate(Math.PI + Math.atan2(this.vy, this.vx)), t.scale(1, this.direction ? 1 : -1), t.beginPath(), t.moveTo(-30, 0), t.bezierCurveTo(-20, 15, 15, 10, 40, 0), t.bezierCurveTo(15, -10, -20, -15, -30, 0), t.fill(), t.save(), t.translate(40, 0), t.scale(.9 + .2 * Math.sin(this.theta), 1), t.beginPath(), t.moveTo(0, 0), t.quadraticCurveTo(5, 10, 20, 8), t.quadraticCurveTo(12, 5, 10, 0), t.quadraticCurveTo(12, -5, 20, -8), t.quadraticCurveTo(5, -10, 0, 0), t.fill(), t.restore(), t.save(), t.translate(-3, 0), t.rotate((Math.PI / 3 + Math.PI / 10 * Math.sin(this.phi)) * (this.renderer.reverse ? -1 : 1)), t.beginPath(), this.renderer.reverse ? (t.moveTo(5, 0), t.bezierCurveTo(10, 10, 10, 30, 0, 40), t.bezierCurveTo(-12, 25, -8, 10, 0, 0)) : (t.moveTo(-5, 0), t.bezierCurveTo(-10, -10, -10, -30, 0, -40), t.bezierCurveTo(12, -25, 8, -10, 0, 0)), t.closePath(), t.fill(), t.restore(), t.restore(), this.controlStatus(t)
-    }
-  }, $(function () {
-    RENDERER.init()
-    $('.dark').click(function () {
-      setTimeout(() => {
-        RENDERER.setFishColor();
-        RENDERER.context.fill();
-      });
-    })
-  });
-</script>
-  
-  <div class="footer bg-color">
-    <div class="footer-main">
-      
-        
-          <div class="link">
-            
-          </div>
-        
-      
-        
-          <div class="footer-copyright">
-            <p>Copyright © 2019 - 2020
-<a target="_blank" rel="noopener" href="https://github.com/yuang01">yuang01</a> | Powered by
-<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme
-<a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a></p>
-
-          </div>
-        
-      
-        
-          
-            <!-- 不蒜子统计 -->
-            <!-- 不蒜子统计 -->
-<span id="busuanzi_container_site_pv">
-      <i class="fas fa-eye" aria-hidden="true"></i>本站总访问量：<span id="busuanzi_value_site_pv"></span> 次
-</span>
-<span class="post-meta-divider">|</span>
-<span id="busuanzi_container_site_uv" style='display:none'>
-      <i class="fas fa-users" aria-hidden="true"></i>本站访客数：<span id="busuanzi_value_site_uv"></span> 人
 </span>
 
-          
-        
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
       
-        
-          <div class="footer-custom">
-            
-          </div>
-        
+        <a href="/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">#环境配置</a>
+      
+        <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/">#科学上网</a>
       
     </div>
-  </div>
-
-
-
-    <!-- 渲染暗黑按钮 -->
-    
-      <div class="dark">
-  <div class="dark-content">
-    <i class="fas fa-moon" aria-hidden="true"></i>
-    <!-- <span>关灯</span> -->
-  </div>
   
 </div>
 
-<script>
-  $(function() {
-    let isDark = JSON.parse(localStorage.getItem('dark'))  || JSON.parse('false');
-    if (isDark) {
-      $(".dark-content").replaceWith(
-          `
-          <div class='dark-content'>
-            <i class="fas fa-lightbulb" aria-hidden="true"></i>
-          </div>
-          `
-        );
-    }
-    $('.dark').click(function() {
-      if ($(document.body).is('.darkModel')) {
-        $(document.body).removeClass('darkModel');
-        localStorage.setItem('dark', false);
-        $(".dark-content").replaceWith(
-          `
-          <div class='dark-content'>
-            <i class="fas fa-moon" aria-hidden="true"></i>
-          </div>
-          `
-        );
-      } else {
-        $(document.body).addClass('darkModel');
-        localStorage.setItem('dark', true);
-        $(".dark-content").replaceWith(
-          `
-          <div class='dark-content'>
-            <i class="fas fa-lightbulb" aria-hidden="true"></i>
-          </div>
-          `
-        );
-      }
-    })
-  })
-</script>
-    
-    <!-- 渲染回到顶部按钮 -->
-    
-      <div class="goTop top-btn-color" pointer>
-  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/08/%E8%A7%A3%E5%86%B3wsl2%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" title="解决wsl2使用遇到的问题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">解决wsl2使用遇到的问题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/18/%E9%85%8D%E7%BD%AEdocker/" title="配置docker">
+                        <span class="hidden-mobile">配置docker</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
 </div>
-<script src="/js/goTop.js"></script>
 
-    
-    <!-- 渲染左下角音乐播放器 -->
-    
-      <link rel="stylesheet" href="/js/aplayer/APlayer@1.10.1.min.css">
-<style>
-.aplayer .aplayer-lrc p {
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
   
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 16px !important;
-}
 
-.aplayer .aplayer-lrc p.aplayer-lrc-current {
+
+
   
-  font-size: 15px;
-  color: #42b983;
-}
 
 
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-  left: -66px !important;
-}
 
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-  left: 0px !important;
-}
-
-
-</style>
-<meting-js  
-  class=""
-  server="tencent"
-  type="playlist"
-  id="8062553743"
-  fixed='true'
-  autoplay='false'
-  theme='#42b983'
-  loop='all'
-  order='random'
-  preload='auto'
-  volume='0.7'
-  list-folded='true'
->
-</meting-js>
-
-<!-- <style>
-  #aplayer {
-    position: fixed;
-    left: 0;
-    bottom: 300px;
-  }
-</style> -->
-<script src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
-<script src="https://unpkg.com/meting@2/dist/Meting.min.js"></script>
-    
-
-    <!-- 图片放大 -->
-    
-      <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-    
-
-    <!-- 百度解析 -->
-    <!-- Baidu Analytics -->
-
-    <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-
-    
-    <!-- 背景彩带 -->
-    
-      <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
-    
-
-    <script src="/js/utils/index.js"></script>
-    <script src="/js/app.js"></script>
-    
-    <!-- 文章目录所需js -->
-<!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
-<script src="/js/tocbot/tocbot.min.js"></script> -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
-
-<script>
-  var headerEl = 'h2, h3, h4',  //headers 
-    content = '.post-detail',//文章容器
-    idArr = {};  //标题数组以确定是否增加索引id
-  //add #id
-  var option = {
-    // Where to render the table of contents.
-    tocSelector: '.toc',
-    // Where to grab the headings to build the table of contents.
-    contentSelector: content,
-    // Which headings to grab inside of the contentSelector element.
-    headingSelector: headerEl,
-    scrollSmooth: true,
-    scrollSmoothOffset: -70,
-    // headingsOffset: -($(window).height() * 0.4 - 45),
-    headingsOffset: -($(window).height() * 0.4 - 70),
-    // positionFixedSelector: '.toc-main',
-    // positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto',
-    activeLinkClass: 'is-active-link',
-    orderedList: true,
-    collapseDepth: 20,
-    // onClick: function (e) {},
-  }
-  if ($('.toc').length > 0) {
-
-    $(content).children(headerEl).each(function () {
-      //去除空格以及多余标点
-      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
-
-      headerId = headerId.toLowerCase();
-      if (idArr[headerId]) {
-        //id已经存在
-        $(this).attr('id', headerId + '-' + idArr[headerId]);
-        idArr[headerId]++;
-      }
-      else {
-        //id未存在
-        idArr[headerId] = 1;
-        $(this).attr('id', headerId);
-      }
-    });
-
-    document.addEventListener("DOMContentLoaded", function () {
-      tocbot.init(option);
-      mobileTocClick();
-    });
-
-  }
-
-  window.tocScrollFn = function () {
-    return bamboo.throttle(function () {
-      findHeadPosition();
-    }, 100)()
-  }
-  window.addEventListener('scroll', tocScrollFn);
-
-  const findHeadPosition = function (top) {
-    if ($('.toc-list').length <= 0) {
-      return false;
-    }
-    setTimeout(() => {  // or DOMContentLoaded 
-      autoScrollToc();
-    }, 0);
-  }
-
-  const autoScrollToc = function () {
-    const $activeItem = document.querySelector('.is-active-link');
-    const $cardToc = document.querySelector('.toc-content');
-    const activePosition = $activeItem.getBoundingClientRect().top
-    const sidebarScrollTop = $cardToc.scrollTop
-    if (activePosition > (document.documentElement.clientHeight - 100)) {
-      $cardToc.scrollTop = sidebarScrollTop + 150
-    }
-    if (activePosition < 150) {
-      $cardToc.scrollTop = sidebarScrollTop - 150
-    }
-  }
-
-  document.addEventListener('pjax:send', function () {
-    if ($('.toc').length) {
-      tocbot.destroy();
-    }
-  });
-
-  document.addEventListener('pjax:complete', function () {
-    if ($('.toc').length) {
-      tocbot.init(option);
-      mobileTocClick();
-    }
-  });
   
-  // 手机端toc按钮点击出现目录
-  const mobileTocClick = function () {
-    const $cardTocLayout = document.getElementsByClassName('side_toc')[0];
-    const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0];
-    let right = '45px';
-    if (window.innerWidth >= 551 && window.innerWidth <= 992) {
-      right = '100px'
-    }
-    const mobileToc = {
-      open: () => {
-        $cardTocLayout.style.cssText = 'animation: toc-open .3s; opacity: 1; right: ' + right
-      },
 
-      close: () => {
-        $cardTocLayout.style.animation = 'toc-close .2s'
-        setTimeout(() => {
-          $cardTocLayout.style.cssText = "opacity:''; animation: ''; right: ''"
-        }, 100)
-      }
-    }
-    document.getElementById('toc-mobile-btn').addEventListener('click', () => {
-      if (window.getComputedStyle($cardTocLayout).getPropertyValue('opacity') === '0') mobileToc.open()
-      else mobileToc.close()
-    })
 
-    $cardToc.addEventListener('click', (e) => {
-      if (window.innerWidth < 992) { // 小于992px的时候
-        mobileToc.close()
-      }
-    })
-  }
-</script>
 
-<style>
-  /* .is-position-fixed {
-    position: sticky !important;
-    top: 74px;
-  }
+  
 
-  .toc-main ul {
-    counter-reset: show-list;
-  }
 
-  .toc-main ul li::before {
-    content: counter(item)".";
-    display: block;
-    position: absolute;
-    left: 12px;
-    top: 0;
-  } */
-</style>
- 
 
-<!-- 设置导航背景 -->
-<script>
-  let setHeaderClass = () => {
-    const nav = $('#navHeader');
-    const navTop = nav.outerHeight();
-    const winTop = $(window).scrollTop();
-    if(winTop > navTop) {
-      nav.addClass('header-bg-color');
-    }
-    else {
-      nav.removeClass('header-bg-color');
-    }
-  };
 
-  let scrollCollect = () => {
-    return bamboo.throttle(function (e) {
-      setHeaderClass();
-    }, 200)()
-  }
 
-  let initHeaderBg = () => {
-    setHeaderClass();
-  }
 
-  setHeaderClass();
-  window.addEventListener('scroll', scrollCollect);
 
-  document.addEventListener('pjax:send', function () {
-    window.removeEventListener('scroll', scrollCollect)
-  })
-  document.addEventListener('pjax:complete', function () {
-    window.addEventListener('scroll', scrollCollect);
-    setHeaderClass();
-  })
-</script> 
 
-<!-- 渲染issues标签里的内容 -->
-<script>
-  function loadIssuesJS() {
-    if ($(".post-detail").find(".issues-api").length == 0) {
-      return;
-    } 
-    loadScript('/js/issues/index.js');
-  };
-  $(function () {
-    loadIssuesJS();
-  });
-  document.addEventListener('pjax:complete', function () {
-    if (typeof IssuesAPI == "undefined") {
-      loadIssuesJS();
-    }
-  })
-</script>
 
-<!-- 渲染远程json加载的图片标签(getPhotoOnline)里的内容 -->
-<script>
-  function loadPhotoOnlineJS() {
-    if ($(".post-detail").find(".getJsonPhoto-api").length == 0) {
-      return;
-    } 
-    loadScript('/js/getPhotoOnline/index.js');
-  };
-  $(function () {
-    loadPhotoOnlineJS();
-  });
-  document.addEventListener('pjax:complete', function () {
-    if (typeof getPhotoJson == "undefined") {
-      loadPhotoOnlineJS();
-    }
-  })
-</script>
+    
 
-<!-- 渲染远程json加载的talk标签(getTalkOnline)里的内容 -->
-<script>
-  function loadTalkOnlineJS() {
-    if ($(".post-detail").find(".getJsonTalk-api").length == 0) {
-      return;
-    } 
-    loadScript('https://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'); // 瀑布流插件，https://raphamorim.io/waterfall.js/
-    loadScript('/js/getTalkOnline/index.js');
-  };
-  $(function () {
-    loadTalkOnlineJS();
-  });
-  document.addEventListener('pjax:complete', function () {
-    if (typeof getTalkJson == "undefined") {
-      loadTalkOnlineJS();
-    }
-  })
-</script>
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<!-- 渲染远程json加载的site-card标签(getSiteOnline)里的内容 -->
-<script>
-  function loadSiteOnlineJS() {
-    if ($(".post-detail").find(".getJsonSite-api").length == 0) {
-      return;
-    } 
-    loadScript('/js/getSiteOnline/index.js');
-  };
-  $(function () {
-    loadSiteOnlineJS();
-  });
-  document.addEventListener('pjax:complete', function () {
-    if (typeof getSiteJson == "undefined") {
-      loadSiteOnlineJS();
-    }
-  })
-</script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!-- 输入框打字特效 -->
-<!-- 输入框打字特效 -->
+    
 
-  <script src="/js/activate-power-mode.js"></script>
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
   <script>
-    POWERMODE.colorful = true;  // 打开随机颜色特效
-    POWERMODE.shake = false;    // 关闭输入框抖动
-    document.body.addEventListener('input', POWERMODE);//监听打字事件
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
   </script>
 
 
-<!-- markdown代码一键复制功能 -->
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
-  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
-  <script src="/js/clipboard/clipboard.min.js"></script>
-  <div id="appCopy">
-  </div>
-  <script data-pjax>
-    var vm = new Vue({
-      el: '#appCopy',
-      data: {
-      },
-      computed: {
-      },
-      mounted() {
-        const that = this;
-        var copy = '复制';
-        /* code */
-        var initCopyCode = function () {
-          var copyHtml = '';
-          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
-          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
-          copyHtml += '</button>';
-          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
-          $(".post-detail pre").not('.gutter pre').before(copyHtml);
-          new ClipboardJS('.btn-copy', {
-            target: function (trigger) {
-              return trigger.nextElementSibling;
-            }
-          });
-        }
-        initCopyCode();
-        $('.btn-copy').unbind('click').bind('click', function () {
-          doSomething();
-        })
-        $(document).unbind('keypress').bind('keypress', function (e) {
-          if (e.ctrlKey && e.keyCode == 67) {
-            doSomething();
-          }
-        })
 
-        function doSomething() {
-          that.$notify({
-            title: "成功",
-            content: "代码已复制，请遵守相关授权协议。",
-            type: 'success'
-          })
-        }
-      },
-      methods: {
-      },
-      created() { }
-    })
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
   </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
   
 
-<!-- 图片懒加载 -->
-<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+
+
+
+  
 <script>
-  // https://www.npmjs.com/package/vanilla-lazyload
-  // Set the options globally
-  // to make LazyLoad self-initialize
-  window.lazyLoadOptions = {
-    elements_selector: ".lazyload",
-    threshold: 0
-  };
-  // Listen to the initialization event
-  // and get the instance of LazyLoad
-  window.addEventListener(
-    "LazyLoad::Initialized",
-    function (event) {
-      window.lazyLoadInstance = event.detail.instance;
-    },
-    false
-  );
-  document.addEventListener('DOMContentLoaded', function () {
-    lazyLoadInstance.update();
-  });
-  document.addEventListener('pjax:complete', function () {
-    lazyLoadInstance.update();
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
   });
 </script>
 
 
-<!-- 卡片滚动动画 -->
-   
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
 
-<!-- 评论所需js -->
+  <script>Fluid.plugins.codeWidget();</script>
+
 
   
-    <script type="text/javascript">
-  var utteranceCommon = {};
-
-  function check_utterance() {
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
-    if (isDark) {
-      utteranceCommon.Theme = 'github-dark';
-    } else {
-      utteranceCommon.Theme = 'github-light';
-    }
-
-    return document.getElementById("gitment-container");
-  }
-  comment_el = '#gitment-container';
-  load_utterance = function () {
-    if ($(comment_el).length) {
-      // 匿名函数，防止污染全局变量
-      const HEAD = check_utterance();
-
-      var utterances = document.createElement('script');
-      utterances.type = 'text/javascript';
-      utterances.async = true;
-      utterances.setAttribute('issue-term', 'pathname')
-      utterances.setAttribute('theme', utteranceCommon.Theme)
-      utterances.setAttribute('repo', '')
-      utterances.crossorigin = 'anonymous';
-      utterances.src = 'https://utteranc.es/client.js';
-      // content 是要插入评论的地方
-      document.getElementById('gitment-container').appendChild(utterances);
-
-    }
-  }
-
-  function dark_utterance() {
-    const HEAD = check_utterance();
-    if (!HEAD) return;
-    const message = {
-      type: 'set-theme',
-      theme: utteranceCommon.Theme
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
     };
-    const utteranceIframe = document.querySelector('iframe');
-    utteranceIframe.contentWindow.postMessage(message, 'https://utteranc.es');
-  }
-
-  $(document).ready(load_utterance);
-  document.addEventListener('pjax:complete', function () {
-    load_utterance();
-  });
-
-  $('.dark').click(function () {
-    setTimeout(() => {
-      dark_utterance();
-    });
-  })
-
-</script>
-
-<style>
-  .utterances {
-    max-width: inherit !important;
-  }
-</style>
-  
-
-
-<!-- 鼠标点击特效 -->
-<!-- 爱心点击 -->
-
-  
-    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 999; pointer-events: none;" ></canvas>
-    <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
-    <script src="/js/cursor/explosion.min.js"></script>
-  
-
-
-
-
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
-
-
-<!-- 轮播图标签 -->
-<script>
-  var bambooSwiperTag = {};
-  function load_swiper() {
-    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
-    loadCSS("https://unpkg.com/swiper@6/swiper-bundle.min.css")
-    loadScript("https://unpkg.com/swiper@6/swiper-bundle.min.js").then(() => {
-      pjax_swiper();
-    });
-  }
-
-  load_swiper();
-
-  function pjax_swiper() {
-    bambooSwiperTag.swiper = new Swiper('.post-swiper-container', {
-      slidesPerView: 'auto',
-      spaceBetween: 8,
-      centeredSlides: true,
-      loop: true,
-      autoplay: true ? {
-        delay: 3000,
-        stopOnLastSlide: false,
-        disableOnInteraction: false,
-      } : false,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      on:{
-        init: function(){
-          swiperAnimateCache(this); //隐藏动画元素 
-          swiperAnimate(this); //初始化完成开始动画
-        }, 
-        slideChangeTransitionEnd: function(){ 
-          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
-          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
-        } 
-      }
-    });
-  }
-
-  document.addEventListener('pjax:complete', function () {
-    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
-    if (typeof bambooSwiperTag.swiper === "undefined") {
-      load_swiper();
-    } else {
-      pjax_swiper();
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
     }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
   });
 </script>
-    <!-- pjax -->
-    
-
-<!-- pjax -->
 
 
-  <script src="/js/pjax@0.2.8/index.js"></script>
   
-    <!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
 
-<div class="pjax-animate">
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
   
-    <div class="loading-circle"><div id="loader-circle"></div></div>
-    <script>
-      window.ShowLoading = function() {
-        $(".loading-circle").css("display", "block");
-      };
-      window.HideLoading = function() {
-        $(".loading-circle").css("display", "none");
-      }
-    </script>
-  
-	<script>
-    document.addEventListener('pjax:complete', function () {
-      window.HideLoading();
-    })
-    document.addEventListener('pjax:send', function () {
-      window.ShowLoading();
-    })
-    document.addEventListener('pjax:error', function () {
-      window.HideLoading();
-    })
-	</script>
-</div>
+<script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js"></script>
+<script src="/js/sakura.js"></script>
+<script src="/js/star.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
 
   
 
-  <script>
-    var pjax = new Pjax({
-      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
-      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
-      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
-      timeout: 5000
-    });
-
-    document.addEventListener('pjax:send', function (e) {
-
-      try {
-        var currentUrl = window.location.pathname;
-        var targetUrl = e.triggerElement.href;
-        var banUrl = [""];
-        if (banUrl[0] != "") {
-          banUrl.forEach(item => {
-            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
-              window.location.href = targetUrl;
-            }
-          });
-        }
-      } catch (error) {}
-
-      $(window).unbind('resize');
-      $(window).unbind('scroll');
-      $(document).unbind('scroll');
-      $(document).unbind('click');
-      $('body').unbind('click');
-
-    })
-    
-    document.addEventListener('pjax:complete', function () {
-      $('script[data-pjax], .pjax-reload script').each(function () {
-        $(this).parent().append($(this).remove());
-      });
-    });
-
-    document.addEventListener('pjax:error', function (e) {
-      window.location.href = e.triggerElement.href;
-    })
-    
-    // 刷新不从顶部开始
-    document.addEventListener("DOMContentLoaded", function () {
-      history.scrollRestoration = 'auto';
-    })
-  </script>
-
-
-
-  </body>
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
 </html>
