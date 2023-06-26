@@ -225,7 +225,7 @@ color:
 # Font
 font:
   font_size: 16px
-  font_family:
+  font_family: "LXGW WenKai"
   letter_spacing: 0.02em
   code_font_size: 85%
 
@@ -234,8 +234,10 @@ font:
 custom_js:
   - //cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js  
   - //cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js 
-  - /js/sakura.js
-  - /js/star.js
+  - //cdn.bootcss.com/animejs/2.2.0/anime.min.js
+  - /js/background.js
+  - /js/fireworks.js
+
 # 指定自定义 .css 文件路径，用法和 custom_js 相同
 # The usage is the same as custom_js
 custom_css:
@@ -353,7 +355,7 @@ navbar:
     - { key: "category", link: "/categories/", icon: "iconfont icon-category-fill" }
     - { key: "tag", link: "/tags/", icon: "iconfont icon-tags-fill" }
     - { key: "about", link: "/about/", icon: "iconfont icon-user-fill" }
-    #- { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
+    - { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
 
 # 搜索功能，基于 hexo-generator-search 插件，若已安装其他搜索插件请关闭此功能，以避免生成多余的索引文件
 # Search feature, based on hexo-generator-search. If you have installed other search plugins, please disable this feature to avoid generating redundant index files
@@ -468,7 +470,7 @@ footer:
 index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
-  banner_img: /img/18.jpg
+  banner_img: /img/21.jpg
 
   # 头图高度，屏幕百分比
   # Height ratio of banner image
@@ -1046,6 +1048,9 @@ links:
 tidio:
   enable: true
   key: cek0qomnlvhhdar1huindmvyc6asqced
+
+# # Fireworks
+# fireworks: true
 
 #---------------------------
 # 以下是配置 JS CSS 等静态资源的 URL 前缀，可以自定义成 CDN 地址，
