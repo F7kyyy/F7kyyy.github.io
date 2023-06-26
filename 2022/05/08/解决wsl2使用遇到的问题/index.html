@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://f7kyyy.github.io/img/article/wsl.png">
 <meta property="article:published_time" content="2022-05-08T08:19:33.000Z">
-<meta property="article:modified_time" content="2023-05-27T07:15:57.922Z">
+<meta property="article:modified_time" content="2023-06-17T15:08:42.411Z">
 <meta property="article:author" content="F7kyyy">
 <meta property="article:tag" content="环境配置">
 <meta property="article:tag" content="wsl">
@@ -228,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          3.3k 字
         
       </span>
     
@@ -239,7 +239,7 @@
         
         
         
-          27 分钟
+          28 分钟
         
       </span>
     
@@ -290,7 +290,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年5月27日 下午
+                    本文最后更新于：2023年6月17日 晚上
                   
                 
               </p>
@@ -319,11 +319,15 @@
 <li><p>备份文件回复到新的子系统中，可以重命名</p>
 <p><code>import 发行版名称 新的磁盘位置 导出压缩包位置</code></p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--import</span> Ubuntu D:\Environment\UbuntuWSL D:\Environment\UbuntuWSL\Ubuntu.tar<br></code></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/F7kyyy/picture/main/img/202305261824929.png" srcset="/img/loading.gif" lazyload alt="image-20230526182410865" style="zoom: 50%;" /></p></li>
+<p><img src="https://raw.githubusercontent.com/F7kyyy/picture/main/img/202305261824929.png" srcset="/img/loading.gif" lazyload alt="image-20230526182410865" style="zoom: 67%;" /></p></li>
 <li><p>恢复默认用户<code>f7kyyy</code></p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">Ubuntu2204 config <span class="hljs-literal">--default-user</span> f7kyyy<br></code></pre></td></tr></table></figure>
 <p>这里应该是纯英文或者纯数字，如果名字叫做<code>Ubuntu-22.04</code>就改为
-<code>Ubuntu2204</code></p></li>
+<code>Ubuntu2204</code></p>
+<p><strong>不知道为什么，我在使用Ubuntu的时候，powershell
+提示找不到命令，始终未解决。</strong></p>
+<p>建议前往<a
+target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/wsl/install-manual">网站</a>，手动下载发行版，然后将后缀改为<code>zip</code>,在想要安装的位置解压，然后双击<code>.exe</code>文件手动安装。</p></li>
 </ul>
 <h2 id="更新系统提示">2. 更新系统提示</h2>
 <h3 id="安装cuda前">2.1 安装cuda前</h3>
@@ -370,6 +374,7 @@ src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205081641462.png" sr
 alt="image-20220508164137335" />
 <figcaption aria-hidden="true">image-20220508164137335</figcaption>
 </figure>
+<p><strong>最新更新，Clash Tun 模式使用全局代理解决一切问题</strong></p>
 
                 
               </div>
