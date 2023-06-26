@@ -12,13 +12,13 @@ class Circle {
   draw() {
     this.context.fillStyle = this.color
     this.context.beginPath()
-    this.context.arc(this.position.x, this.position.y, 2, 0, Math.PI * 4)
+    this.context.arc(this.position.x, this.position.y, 4, 0, Math.PI * 2)
     this.context.fill()
   }
 
   move() {
     this.position.x = (Math.sin(this.angle) * this.speed) + this.position.x
-    this.position.y = (Math.cos(this.angle) * this.speed) + this.position.y + (this.renderCount * 0.1)
+    this.position.y = (Math.cos(this.angle) * this.speed) + this.position.y + (this.renderCount * 0.3)
     this.renderCount++
   }
 }
@@ -39,10 +39,10 @@ class Boom {
     return range[randomIndex]
   }
 
-  randomColor() {
-    const range = ['8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
-    return '#' + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range) + this.randomArray(range)
-  }
+randomColor() {
+  const range = ['FF5733', 'FFC300', 'DAF7A6', 'C70039', '900C3F', '581845', '00FFFF', 'FF00FF', 'FFFF00']
+  return '#' + this.randomArray(range)
+}
 
   randomRange(start, end) {
     return (end - start) * Math.random() + start
@@ -55,7 +55,7 @@ class Boom {
         origin: this.origin,
         color: this.randomColor(),
         angle: this.randomRange(Math.PI - 1, Math.PI + 1),
-        speed: this.randomRange(1, 6)
+        speed: this.randomRange(1, 3)
       })
       this.circles.push(circle)
     }

@@ -1,4 +1,4 @@
-// 背景黑色线条 bynote.cn
+// 背景线条 bynote.cn
 (function () {
     function getAttributeOrDefault(element, attribute, defaultValue) {
         return element.getAttribute(attribute) || defaultValue;
@@ -34,7 +34,10 @@
             otherParticle.y += otherParticle.ya;
             otherParticle.xa *= otherParticle.x > canvas.width || otherParticle.x < 0 ? -1 : 1;
             otherParticle.ya *= otherParticle.y > canvas.height || otherParticle.y < 0 ? -1 : 1;
-            context.fillRect(otherParticle.x - 0.5, otherParticle.y - 0.5, 1, 1);
+            context.beginPath();
+            context.arc(otherParticle.x, otherParticle.y, 2, 0, 2 * Math.PI);
+            context.fillStyle = "rgb(135, 206, 250)";
+            context.fill();
             for (var i = 0; i < particles.length; i++) {
                 particle = particles[i];
                 if (otherParticle !== particle && particle.x !== null && particle.y !== null) {
@@ -47,7 +50,7 @@
                             otherParticle.y -= 0.03 * yDiff;
                         }
                         alpha = (particle.max - distance) / particle.max;
-                        lineWidth = alpha / 2;
+                        lineWidth = alpha;
                         strokeStyle = "rgba(" + options.color + "," + (alpha + 0.2) + ")";
                         context.beginPath();
                         context.lineWidth = lineWidth;
