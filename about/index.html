@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="zh-CN" data-default-color-scheme=auto>
-
+ 
 
 
 <head>
@@ -173,6 +173,18 @@
             </li>
           
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
@@ -219,6 +231,11 @@
   </header>
 
   <main>
+    {% if theme.fireworks %}
+      <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+      <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+      <script type="text/javascript" src="../source/js/fireworks.js"></script>
+    {% endif %}
     
       <div class="container nopadding-x-md">
         <div id="board"
@@ -375,6 +392,10 @@
   
   
   
+  <!-- 在线通讯Tidio -->
+  
+    <script src="//code.tidio.co/cek0qomnlvhhdar1huindmvyc6asqced.js"></script>
+  
 </div>
 
   </footer>
@@ -483,8 +504,7 @@
   
 <script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 <script src="//cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js"></script>
-<script src="/js/sakura.js"></script>
-<script src="/js/star.js"></script>
+<script src="/js/fireworks.js"></script>
 
 
 

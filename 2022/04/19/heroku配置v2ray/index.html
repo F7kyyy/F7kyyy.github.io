@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="zh-CN" data-default-color-scheme=auto>
-
+ 
 
 
 <head>
@@ -16,12 +16,12 @@
   <meta name="author" content="F7kyyy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="注意！本教程仅且只能用于研究与学习，只是做一个记录 注意事项 Heroku免费套餐每月只有550小时的免费时间，限量2TB，适合在非常时期当做备胎使用 Heroku对流量检测有些严格，请避免大流量消耗 引用项目原作者的话：Heroku提供给我们免费的服务，我们不应该滥用它 绝大部分的Heroku服务器节点都被twitter屏蔽了，可能是我新建的暂时还没有 Heroku免费容器未使用超过一段时间（三">
+    <meta name="description" content="注意！本教程仅且只能用于研究与学习，只是做一个记录 注意事项  Heroku免费套餐每月只有550小时的免费时间，限量2TB，适合在非常时期当做备胎使用 Heroku对流量检测有些严格，请避免大流量消耗 引用项目原作者的话：Heroku提供给我们免费的服务，我们不应该滥用它 绝大部分的Heroku服务器节点都被twitter屏蔽了，可能是我新建的暂时还没有 Heroku免费容器未使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="heroku配置v2ray">
 <meta property="og:url" content="http://f7kyyy.github.io/2022/04/19/heroku%E9%85%8D%E7%BD%AEv2ray/index.html">
 <meta property="og:site_name" content="F7kyyy的博客">
-<meta property="og:description" content="注意！本教程仅且只能用于研究与学习，只是做一个记录 注意事项 Heroku免费套餐每月只有550小时的免费时间，限量2TB，适合在非常时期当做备胎使用 Heroku对流量检测有些严格，请避免大流量消耗 引用项目原作者的话：Heroku提供给我们免费的服务，我们不应该滥用它 绝大部分的Heroku服务器节点都被twitter屏蔽了，可能是我新建的暂时还没有 Heroku免费容器未使用超过一段时间（三">
+<meta property="og:description" content="注意！本教程仅且只能用于研究与学习，只是做一个记录 注意事项  Heroku免费套餐每月只有550小时的免费时间，限量2TB，适合在非常时期当做备胎使用 Heroku对流量检测有些严格，请避免大流量消耗 引用项目原作者的话：Heroku提供给我们免费的服务，我们不应该滥用它 绝大部分的Heroku服务器节点都被twitter屏蔽了，可能是我新建的暂时还没有 Heroku免费容器未使用">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://f7kyyy.github.io/img/article/heroku.png">
 <meta property="article:published_time" content="2022-04-19T10:49:38.000Z">
@@ -177,6 +177,18 @@
             </li>
           
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
@@ -271,6 +283,11 @@
   </header>
 
   <main>
+    {% if theme.fireworks %}
+      <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+      <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+      <script type="text/javascript" src="../source/js/fireworks.js"></script>
+    {% endif %}
     
       
 
@@ -300,176 +317,220 @@
               <div class="markdown-body">
                 
                 <p><strong>注意！本教程仅且只能用于研究与学习，只是做一个记录</strong></p>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<h2 id="注意事项">注意事项</h2>
+<ol type="1">
 <li><em>Heroku免费套餐每月只有<strong>550小时</strong>的免费时间，限量<strong>2TB</strong>，适合在非常时期当做备胎使用</em></li>
 <li><em>Heroku对流量检测有些严格，请避免大流量消耗</em></li>
 <li><em>引用项目原作者的话：Heroku提供给我们免费的服务，<strong>我们不应该滥用它</strong></em></li>
 <li><em><strong>绝大部分的Heroku服务器节点都被twitter屏蔽了</strong>，可能是我新建的暂时还没有</em></li>
 <li><em>Heroku免费容器未使用超过一段时间（三十分钟左右）就会休眠</em></li>
 </ol>
-<p><strong>2022.5.9更新，Cloud flare 的work.dev凉了，设置反代看<a target="_blank" rel="noopener" href="https://my.freenom.com/domains.php">链接</a></strong></p>
-<h2 id="必要的准备"><a href="#必要的准备" class="headerlink" title="必要的准备"></a>必要的准备</h2><ol>
-<li><p>一个非国内邮箱地址，gmail 或者 outlook</p>
-</li>
+<p><strong>2022.5.9更新，Cloud flare 的work.dev凉了，设置反代看<a
+target="_blank" rel="noopener" href="https://my.freenom.com/domains.php">链接</a></strong></p>
+<h2 id="必要的准备">必要的准备</h2>
+<ol type="1">
+<li><p>一个非国内邮箱地址，gmail 或者 outlook</p></li>
 <li><p>Heroku与Cloudflare国内访问速度并不理想，可使用非国内网络环境</p>
-<p>(也就是说必须有一个机场，机场的免费时间一般来说就够用了)</p>
-</li>
-<li><p>翻译工具，也可以使用Google Chrome浏览器</p>
-</li>
-<li><p>V2Ray软件，如果没有安装过请下载core版本，自带V2ray-Core<a target="_blank" rel="noopener" href="https://github.com/2dust/v2rayN/releases">点击下载</a></p>
-</li>
+<p>(也就是说必须有一个机场，机场的免费时间一般来说就够用了)</p></li>
+<li><p>翻译工具，也可以使用Google Chrome浏览器</p></li>
+<li><p>V2Ray软件，如果没有安装过请下载core版本，自带V2ray-Core<a
+target="_blank" rel="noopener" href="https://github.com/2dust/v2rayN/releases">点击下载</a></p></li>
 </ol>
-<h2 id="一、服务端部署"><a href="#一、服务端部署" class="headerlink" title="一、服务端部署"></a>一、服务端部署</h2><h3 id="1-1-注册Heroku账户"><a href="#1-1-注册Heroku账户" class="headerlink" title="1.1 注册Heroku账户"></a>1.1 注册Heroku账户</h3><p>很简单，根据官网的提示操作就行:<a target="_blank" rel="noopener" href="https://signup.heroku.com/">点击注册</a></p>
+<h2 id="一服务端部署">一、服务端部署</h2>
+<h3 id="注册heroku账户">1.1 注册Heroku账户</h3>
+<p>很简单，根据官网的提示操作就行:<a
+target="_blank" rel="noopener" href="https://signup.heroku.com/">点击注册</a></p>
 <p>注意：请使用外网IP注册，且请准备好翻译工具，并在收到邮件后激活账户；注册时不能使用QQ邮箱</p>
-<h3 id="1-2-在Heroku部署v2ray"><a href="#1-2-在Heroku部署v2ray" class="headerlink" title="1.2 在Heroku部署v2ray"></a>1.2 在Heroku部署v2ray</h3><p>点击下方按钮部署应用<a target="_blank" rel="noopener" href="https://dashboard.heroku.com/new?template=https://github.com/F7kyyy/heroku-v2ray"><img src="https://www.herokucdn.com/deploy/button.png" srcset="/img/loading.gif" lazyload alt="Deploy"></a></p>
-<p>ps: （2022.01.16）最近大佬们的仓库都被heroku给ban了，所以想要使用可以自建一个仓库，<del>然后import大佬Fbclswl0827的heroku-v2ray项目自行部署</del></p>
+<h3 id="在heroku部署v2ray">1.2 在Heroku部署v2ray</h3>
+<p>点击下方按钮部署应用<a
+target="_blank" rel="noopener" href="https://dashboard.heroku.com/new?template=https://github.com/F7kyyy/heroku-v2ray"><img
+src="https://www.herokucdn.com/deploy/button.png" srcset="/img/loading.gif" lazyload
+alt="Deploy" /></a></p>
+<p>ps:
+（2022.01.16）最近大佬们的仓库都被heroku给ban了，所以想要使用可以自建一个仓库，<del>然后import大佬Fbclswl0827的heroku-v2ray项目自行部署</del></p>
 <p>ps: 上面部署方式是我自己的仓库</p>
-<h4 id="Extra-创建github项目仓库"><a href="#Extra-创建github项目仓库" class="headerlink" title="Extra 创建github项目仓库"></a>Extra 创建github项目仓库</h4><p>1、打开 <a target="_blank" rel="noopener" href="https://github.com/">github</a> 登录你自己的账号</p>
+<h4 id="extra-创建github项目仓库">Extra 创建github项目仓库</h4>
+<p>1、打开 <a target="_blank" rel="noopener" href="https://github.com/">github</a> 登录你自己的账号</p>
 <p>2、点击左边的 <code>New</code> 创建一个仓库</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901306.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
-
-<p>3、在打开的页面中填写仓库名称，然后点击 <code>Create repository</code> 创建仓库</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901796.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
-
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901306.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></p>
+<p>3、在打开的页面中填写仓库名称，然后点击
+<code>Create repository</code> 创建仓库</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901796.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></p>
 <p>4、在新打开的页面下翻找到 <code>import</code></p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191905575.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
-
-<p>5、在 <code>Your old repository’s clone URL</code> 中填入 <code>https://github.com/bclswl0827/v2ray-heroku.git</code>, 随后点击 <code>Begin import</code> 导入</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901228.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
-
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191905575.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></p>
+<p>5、在 <code>Your old repository’s clone URL</code> 中填入
+<code>https://github.com/bclswl0827/v2ray-heroku.git</code>, 随后点击
+<code>Begin import</code> 导入</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901228.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></p>
 <p><strong>这位大佬的github仓库已经被disable了，可以选择其他人的，搜索一下应该很容易找到</strong></p>
-<p>6、导入完成后，进入仓库，修改 <code>README.md</code> ，修改完成后点击下方 <code>Commit changes</code> 提交</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901430.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
-
+<p>6、导入完成后，进入仓库，修改 <code>README.md</code>
+，修改完成后点击下方 <code>Commit changes</code> 提交</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901430.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></p>
 <p>7、最后进入仓库点击 <code>Deploy to Heroku</code> 图标开始部署</p>
-<p>App name随便填写，可用就行；Choose a region就是你的服务器地区；UUID可自行修改（建议修改，使用默认UUID会使节点暴露在危险下）；然后点击<code>Deploy app</code>系统会自动部署</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901573.png" srcset="/img/loading.gif" lazyload alt="1.png" style="zoom:67%;" />
-
+<p>App name随便填写，可用就行；Choose a
+region就是你的服务器地区；UUID可自行修改（建议修改，使用默认UUID会使节点暴露在危险下）；然后点击<code>Deploy app</code>系统会自动部署</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191901573.png" srcset="/img/loading.gif" lazyload alt="1.png" style="zoom:67%;" /></p>
 <p>稍微等待一会儿，几秒的样子，直到全部打勾变绿</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902144.png" srcset="/img/loading.gif" lazyload alt="2.png" style="zoom:67%;" />
-
-<h2 id="二、客户端使用"><a href="#二、客户端使用" class="headerlink" title="二、客户端使用"></a>二、客户端使用</h2><h3 id="2-1-相关配置信息"><a href="#2-1-相关配置信息" class="headerlink" title="2.1 相关配置信息"></a>2.1 相关配置信息</h3><p>点击Manage App进入你的项目；或者在<a target="_blank" rel="noopener" href="https://dashboard.heroku.com/apps%E4%B8%AD%E6%89%BE%E7%9A%84%E5%88%B0%E4%BD%A0%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%B9%B6%E8%BF%9B%E5%85%A5">https://dashboard.heroku.com/apps中找的到你的项目并进入</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902144.png" srcset="/img/loading.gif" lazyload alt="2.png" style="zoom:67%;" /></p>
+<h2 id="二客户端使用">二、客户端使用</h2>
+<h3 id="相关配置信息">2.1 相关配置信息</h3>
+<p>点击Manage
+App进入你的项目；或者在https://dashboard.heroku.com/apps中找的到你的项目并进入</p>
 <p>注意：你会看到一个项目，点击上方的<code>Settings</code>进入，查看你的V2Ray具体配置，如图</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902864.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
-
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902864.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></p>
 <p>点击<code>Reveal Config Vars</code>显示V2RrayN相关配置信息，如图</p>
 <p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902242.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191906266.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></p>
-<h3 id="2-2-配置v2rayN"><a href="#2-2-配置v2rayN" class="headerlink" title="2.2 配置v2rayN"></a>2.2 配置v2rayN</h3><p>开始配置V2Ray，如果你记好了以上两个（那串字母UUID和二级域名xxxx.herokuapp.com）</p>
+<h3 id="配置v2rayn">2.2 配置v2rayN</h3>
+<p>开始配置V2Ray，如果你记好了以上两个（那串字母UUID和二级域名xxxx.herokuapp.com）</p>
 <p>ps: 二级域名不用加<code>https://</code>，直接填域名就好</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902011.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
-
-<p>最基础的配置完成了，可以发现节点的速度慢的令人发指，接下来我们利用cloudflare + 自选ip进行加速</p>
-<h2 id="三、Cloudflare-Workers反代加速"><a href="#三、Cloudflare-Workers反代加速" class="headerlink" title="三、Cloudflare Workers反代加速"></a>三、Cloudflare Workers反代加速</h2><p>对速度有要求的人群（强迫症患者）可以看一下；主要是使用Cloudflare Workers加速，虽然免费套餐有调用限制，但是一般个人使用不可能用完</p>
-<h3 id="3-1-创建Cloudflare-Workers"><a href="#3-1-创建Cloudflare-Workers" class="headerlink" title="3.1 创建Cloudflare Workers"></a>3.1 创建Cloudflare Workers</h3><p>在<a target="_blank" rel="noopener" href="https://dash.cloudflare.com/">Cloudflare Workers</a>中创建一个Workers</p>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902438.png" srcset="/img/loading.gif" lazyload alt="img"><br><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902747.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>点击<code>快速编辑</code>进入项目编辑<br><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903865.png" srcset="/img/loading.gif" lazyload alt="img"><br>将原有的示例代码全部删除，复制如下代码，并将第四行的xxx.herokuapp.com 替换为你的V2Ray的地址 ps: 不需要<code>https://</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902011.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></p>
+<p>最基础的配置完成了，可以发现节点的速度慢的令人发指，接下来我们利用cloudflare
++ 自选ip进行加速</p>
+<h2 id="三cloudflare-workers反代加速">三、Cloudflare
+Workers反代加速</h2>
+<p>对速度有要求的人群（强迫症患者）可以看一下；主要是使用Cloudflare
+Workers加速，虽然免费套餐有调用限制，但是一般个人使用不可能用完</p>
+<h3 id="创建cloudflare-workers">3.1 创建Cloudflare Workers</h3>
+<p>在<a target="_blank" rel="noopener" href="https://dash.cloudflare.com/">Cloudflare
+Workers</a>中创建一个Workers</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902438.png" srcset="/img/loading.gif" lazyload
+alt="img" /> <img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191902747.png" srcset="/img/loading.gif" lazyload
+alt="img" /></p>
+<p>点击<code>快速编辑</code>进入项目编辑 <img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903865.png" srcset="/img/loading.gif" lazyload
+alt="img" />
+将原有的示例代码全部删除，复制如下代码，并将第四行的xxx.herokuapp.com
+替换为你的V2Ray的地址 ps: 不需要<code>https://</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-variable constant_">VBSCRIPT</span><br><span class="hljs-title function_">addEventListener</span>(<br>	<span class="hljs-string">&quot;fetch&quot;</span>,<span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> &#123;<br>		<span class="hljs-keyword">let</span> url=<span class="hljs-keyword">new</span> <span class="hljs-title function_">URL</span>(event.<span class="hljs-property">request</span>.<span class="hljs-property">url</span>);<br>		url.<span class="hljs-property">hostname</span>=<span class="hljs-string">&quot;xxxx.herokuapp.com&quot;</span>;<br>		<span class="hljs-keyword">let</span> request=<span class="hljs-keyword">new</span> <span class="hljs-title class_">Request</span>(url,event.<span class="hljs-property">request</span>);<br>		event. <span class="hljs-title function_">respondWith</span>(<br>			<span class="hljs-title function_">fetch</span>(request)<br>		)<br>	&#125;<br>)<br></code></pre></td></tr></table></figure>
-
 <p>点击右侧的<code>发送</code>按钮，看最后一行是否出现了<code>Bad Request</code>，出现则代表成功</p>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903829.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903829.png" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
 <p>成功后，点击<code>保存并部署</code>，并记下你的Workers二级域名</p>
-<h3 id="3-2-修改V2rayN中的配置"><a href="#3-2-修改V2rayN中的配置" class="headerlink" title="3.2 修改V2rayN中的配置"></a>3.2 修改V2rayN中的配置</h3><p>把V2RayN中原来的域名改为现在的Workers域名就行了，其实利用Cloudflare Workers进行反代以后速度已经可以了，但是优选ip以后速度会更加快<br><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903475.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />](<a target="_blank" rel="noopener" href="https://gitee.co/">https://gitee.co</a></p>
+<h3 id="修改v2rayn中的配置">3.2 修改V2rayN中的配置</h3>
+<p>把V2RayN中原来的域名改为现在的Workers域名就行了，其实利用Cloudflare
+Workers进行反代以后速度已经可以了，但是优选ip以后速度会更加快
+<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903475.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />](https://gitee.co</p>
 <p><strong>对速度有更高追求以及不怕折腾的人可以接着往下看，我个人测试，这个没什么太大的效果</strong></p>
-<h2 id="四、Cloudflare自选IP"><a href="#四、Cloudflare自选IP" class="headerlink" title="四、Cloudflare自选IP"></a>四、Cloudflare自选IP</h2><p>点击下载<a target="_blank" rel="noopener" href="https://github.com/badafans/better-cloudflare-ip/releases/lastest/download/batch.zip">IP自选程序</a>，解压，在Windows系统下运行</p>
+<h2 id="四cloudflare自选ip">四、Cloudflare自选IP</h2>
+<p>点击下载<a
+target="_blank" rel="noopener" href="https://github.com/badafans/better-cloudflare-ip/releases/lastest/download/batch.zip">IP自选程序</a>，解压，在Windows系统下运行</p>
 <p>其他的<code>使用说明.txt</code>文件中都有说，在此就不过多赘述</p>
 <p>最后，配置V2Ray：</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903472.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
-
-<h3 id="注意事项-1"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h3><p>由于各地的网络情况每天都不同，所以每天（甚至是每半天）的最优节点都不尽相同；但对于一个应急用的已经足够了</p>
-<h2 id="五、移动端使用"><a href="#五、移动端使用" class="headerlink" title="五、移动端使用"></a>五、移动端使用</h2><p>iOS端需要外区apple ID 平且基本移动端v2ray工具都需要付费下载，而这也需要信用卡较为麻烦，淘宝代充很多是盗刷信用卡，慎重考虑</p>
-<h3 id="5-1-下载apk"><a href="#5-1-下载apk" class="headerlink" title="5.1 下载apk"></a>5.1 下载apk</h3><p>可以选择google play 直接下载v2rayNG,可能存在困难，所以推荐<a target="_blank" rel="noopener" href="https://github.com/2dust/v2rayNG">github下载apk</a> 直接选择release版本</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903472.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" /></p>
+<h3 id="注意事项-1">注意事项</h3>
+<p>由于各地的网络情况每天都不同，所以每天（甚至是每半天）的最优节点都不尽相同；但对于一个应急用的已经足够了</p>
+<h2 id="五移动端使用">五、移动端使用</h2>
+<p>iOS端需要外区apple ID
+平且基本移动端v2ray工具都需要付费下载，而这也需要信用卡较为麻烦，淘宝代充很多是盗刷信用卡，慎重考虑</p>
+<h3 id="下载apk">5.1 下载apk</h3>
+<p>可以选择google play 直接下载v2rayNG,可能存在困难，所以推荐<a
+target="_blank" rel="noopener" href="https://github.com/2dust/v2rayNG">github下载apk</a>
+直接选择release版本</p>
 <p>如果想使用最新版，也可以自己使用Android Studio 编译安装</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903746.png" srcset="/img/loading.gif" lazyload alt="image-20220322195545604" style="zoom:67%;" />
-
-<h3 id="5-2-复制订阅"><a href="#5-2-复制订阅" class="headerlink" title="5.2 复制订阅"></a>5.2 复制订阅</h3><p>v2rayN 右键点击服务器-&gt;导出url到剪贴板-&gt;发送到手机</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203221958180.png" srcset="/img/loading.gif" lazyload alt="image-20220322195844002" style="zoom:67%;" />
-
-<h3 id="5-3-移动端使用"><a href="#5-3-移动端使用" class="headerlink" title="5.3 移动端使用"></a>5.3 移动端使用</h3><p>点击右上角加号，从剪贴板导入，即可使用</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203222004855.png" srcset="/img/loading.gif" lazyload alt="image-20220322200417813" style="zoom:67%;" />
-
-<h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p>实际使用效果图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202204191903746.png" srcset="/img/loading.gif" lazyload alt="image-20220322195545604" style="zoom:67%;" /></p>
+<h3 id="复制订阅">5.2 复制订阅</h3>
+<p>v2rayN 右键点击服务器-&gt;导出url到剪贴板-&gt;发送到手机</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203221958180.png" srcset="/img/loading.gif" lazyload alt="image-20220322195844002" style="zoom:67%;" /></p>
+<h3 id="移动端使用">5.3 移动端使用</h3>
+<p>点击右上角加号，从剪贴板导入，即可使用</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203222004855.png" srcset="/img/loading.gif" lazyload alt="image-20220322200417813" style="zoom:67%;" /></p>
+<h2 id="效果图">效果图</h2>
+<p>实际使用效果图：</p>
 <ul>
 <li>4320P不要想了可以选择白嫖谷歌云3个月，但是需要国外信用卡，比较麻烦</li>
 <li>2160P看情况</li>
-<li>1440P，1080P没什么问题，Youtube码率比B站高得多 (当然你想看的视频可能还没有720P<span class="github-emoji" alias="smile" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8">&amp;#x1f604;</span>)</li>
+<li>1440P，1080P没什么问题，Youtube码率比B站高得多
+(当然你想看的视频可能还没有720P<span class="github-emoji"
+data-alias="smile" style=""
+data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8">😄</span>)</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203211707537.png" srcset="/img/loading.gif" lazyload alt="image-20220321170725117"></p>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203211707537.png" srcset="/img/loading.gif" lazyload
+alt="image-20220321170725117" />
+<figcaption aria-hidden="true">image-20220321170725117</figcaption>
+</figure>
 <p>比某些大部分的机场免费套餐都好，甚至直逼少数机场的初级付费套餐；和我自己买的流量包10块30GB（他涨价了，之前50GB）差不太多，至少上个github，stackoverflow没什么太大问题。<strong>在这个越来越严格的大环境下，在你的机场时不时抽风的时候，作为备选还是不错的。</strong></p>
-<h2 id="六、2022-x2F-5-x2F-9-cloudflare-worker-dev被封"><a href="#六、2022-x2F-5-x2F-9-cloudflare-worker-dev被封" class="headerlink" title="六、2022&#x2F;5&#x2F;9 cloudflare worker.dev被封"></a>六、2022&#x2F;5&#x2F;9 cloudflare worker.dev被封</h2><p>[问题链接<span class="github-emoji" alias="cry" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8">&amp;#x1f622;</span>][<a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/issues/205]">https://github.com/XIU2/CloudflareSpeedTest/issues/205]</a></p>
+<h2 id="六202259-cloudflare-worker.dev被封">六、2022/5/9 cloudflare
+worker.dev被封</h2>
+<p>[问题链接<span class="github-emoji" data-alias="cry" style=""
+data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8">😢</span>][https://github.com/XIU2/CloudflareSpeedTest/issues/205]</p>
 <p>需要绑定一个自己的域名，才可以继续使用</p>
-<h3 id="6-1-免费域名申请"><a href="#6-1-免费域名申请" class="headerlink" title="6.1 免费域名申请"></a>6.1 免费域名申请</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/109553641">参考链接</a></p>
+<h3 id="免费域名申请">6.1 免费域名申请</h3>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/109553641">参考链接</a></p>
 <ul>
-<li>输入想要的<code>域名带后缀</code>，点击查询 例如： <code>abcd.tk</code></li>
+<li>输入想要的<code>域名带后缀</code>，点击查询 例如：
+<code>abcd.tk</code></li>
 <li>加入购物车， 默认3个月。修改成 12个月free</li>
 <li>结算 填入邮件，然后邮箱收到邮件</li>
 <li>点开邮箱连接，然后填写信息，网上找个美国人的信息详细填写上去,电话也是假的</li>
 <li>注册成功</li>
 </ul>
 <p>注：</p>
-<ol>
+<ol type="1">
 <li>信息：网上有美国人信息生成器；</li>
 <li>要用美国的IP地址，节点设置为美国；</li>
 <li>freenom免费域名很少可以撑到一年的，大概几个月就不行了</li>
 </ol>
-<h3 id="6-2-在cloudflare-上绑定刚才申请的域名"><a href="#6-2-在cloudflare-上绑定刚才申请的域名" class="headerlink" title="6.2 在cloudflare 上绑定刚才申请的域名"></a>6.2 在cloudflare 上绑定刚才申请的域名</h3><ul>
+<h3 id="在cloudflare-上绑定刚才申请的域名">6.2 在cloudflare
+上绑定刚才申请的域名</h3>
+<ul>
 <li><p>点击 网站→添加站点</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111041954.png" srcset="/img/loading.gif" lazyload alt="image-20220511104027760" style="zoom:67%;" />
-</li>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111041954.png" srcset="/img/loading.gif" lazyload alt="image-20220511104027760" style="zoom:67%;" /></p></li>
 <li><p>填入网址</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111041615.png" srcset="/img/loading.gif" lazyload alt="image-20220511104130570" style="zoom:80%;" />
-</li>
-<li><p>选择 free计划 创建</p>
-</li>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111041615.png" srcset="/img/loading.gif" lazyload alt="image-20220511104130570" style="zoom:80%;" /></p></li>
+<li><p>选择 free计划 创建</p></li>
 <li><p>会先扫描以前的 dns, 扫描完成后。手动添加 记录。</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111042042.png" srcset="/img/loading.gif" lazyload alt="image-20220511104205909" style="zoom: 50%;" />
-</li>
-<li><p>填写 名称 和 ip地址随便写 点击保存 这里地址写成了422，是错误的。最大不超过255</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111042849.png" srcset="/img/loading.gif" lazyload alt="image-20220511104237731" style="zoom:67%;" />
-</li>
-<li><p>点击 继续</p>
-</li>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111042042.png" srcset="/img/loading.gif" lazyload alt="image-20220511104205909" style="zoom: 50%;" /></p></li>
+<li><p>填写 名称 和 ip地址随便写 点击保存
+这里地址写成了422，是错误的。最大不超过255</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111042849.png" srcset="/img/loading.gif" lazyload alt="image-20220511104237731" style="zoom:67%;" /></p></li>
+<li><p>点击 继续</p></li>
 <li><p>提示：更改域名的 服务器</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111044379.png" srcset="/img/loading.gif" lazyload alt="image-20220511104400265" style="zoom:50%;" />
-
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111043039.png" srcset="/img/loading.gif" lazyload alt="image-20220511104338930" style="zoom:50%;" />
-</li>
-<li><p>然后打开 域名所在的管理网站 这里是 <a target="_blank" rel="noopener" href="https://www.freenom.com/">https://www.freenom.com/</a> 添加这两条记录</p>
-<p>具体操作见下面6.3</p>
-</li>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111044379.png" srcset="/img/loading.gif" lazyload alt="image-20220511104400265" style="zoom:50%;" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111043039.png" srcset="/img/loading.gif" lazyload alt="image-20220511104338930" style="zoom:50%;" /></p></li>
+<li><p>然后打开 域名所在的管理网站 这里是 https://www.freenom.com/
+添加这两条记录</p>
+<p>具体操作见下面6.3</p></li>
 </ul>
-<h3 id="6-3-在freenom-更换dns-服务器"><a href="#6-3-在freenom-更换dns-服务器" class="headerlink" title="6.3 在freenom 更换dns 服务器"></a>6.3 在freenom 更换dns 服务器</h3><ul>
+<h3 id="在freenom-更换dns-服务器">6.3 在freenom 更换dns 服务器</h3>
+<ul>
 <li><p>选择 我的站点</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111046635.png" srcset="/img/loading.gif" lazyload alt="image-20220511104649550" style="zoom:50%;" />
-</li>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111046635.png" srcset="/img/loading.gif" lazyload alt="image-20220511104649550" style="zoom:50%;" /></p></li>
 <li><p>点击 管理</p>
-<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111047193.png" srcset="/img/loading.gif" lazyload alt="image-20220511104724133"></p>
-</li>
+<figure>
+<img
+src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111047193.png" srcset="/img/loading.gif" lazyload
+alt="image-20220511104724133" />
+<figcaption aria-hidden="true">image-20220511104724133</figcaption>
+</figure></li>
 <li><p>点击 name server</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111048537.png" srcset="/img/loading.gif" lazyload alt="image-20220511104828464" style="zoom:50%;" />
-
-
-</li>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111048537.png" srcset="/img/loading.gif" lazyload alt="image-20220511104828464" style="zoom:50%;" /></p></li>
 <li><p>把上面的复制的dns服务器 添加到 这里</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111048755.png" srcset="/img/loading.gif" lazyload alt="image-20220511104850657" style="zoom:50%;" />
-</li>
-<li><p>然后点击  下面的按钮 change name 完成。</p>
-</li>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111048755.png" srcset="/img/loading.gif" lazyload alt="image-20220511104850657" style="zoom:50%;" /></p></li>
+<li><p>然后点击 下面的按钮 change name 完成。</p></li>
 </ul>
-<h3 id="6-4-在cloudflare-添加-worker路由并绑定"><a href="#6-4-在cloudflare-添加-worker路由并绑定" class="headerlink" title="6.4 在cloudflare 添加 worker路由并绑定"></a>6.4 在cloudflare 添加 worker路由并绑定</h3><ul>
+<h3 id="在cloudflare-添加-worker路由并绑定">6.4 在cloudflare 添加
+worker路由并绑定</h3>
+<ul>
 <li><p>查看是否有效，点击域名</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111050724.png" srcset="/img/loading.gif" lazyload alt="image-20220511105018690" style="zoom:67%;" />
-</li>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111050724.png" srcset="/img/loading.gif" lazyload alt="image-20220511105018690" style="zoom:67%;" /></p></li>
 <li><p>先点击主页的这个域名，这个域名的下添加 worker 路由</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111051692.png" srcset="/img/loading.gif" lazyload alt="image-20220511105129561" style="zoom: 33%;" />
-</li>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111051692.png" srcset="/img/loading.gif" lazyload alt="image-20220511105129561" style="zoom: 33%;" /></p></li>
 <li><p>设置路由 ，选择自己的worker 绑定</p>
-<img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111052241.png" srcset="/img/loading.gif" lazyload alt="image-20220511105208172" style="zoom:50%;" />
-</li>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205111052241.png" srcset="/img/loading.gif" lazyload alt="image-20220511105208172" style="zoom:50%;" /></p></li>
 <li><p>v2ray上替换</p>
-<p>将原有地址，替换为设置的路由(不加 &#x2F; )</p>
-</li>
+<p>将原有地址，替换为设置的路由(不加 / )</p></li>
 </ul>
-<p><strong>其实直接是用heroku速度上个github也够了<span class="github-emoji" alias="laughing" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8">&amp;#x1f606;</span></strong></p>
+<p><strong>其实直接是用heroku速度上个github也够了<span
+class="github-emoji" data-alias="laughing" style=""
+data-fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f606.png?v8">😆</span></strong></p>
 
                 
               </div>
@@ -637,6 +698,10 @@
   
   
   
+  <!-- 在线通讯Tidio -->
+  
+    <script src="//code.tidio.co/cek0qomnlvhhdar1huindmvyc6asqced.js"></script>
+  
 </div>
 
   </footer>
@@ -787,8 +852,7 @@
   
 <script src="//cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 <script src="//cdn.jsdelivr.net/gh/metowolf/Metingjs@1.2/dist/Meting.min.js"></script>
-<script src="/js/sakura.js"></script>
-<script src="/js/star.js"></script>
+<script src="/js/fireworks.js"></script>
 
 
 
