@@ -17,12 +17,12 @@
   <meta name="author" content="F7kyyy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. 系统安装 1.1 选择发行版 展示选择的发行版wsl --shutdown 1wsl --list --online 安装 建议安装Ubuntu,或者Arch 一个用的人多；一个软件新，社区活跃；Debian 日常使用软件包太老了 1wsl --install -d Ubuntu-22.04 1.2 修改安装位置  首先关闭运行的linux发行版 1wsl --shut">
+    <meta name="description" content="1. 系统安装1.1 选择发行版展示选择的发行版wsl –shutdown 1wsl --list --online  安装 建议安装Ubuntu,或者Arch 一个用的人多；一个软件新，社区活跃；Debian 日常使用软件包太老了 1wsl --install -d Ubuntu-22.04  1.2 修改安装位置 首先关闭运行的linux发行版 1wsl --shutdown  在D盘创建一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决wsl2使用遇到的问题">
 <meta property="og:url" content="http://f7kyyy.github.io/2022/05/08/%E8%A7%A3%E5%86%B3wsl2%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="F7kyyy的博客">
-<meta property="og:description" content="1. 系统安装 1.1 选择发行版 展示选择的发行版wsl --shutdown 1wsl --list --online 安装 建议安装Ubuntu,或者Arch 一个用的人多；一个软件新，社区活跃；Debian 日常使用软件包太老了 1wsl --install -d Ubuntu-22.04 1.2 修改安装位置  首先关闭运行的linux发行版 1wsl --shut">
+<meta property="og:description" content="1. 系统安装1.1 选择发行版展示选择的发行版wsl –shutdown 1wsl --list --online  安装 建议安装Ubuntu,或者Arch 一个用的人多；一个软件新，社区活跃；Debian 日常使用软件包太老了 1wsl --install -d Ubuntu-22.04  1.2 修改安装位置 首先关闭运行的linux发行版 1wsl --shutdown  在D盘创建一个">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://f7kyyy.github.io/img/article/wsl.png">
 <meta property="article:published_time" content="2022-05-08T08:19:33.000Z">
@@ -79,7 +79,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"f7kyyy.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"f7kyyy.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading1.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -246,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.3k 字
+          3.2k 字
         
       </span>
     
@@ -257,7 +257,7 @@
         
         
         
-          28 分钟
+          27 分钟
         
       </span>
     
@@ -317,82 +317,72 @@
             
               <div class="markdown-body">
                 
-                <h2 id="系统安装">1. 系统安装</h2>
-<h3 id="选择发行版">1.1 选择发行版</h3>
-<p>展示选择的发行版wsl --shutdown</p>
+                <h2 id="1-系统安装"><a href="#1-系统安装" class="headerlink" title="1. 系统安装"></a>1. 系统安装</h2><h3 id="1-1-选择发行版"><a href="#1-1-选择发行版" class="headerlink" title="1.1 选择发行版"></a>1.1 选择发行版</h3><p>展示选择的发行版wsl –shutdown</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--list</span> <span class="hljs-literal">--online</span><br></code></pre></td></tr></table></figure>
+
 <p>安装</p>
-<p>建议安装Ubuntu,或者Arch 一个用的人多；一个软件新，社区活跃；Debian
-日常使用软件包太老了</p>
+<p>建议安装Ubuntu,或者Arch 一个用的人多；一个软件新，社区活跃；Debian 日常使用软件包太老了</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--install</span> <span class="hljs-literal">-d</span> Ubuntu<span class="hljs-literal">-22</span>.<span class="hljs-number">04</span><br></code></pre></td></tr></table></figure>
-<h3 id="修改安装位置">1.2 修改安装位置</h3>
-<ul>
+
+<h3 id="1-2-修改安装位置"><a href="#1-2-修改安装位置" class="headerlink" title="1.2 修改安装位置"></a>1.2 修改安装位置</h3><ul>
 <li><p>首先关闭运行的linux发行版</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--shutdown</span><br></code></pre></td></tr></table></figure></li>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--shutdown</span><br></code></pre></td></tr></table></figure>
+</li>
 <li><p>在D盘创建一个目录用来存放新的WSL，比如我创建了一个<code>D:\Environment\UbuntuWSL</code>，导出它的备份</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--export</span> Ubuntu<span class="hljs-literal">-22</span>.<span class="hljs-number">04</span> D:\Environment\UbuntuWSL\Ubuntu.tar<br></code></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/F7kyyy/picture/main/img/202305261819078.png" srcset="/img/loading.gif" lazyload alt="image-20230526181905016" style="zoom:67%;" /></p></li>
+
+<img src="https://raw.githubusercontent.com/F7kyyy/picture/main/img/202305261819078.png" srcset="/img/loading1.gif" lazyload alt="image-20230526181905016" style="zoom:67%;" />
+</li>
 <li><p>注销原有的发行版</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--unregister</span> Ubuntu<span class="hljs-literal">-22</span>.<span class="hljs-number">04</span><br></code></pre></td></tr></table></figure>
-<p>正常卸载也是这么卸载，再注销之后直接在开始菜单搜索安装的发行版名字点击卸载就可以从磁盘中删除了</p></li>
+
+<p>正常卸载也是这么卸载，再注销之后直接在开始菜单搜索安装的发行版名字点击卸载就可以从磁盘中删除了</p>
+</li>
 <li><p>备份文件回复到新的子系统中，可以重命名</p>
-<p><code>import 发行版名称 新的磁盘位置 导出压缩包位置</code></p>
+<p><code>import 发行版名称 新的磁盘位置 导出压缩包位置</code> </p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">wsl <span class="hljs-literal">--import</span> Ubuntu D:\Environment\UbuntuWSL D:\Environment\UbuntuWSL\Ubuntu.tar<br></code></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/F7kyyy/picture/main/img/202305261824929.png" srcset="/img/loading.gif" lazyload alt="image-20230526182410865" style="zoom: 67%;" /></p></li>
+
+<img src="https://raw.githubusercontent.com/F7kyyy/picture/main/img/202305261824929.png" srcset="/img/loading1.gif" lazyload alt="image-20230526182410865" style="zoom: 67%;" />
+</li>
 <li><p>恢复默认用户<code>f7kyyy</code></p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">Ubuntu2204 config <span class="hljs-literal">--default-user</span> f7kyyy<br></code></pre></td></tr></table></figure>
-<p>这里应该是纯英文或者纯数字，如果名字叫做<code>Ubuntu-22.04</code>就改为
-<code>Ubuntu2204</code></p>
-<p><strong>不知道为什么，我在使用Ubuntu的时候，powershell
-提示找不到命令，始终未解决。</strong></p>
-<p>建议前往<a
-target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/wsl/install-manual">网站</a>，手动下载发行版，然后将后缀改为<code>zip</code>,在想要安装的位置解压，然后双击<code>.exe</code>文件手动安装。</p></li>
+
+<p>这里应该是纯英文或者纯数字，如果名字叫做<code>Ubuntu-22.04</code>就改为 <code>Ubuntu2204</code></p>
+<p><strong>不知道为什么，我在使用Ubuntu的时候，powershell 提示找不到命令，始终未解决。</strong></p>
+<p>建议前往<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/wsl/install-manual">网站</a>，手动下载发行版，然后将后缀改为<code>zip</code>,在想要安装的位置解压，然后双击<code>.exe</code>文件手动安装。</p>
+</li>
 </ul>
-<h2 id="更新系统提示">2. 更新系统提示</h2>
-<h3 id="安装cuda前">2.1 安装cuda前</h3>
-<p>你会发现没有这个文件夹</p>
+<h2 id="2-更新系统提示"><a href="#2-更新系统提示" class="headerlink" title="2. 更新系统提示"></a>2. 更新系统提示</h2><h3 id="2-1-安装cuda前"><a href="#2-1-安装cuda前" class="headerlink" title="2.1 安装cuda前"></a>2.1 安装cuda前</h3><p>你会发现没有这个文件夹</p>
 <p><code>/usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link</code></p>
 <p>解决方法：</p>
-<ol type="1">
-<li><p>从<code>C:\Windows\System32\lxss\lib</code>
-删除<code>libcuda.so</code> and <code>libcuda.so.1</code></p></li>
+<ol>
+<li><p>从<code>C:\Windows\System32\lxss\lib</code> 删除<code>libcuda.so</code> and <code>libcuda.so.1</code> </p>
+</li>
 <li><p>以管理员打开powershell，输入<code>wsl</code>,进入wsl环境,执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo <span class="hljs-built_in">ln</span> -sr /mnt/c/Windows/System32/lxss/lib/libcuda.so.1.1 /mnt/c/Windows/System32/lxss/lib/libcuda.so.1<br>sudo <span class="hljs-built_in">ln</span> -sr /mnt/c/Windows/System32/lxss/lib/libcuda.so.1.1 /mnt/c/Windows/System32/lxss/lib/libcuda.so<br></code></pre></td></tr></table></figure></li>
 </ol>
-<h3 id="安装cuda后">2.2 安装cuda后</h3>
-<p>不同的系统安装位置不一样，一般来说会安装在<code>/usr/local/cuda/</code>文件夹下，但是我使用的是arch
-linux，使用pacman 直接安装会安装在<code>/opt/cuda</code>文件夹中</p>
+<h3 id="2-2-安装cuda后"><a href="#2-2-安装cuda后" class="headerlink" title="2.2 安装cuda后"></a>2.2 安装cuda后</h3><p>不同的系统安装位置不一样，一般来说会安装在<code>/usr/local/cuda/</code>文件夹下，但是我使用的是arch linux，使用pacman 直接安装会安装在<code>/opt/cuda</code>文件夹中</p>
 <p>使用以下命令建立软连接</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo <span class="hljs-built_in">ln</span> -s /usr/lib/wsl/lib/libcuda.so.1 /opt/cuda/lib64/libcuda.so<br></code></pre></td></tr></table></figure>
-<h2 id="系统代理">3. 系统代理</h2>
-<h3 id="系统代理-1">3.1 系统代理</h3>
-<p>wsl1没有独立的IP,可以直接给<code>127.0.0.1:port</code>，进行代理</p>
+
+<h2 id="3-系统代理"><a href="#3-系统代理" class="headerlink" title="3. 系统代理"></a>3. 系统代理</h2><h3 id="3-1-系统代理"><a href="#3-1-系统代理" class="headerlink" title="3.1  系统代理"></a>3.1  系统代理</h3><p>wsl1没有独立的IP,可以直接给<code>127.0.0.1:port</code>，进行代理</p>
 <p>更新wsl2后，需要使用正则获取IP地址</p>
 <p>在.<code>bashrc</code>,<code>.zshrc</code>中加上</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># &gt;&gt;&gt; setproxy &gt;&gt;&gt;</span><br><span class="hljs-built_in">export</span> hostip=$(<span class="hljs-built_in">cat</span> /etc/resolv.conf |grep -oP <span class="hljs-string">&#x27;(?&lt;=nameserver\ ).*&#x27;</span>)<br><span class="hljs-built_in">alias</span> setproxy=<span class="hljs-string">&#x27;export https_proxy=&quot;http://$&#123;hostip&#125;:10811&quot;;export http_proxy=&quot;http://$&#123;hostip&#125;:10811&quot;;&#x27;</span><br><span class="hljs-built_in">alias</span> unsetproxy=<span class="hljs-string">&#x27;unset all_proxy&#x27;</span><br><span class="hljs-comment"># &lt;&lt;&lt; setproxy &lt;&lt;&lt;</span><br></code></pre></td></tr></table></figure>
+
 <p>config.fish</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 设置代理</span><br><span class="hljs-keyword">function</span> unsetproxy<br>    <span class="hljs-built_in">set</span> -e ALL_PROXY<br>end<br><br><span class="hljs-keyword">function</span> setproxy<br>    <span class="hljs-built_in">set</span> hostip $(<span class="hljs-built_in">cat</span> /etc/resolv.conf |grep -oP <span class="hljs-string">&#x27;(?&lt;=nameserver\ ).*&#x27;</span>)<br>    <span class="hljs-built_in">set</span> -xg ALL_PROXY http://<span class="hljs-variable">$hostip</span>:10811<br>end<br></code></pre></td></tr></table></figure>
+
 <p>注意端口，在windows代理软件中打开<code>allow LAN</code>，或者<code>允许局域网代理</code></p>
 <p><em>测试</em>：</p>
 <p>执行<code>setproxy</code>后，<code>curl google.com</code>,返回html文件</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205081643996.png" srcset="/img/loading.gif" lazyload
-alt="image-20220508164357859" />
-<figcaption aria-hidden="true">image-20220508164357859</figcaption>
-</figure>
-<h3 id="为git设置代理">3.2 为git设置代理</h3>
-<p>写一个简单的python 脚本<code>setgitproxy.py</code>，为git设置代理</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205081643996.png" srcset="/img/loading1.gif" lazyload alt="image-20220508164357859"></p>
+<h3 id="3-2-为git设置代理"><a href="#3-2-为git设置代理" class="headerlink" title="3.2 为git设置代理"></a>3.2 为git设置代理</h3><p>写一个简单的python 脚本<code>setgitproxy.py</code>，为git设置代理</p>
 <p>先使用pip安装<code>IPy</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># coding=utf-8</span><br><br><span class="hljs-keyword">import</span> socket<br><span class="hljs-keyword">import</span> fcntl<br><span class="hljs-keyword">import</span> struct<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">from</span> IPy <span class="hljs-keyword">import</span> IP<br><br><span class="hljs-comment"># 本地代理端口，你的和我不一定一样，按照自己的设置改动一下</span><br>PORT = <span class="hljs-number">10811</span><br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_ip_address</span>(<span class="hljs-params">ifname</span>):<br>    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)<br>    <span class="hljs-keyword">return</span> socket.inet_ntoa(fcntl.ioctl(<br>        s.fileno(),<br>        <span class="hljs-number">0x8915</span>,  <span class="hljs-comment"># SIOCGIFADDR</span><br>        struct.pack((<span class="hljs-string">&#x27;256s&#x27;</span>).encode(<span class="hljs-string">&quot;utf-8&quot;</span>), (ifname[:<span class="hljs-number">15</span>]).encode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>    )[<span class="hljs-number">20</span>:<span class="hljs-number">24</span>])<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_windows_ip</span>(<span class="hljs-params">wsl_ip</span>):<br>    ip = IP(wsl_ip).make_net(<span class="hljs-string">&quot;20&quot;</span>).strNormal()<br>    ip = ip.split(<span class="hljs-string">&#x27;/&#x27;</span>)[<span class="hljs-number">0</span>][:-<span class="hljs-number">1</span>] + <span class="hljs-string">&#x27;1&#x27;</span><br>    <span class="hljs-keyword">return</span> ip<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">config_git_proxy</span>(<span class="hljs-params">ip</span>):<br>    config_str = (<br>        <span class="hljs-string">&quot;git config --global https.proxy &#x27;https://%s:%d&#x27;&quot;</span> % (ip, PORT))<br>    <span class="hljs-comment"># print(config_str)</span><br>    ret = os.system(config_str)<br>    <span class="hljs-keyword">if</span> ret:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;set git porxy fail&quot;</span>)<br>        <span class="hljs-keyword">return</span><br>    <span class="hljs-keyword">else</span>:<br>        config_str = (<br>            <span class="hljs-string">&quot;git config --global http.proxy &#x27;http://%s:%d&#x27;&quot;</span> % (ip, PORT))<br>        <span class="hljs-comment"># print(config_str)</span><br>        ret = os.system(config_str)<br>    <span class="hljs-keyword">if</span> ret:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;set git porxy fail&quot;</span>)<br>        <span class="hljs-keyword">return</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;set git porxy success&quot;</span>)<br>        <span class="hljs-keyword">return</span><br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    wsl_ip = get_ip_address(<span class="hljs-string">&#x27;eth0&#x27;</span>)<br>    windows_ip = get_windows_ip(wsl_ip)<br>    <span class="hljs-comment"># print(windows_ip)</span><br>    config_git_proxy(windows_ip)<br><br></code></pre></td></tr></table></figure>
-<p>使用git 命令或者其他git
-GUI客户端前，执行<code>python setgitproxy.py</code>为git添加代理</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205081641462.png" srcset="/img/loading.gif" lazyload
-alt="image-20220508164137335" />
-<figcaption aria-hidden="true">image-20220508164137335</figcaption>
-</figure>
+
+<p>使用git 命令或者其他git GUI客户端前，执行<code>python setgitproxy.py</code>为git添加代理</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202205081641462.png" srcset="/img/loading1.gif" lazyload alt="image-20220508164137335"></p>
 <p><strong>最新更新，Clash Tun 模式使用全局代理解决一切问题</strong></p>
 
                 

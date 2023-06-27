@@ -17,12 +17,12 @@
   <meta name="author" content="F7kyyy">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. 遍历每一个数，判断是否是质数 朴素方法 是否可以被整除 我们判断\(N\)是否是质数时，不选要考虑\(\leq N\)的所有情况,只需要考虑\(N\)是否可以被小于等于\(\sqrt{N}\)的数整除就可以了，因此代码如下(此时不考虑并行情况) 123456789101112131415161718192021222324252627282930bool ifprime(int n)&amp;">
+    <meta name="description" content="1. 遍历每一个数，判断是否是质数朴素方法 是否可以被整除我们判断$N$是否是质数时，不选要考虑$\leq N$的所有情况,只需要考虑$N$是否可以被小于等于$\sqrt{N}$的数整除就可以了，因此代码如下(此时不考虑并行情况) 123456789101112131415161718192021222324252627282930bool ifprime(int n)&amp;#123;    for">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算小于等于N的质数的并行算法">
 <meta property="og:url" content="http://f7kyyy.github.io/2022/03/17/%E8%AE%A1%E7%AE%97%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8EN%E7%9A%84%E8%B4%A8%E6%95%B0%E7%9A%84%E5%B9%B6%E8%A1%8C%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="F7kyyy的博客">
-<meta property="og:description" content="1. 遍历每一个数，判断是否是质数 朴素方法 是否可以被整除 我们判断\(N\)是否是质数时，不选要考虑\(\leq N\)的所有情况,只需要考虑\(N\)是否可以被小于等于\(\sqrt{N}\)的数整除就可以了，因此代码如下(此时不考虑并行情况) 123456789101112131415161718192021222324252627282930bool ifprime(int n)&amp;">
+<meta property="og:description" content="1. 遍历每一个数，判断是否是质数朴素方法 是否可以被整除我们判断$N$是否是质数时，不选要考虑$\leq N$的所有情况,只需要考虑$N$是否可以被小于等于$\sqrt{N}$的数整除就可以了，因此代码如下(此时不考虑并行情况) 123456789101112131415161718192021222324252627282930bool ifprime(int n)&amp;#123;    for">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://f7kyyy.github.io/img/article/prime.jpg">
 <meta property="article:published_time" content="2022-03-17T05:35:05.000Z">
@@ -80,7 +80,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"f7kyyy.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"f7kyyy.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":60,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading1.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -258,7 +258,7 @@
         
         
         
-          31 分钟
+          30 分钟
         
       </span>
     
@@ -318,153 +318,106 @@
             
               <div class="markdown-body">
                 
-                <h2 id="遍历每一个数判断是否是质数">1. 遍历每一个数，判断是否是质数</h2>
-<h3 id="朴素方法-是否可以被整除">朴素方法 是否可以被整除</h3>
-<p>我们判断<span
-class="math inline">\(N\)</span>是否是质数时，不选要考虑<span
-class="math inline">\(\leq N\)</span>的所有情况,只需要考虑<span
-class="math inline">\(N\)</span>是否可以被小于等于<span
-class="math inline">\(\sqrt{N}\)</span>的数整除就可以了，因此代码如下(此时不考虑并行情况)</p>
+                <h2 id="1-遍历每一个数，判断是否是质数"><a href="#1-遍历每一个数，判断是否是质数" class="headerlink" title="1. 遍历每一个数，判断是否是质数"></a>1. 遍历每一个数，判断是否是质数</h2><h3 id="朴素方法-是否可以被整除"><a href="#朴素方法-是否可以被整除" class="headerlink" title="朴素方法 是否可以被整除"></a>朴素方法 是否可以被整除</h3><p>我们判断$N$是否是质数时，不选要考虑$\leq N$的所有情况,只需要考虑$N$是否可以被小于等于$\sqrt{N}$的数整除就可以了，因此代码如下(此时不考虑并行情况)</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">ifprime</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">2</span>; k &lt;= <span class="hljs-built_in">sqrt</span>(n); k++)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (n % k == <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getPrime</span><span class="hljs-params">(vector&lt;<span class="hljs-type">long</span>&gt; &amp;prime)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= SIZE; i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (ifprime(i))<br>            prime.<span class="hljs-built_in">emplace_back</span>(i);<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    vector&lt;<span class="hljs-type">long</span>&gt; prime;<br>    <span class="hljs-type">double</span> t = <span class="hljs-built_in">omp_get_wtime</span>();<br>    <span class="hljs-comment">// add your codes begin</span><br>    <span class="hljs-built_in">getPrime</span>(prime);<br>    <span class="hljs-comment">// add your codes end</span><br>    t = <span class="hljs-built_in">omp_get_wtime</span>() - t;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;time %f %ld\n&quot;</span>, t, <span class="hljs-built_in">long</span>(SIZE));<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\nsize %ld\n&quot;</span>, prime.<span class="hljs-built_in">size</span>());<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p><strong>此时运行时间为</strong></p>
 <blockquote>
-<p>time=0.477831</p>
+<p>time&#x3D;0.477831</p>
 </blockquote>
-<p>时间后的1000000时参数SIZE，含义是<span class="math inline">\(\leq
-1000000\)</span>中有78498个质数</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261347360.png" srcset="/img/loading.gif" lazyload
-alt="202203171647230" />
-<figcaption aria-hidden="true">202203171647230</figcaption>
-</figure>
+<p>时间后的1000000时参数SIZE，含义是$\leq 1000000$中有78498个质数</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261347360.png" srcset="/img/loading1.gif" lazyload alt="202203171647230"></p>
 <p>而在使用openmp并行后，从2-SIZE，每个线程分配一部分，判断是否为质数。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">ifprime</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">2</span>; k &lt;= <span class="hljs-built_in">sqrt</span>(n); k++)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (n % k == <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getPrime</span><span class="hljs-params">(vector&lt;<span class="hljs-type">long</span>&gt; &amp;prime)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 并行的写入vector</span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel</span><br>    &#123;<br>        vector&lt;<span class="hljs-type">int</span>&gt; vec_private;<br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp for nowait schedule(static)</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= SIZE; i++)<br>        &#123;<br>            <span class="hljs-keyword">if</span> (ifprime(i))<br>                vec_private.<span class="hljs-built_in">emplace_back</span>(i);<br>        &#125;<br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp critical</span><br>        prime.<span class="hljs-built_in">insert</span>(prime.<span class="hljs-built_in">end</span>(), vec_private.<span class="hljs-built_in">begin</span>(), vec_private.<span class="hljs-built_in">end</span>());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p><strong>此时运行时间为</strong></p>
 <blockquote>
-<p>time=0.033235</p>
+<p>time&#x3D;0.033235</p>
 </blockquote>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261348208.png" srcset="/img/loading.gif" lazyload
-alt="202203171651834" />
-<figcaption aria-hidden="true">202203171651834</figcaption>
-</figure>
-<h3 id="优化判断质数函数">优化判断质数函数</h3>
-<p>首先，我们应该知道一个关于质数分布的规律：<strong>大于等于5的质数一定和6的倍数相邻</strong>。例如5和7，11和13,17和19,<strong>反之是不一定成立的</strong></p>
-<p>证明：令x≥1，将大于等于5的自然数表示如下：···
-6x-1，6x，6x+1，6x+2，6x+3，6x+4，6x+5，6(x+1），6(x+1)+1 ···</p>
-<p>可以看到，不和6的倍数相邻的数为6x+2，6x+3，6x+4，由于2(3x+1)，3(2x+1)，2(3x+2)，所以它们一定不是素数，再除去6x本身，显然，素数要出现只可能出现在6x的相邻两侧。因此在5到<span
-class="math inline">\(\sqrt{n}\)</span>中每6个数只判断2个，时间复杂度O(<span
-class="math inline">\(\frac{\sqrt{n}}{3}\)</span>),C++代码如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261348208.png" srcset="/img/loading1.gif" lazyload alt="202203171651834"></p>
+<h3 id="优化判断质数函数"><a href="#优化判断质数函数" class="headerlink" title="优化判断质数函数"></a>优化判断质数函数</h3><p>首先，我们应该知道一个关于质数分布的规律：<strong>大于等于5的质数一定和6的倍数相邻</strong>。例如5和7，11和13,17和19,<strong>反之是不一定成立的</strong></p>
+<p>证明：令x≥1，将大于等于5的自然数表示如下：··· 6x-1，6x，6x+1，6x+2，6x+3，6x+4，6x+5，6(x+1），6(x+1)+1 ···</p>
+<p>可以看到，不和6的倍数相邻的数为6x+2，6x+3，6x+4，由于2(3x+1)，3(2x+1)，2(3x+2)，所以它们一定不是素数，再除去6x本身，显然，素数要出现只可能出现在6x的相邻两侧。因此在5到$\sqrt{n}$中每6个数只判断2个，时间复杂度O($\frac{\sqrt{n}}{3}$),C++代码如下</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">ifprime</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">2</span> || n == <span class="hljs-number">3</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (n % <span class="hljs-number">6</span> != <span class="hljs-number">1</span> &amp;&amp; n % <span class="hljs-number">6</span> != <span class="hljs-number">5</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> k = <span class="hljs-number">5</span>; k &lt;= <span class="hljs-built_in">floor</span>(<span class="hljs-built_in">sqrt</span>(n)); k += <span class="hljs-number">6</span>)<br>        <span class="hljs-keyword">if</span> (n % k == <span class="hljs-number">0</span> || n % (k + <span class="hljs-number">2</span>) == <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>串行 <strong>此时运行时间为</strong></p>
 <blockquote>
-<p>time=0.156363</p>
+<p>time&#x3D;0.156363</p>
 </blockquote>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261348573.png" srcset="/img/loading.gif" lazyload
-alt="202203171659060" />
-<figcaption aria-hidden="true">202203171659060</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261348573.png" srcset="/img/loading1.gif" lazyload alt="202203171659060"></p>
 <p>并行 <strong>此时运行时间为</strong></p>
 <blockquote>
-<p>time=0.015401</p>
+<p>time&#x3D;0.015401</p>
 </blockquote>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261348471.png" srcset="/img/loading.gif" lazyload
-alt="202203171713716" />
-<figcaption aria-hidden="true">202203171713716</figcaption>
-</figure>
-<h2 id="使用筛法">2. 使用筛法</h2>
-<p>我们可以标记所有合数，然后求质数</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261348471.png" srcset="/img/loading1.gif" lazyload alt="202203171713716"></p>
+<h2 id="2-使用筛法"><a href="#2-使用筛法" class="headerlink" title="2. 使用筛法"></a>2. 使用筛法</h2><p>我们可以标记所有合数，然后求质数</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">long</span> sign[SIZE + <span class="hljs-number">1</span>];<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getPrime</span><span class="hljs-params">(vector&lt;<span class="hljs-type">long</span>&gt; &amp;prime)</span></span><br><span class="hljs-function"></span>&#123;<br>  <span class="hljs-type">int</span> N = <span class="hljs-built_in">sqrt</span>(SIZE);<br>  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= N; i++)<br>  &#123;<br>    <span class="hljs-keyword">if</span> (!sign[i])<br>      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = i; j &lt;= SIZE / i; j++)<br>        sign[i * j] = <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>sign[i]=true表示i为合数，当一个数i是质数时，我们标记<span
-class="math inline">\(i*j\)</span>为合数，<span
-class="math inline">\(i*j\leq SIZE\)</span></p>
-<h3 id="串行">串行</h3>
+
+<p>sign[i]&#x3D;true表示i为合数，当一个数i是质数时，我们标记$i<em>j$为合数，$i</em>j\leq SIZE$</p>
+<h3 id="串行"><a href="#串行" class="headerlink" title="串行"></a>串行</h3><p><strong>此时运行时间为</strong></p>
+<blockquote>
+<p>time&#x3D;0.021131</p>
+</blockquote>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261349127.png" srcset="/img/loading1.gif" lazyload alt="202203171712942"></p>
+<h3 id="在遍历时并行"><a href="#在遍历时并行" class="headerlink" title="在遍历时并行"></a>在遍历时并行</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++">  <span class="hljs-type">int</span> N = <span class="hljs-built_in">sqrt</span>(SIZE);<br>  <span class="hljs-comment">// 并行的使用筛法找出所有合数</span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel for num_threads(NUM_THREADS)</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= N; i++)<br>  &#123;<br>    <span class="hljs-keyword">if</span> (!sign[i])<br>      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = i; j &lt;= SIZE / i; j++)<br>        sign[i * j] = <span class="hljs-literal">true</span>;<br>  &#125;<br></code></pre></td></tr></table></figure>
+
 <p><strong>此时运行时间为</strong></p>
 <blockquote>
-<p>time=0.021131</p>
+<p>time&#x3D;0.012204</p>
 </blockquote>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261349127.png" srcset="/img/loading.gif" lazyload
-alt="202203171712942" />
-<figcaption aria-hidden="true">202203171712942</figcaption>
-</figure>
-<h3 id="在遍历时并行">在遍历时并行</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++">  <span class="hljs-type">int</span> N = <span class="hljs-built_in">sqrt</span>(SIZE);<br>  <span class="hljs-comment">// 并行的使用筛法找出所有合数</span><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel for num_threads(NUM_THREADS)</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= N; i++)<br>  &#123;<br>    <span class="hljs-keyword">if</span> (!sign[i])<br>      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = i; j &lt;= SIZE / i; j++)<br>        sign[i * j] = <span class="hljs-literal">true</span>;<br>  &#125;<br></code></pre></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261349515.png" srcset="/img/loading1.gif" lazyload alt="202203171716363"></p>
+<h3 id="在寻找合数时并行"><a href="#在寻找合数时并行" class="headerlink" title="在寻找合数时并行"></a>在寻找合数时并行</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++">  <span class="hljs-type">int</span> N = <span class="hljs-built_in">sqrt</span>(SIZE);<br><span class="hljs-comment">// 并行的使用筛法找出所有合数</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= N; i++)<br>  &#123;<br>    <span class="hljs-keyword">if</span> (!sign[i])<br>    <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel for num_threads(NUM_THREADS)</span><br>      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = i; j &lt;= SIZE / i; j++)<br>        sign[i * j] = <span class="hljs-literal">true</span>;<br>  &#125;<br></code></pre></td></tr></table></figure>
+
 <p><strong>此时运行时间为</strong></p>
 <blockquote>
-<p>time=0.012204</p>
+<p>time&#x3D;0.006109</p>
 </blockquote>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261349515.png" srcset="/img/loading.gif" lazyload
-alt="202203171716363" />
-<figcaption aria-hidden="true">202203171716363</figcaption>
-</figure>
-<h3 id="在寻找合数时并行">在寻找合数时并行</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++">  <span class="hljs-type">int</span> N = <span class="hljs-built_in">sqrt</span>(SIZE);<br><span class="hljs-comment">// 并行的使用筛法找出所有合数</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= N; i++)<br>  &#123;<br>    <span class="hljs-keyword">if</span> (!sign[i])<br>    <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel for num_threads(NUM_THREADS)</span><br>      <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = i; j &lt;= SIZE / i; j++)<br>        sign[i * j] = <span class="hljs-literal">true</span>;<br>  &#125;<br></code></pre></td></tr></table></figure>
-<p><strong>此时运行时间为</strong></p>
-<blockquote>
-<p>time=0.006109</p>
-</blockquote>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261349256.png" srcset="/img/loading.gif" lazyload
-alt="202203171718941" />
-<figcaption aria-hidden="true">202203171718941</figcaption>
-</figure>
-<h2 id="时间对比">3. 时间对比</h2>
-<table>
+<p><img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202203261349256.png" srcset="/img/loading1.gif" lazyload alt="202203171718941"></p>
+<h2 id="3-时间对比"><a href="#3-时间对比" class="headerlink" title="3. 时间对比"></a>3. 时间对比</h2><table>
 <thead>
-<tr class="header">
+<tr>
 <th>方法</th>
 <th>时间</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
+<tbody><tr>
 <td>朴素方法 串行</td>
 <td>0.477831</td>
 </tr>
-<tr class="even">
+<tr>
 <td>朴素方法 并行</td>
 <td>0.033235</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>优化判断质数 串行</td>
 <td>0.156363</td>
 </tr>
-<tr class="even">
+<tr>
 <td>优化判断质数 并行</td>
 <td>0.015401</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>筛法 串行</td>
 <td>0.021131</td>
 </tr>
-<tr class="even">
+<tr>
 <td>筛法 遍历时并行</td>
 <td>0.012204</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>筛法 寻找合数时并行</td>
 <td>0.006109</td>
 </tr>
-</tbody>
-</table>
-<h2 id="多线程写入vector">4. 多线程写入vector</h2>
-<p>在完成上述问题时，遇到过循环中多线程无法对同一个vector进行写操作，有以下几种解决方法</p>
+</tbody></table>
+<h2 id="4-多线程写入vector"><a href="#4-多线程写入vector" class="headerlink" title="4. 多线程写入vector"></a>4. 多线程写入vector</h2><p>在完成上述问题时，遇到过循环中多线程无法对同一个vector进行写操作，有以下几种解决方法</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++">std::vector&lt;<span class="hljs-type">int</span>&gt; vec;<br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel</span><br>&#123;<br>    std::vector&lt;<span class="hljs-type">int</span>&gt; vec_private;<br>    <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp for nowait <span class="hljs-comment">//fill vec_private in parallel</span></span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">100</span>; i++) &#123;<br>        vec_private.<span class="hljs-built_in">push_back</span>(i);<br>    &#125;<br>    <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp critical</span><br>    vec.<span class="hljs-built_in">insert</span>(vec.<span class="hljs-built_in">end</span>(), vec_private.<span class="hljs-built_in">begin</span>(), vec_private.<span class="hljs-built_in">end</span>());<br>&#125;<br></code></pre></td></tr></table></figure>
+
 <p>OpenMP 4.0允许使用reduction</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp declare reduction (merge : std::vector<span class="hljs-string">&lt;int&gt;</span> : omp_out.insert(omp_out.end(), omp_in.begin(), omp_in.end()))</span><br><br>std::vector&lt;<span class="hljs-type">int</span>&gt; vec;<br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel for reduction(merge: vec)</span><br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">100</span>; i++) <br>    vec.<span class="hljs-built_in">push_back</span>(i);<br></code></pre></td></tr></table></figure>
+
 <p>较为详细的可以这样</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++">std::vector&lt;<span class="hljs-type">int</span>&gt; vec;<br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp parallel</span><br>&#123;<br>    std::vector&lt;<span class="hljs-type">int</span>&gt; vec_private;<br>    <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp for nowait schedule(static)</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;N; i++) &#123; <br>        vec_private.<span class="hljs-built_in">push_back</span>(i);<br>    &#125;<br>    <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp for schedule(static) ordered</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-built_in">omp_get_num_threads</span>(); i++) &#123;<br>        <span class="hljs-meta">#<span class="hljs-keyword">pragma</span> omp ordered</span><br>        vec.<span class="hljs-built_in">insert</span>(vec.<span class="hljs-built_in">end</span>(), vec_private.<span class="hljs-built_in">begin</span>(), vec_private.<span class="hljs-built_in">end</span>());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
