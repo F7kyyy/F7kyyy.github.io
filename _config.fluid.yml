@@ -306,7 +306,7 @@ lazyload:
 
   # 加载时的占位图片
   # The placeholder image when loading
-  loading_img: /img/loading.gif
+  loading_img: /img/loading1.gif
 
   # 开启后懒加载仅在文章页生效，如果自定义页面需要使用，可以在 Front-matter 里指定 `lazyload: true`
   # If true, only enable lazyload on the post page. For custom pages, you can set 'lazyload: true' in front-matter
@@ -896,7 +896,7 @@ giscus:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: /img/20.jpg
+  banner_img: /img/1.png
   banner_img_height: 60
   banner_mask_alpha: 0.0
 
@@ -907,7 +907,7 @@ archive:
 #---------------------------
 category:
   enable: true
-  banner_img: /img/7.jpg
+  banner_img: /img/22.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.0
 
@@ -936,7 +936,7 @@ category:
 #---------------------------
 tag:
   enable: true
-  banner_img: /img/10.jpg
+  banner_img: /img/5.jpg
   banner_img_height: 60
   banner_mask_alpha: 0.0
   tagcloud:
@@ -1010,12 +1010,6 @@ links:
       title: "Fluid Blog",
       intro: "主题博客",
       link: "https://hexo.fluid-dev.com/",
-      avatar: "/img/favicon.png"
-    }
-    - {
-      title: "Fluid Docs",
-      intro: "主题使用指南",
-      link: "https://hexo.fluid-dev.com/docs/",
       avatar: "/img/favicon.png"
     }
     - {

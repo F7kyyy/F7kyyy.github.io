@@ -69,7 +69,7 @@ emoji:
 
 - 更改主题文件 
 
-  /hexo-theme-fluid/layout\_partials/footer.ejs中添加
+  `/hexo-theme-fluid/layout/_partials/footer.ejs`中添加
 
   ```ejs
   <!-- 在线通讯Tidio -->
@@ -78,7 +78,7 @@ emoji:
   <% } %>
   ```
 
-  <img src="https://cdn.jsdelivr.net/gh/F7kyyy/picture@main/img/202207031416121.png" alt="image-20220703141600054" style="zoom:50%;" />
+  ![image-20230626225056114](https://cdn.jsdelivr.net/gh/F7kyyy/picture/img/202306262251211.png)
 
 - 重新部署
 
